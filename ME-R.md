@@ -1,6 +1,6 @@
 |Data|Versão|Alteração|Autor| 
 |----|------|---------|-----|
-|25/11/2022|0.1|Primeira versão do MER |Alexia, André, Iago, Letícia e Felipe.|
+|25/11/2022|0.1|Primeira versão do MER |[Alexia](https://github.com/alexianaa), [André](https://github.com/dartmol203), [Iago](https://github.com/iagoscm), [Letícia](https://github.com/leticiaarj) e [Felipe](https://github.com/felipecdmoura ).|
 
 # Modelo Entidade-Relacionamento
 
