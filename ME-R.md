@@ -39,8 +39,8 @@
     * Ferramenta(forca).
 * Feitico(<ins>idFeitico</ins>, nome, efeito, dano, quantidadeUso); 
 * Grimorio(<ins>idGrimorio</ins>, numSlots);
-* Habilidade(idHabilidade, nomeHabilidade, dano, descricaoHabilidade);
-* Ingrediente(idIngrediente, nomeIngrediente).
+* Habilidade(<ins>idHabilidade</ins>, nomeHabilidade, dano, descricaoHabilidade);
+* Ingrediente(<ins>idIngrediente</ins>, nomeIngrediente).
 
 ## Relacionamentos
 * **Jogador** -  *possui* -  **Casa**:
