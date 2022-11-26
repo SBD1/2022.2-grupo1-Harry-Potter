@@ -33,7 +33,7 @@
 * Mapa(<ins>idMapa</ins>, Regiao);
 * Regiao(<ins>idRegiao</ins>, descricaoArea); 
 * Area(<ins>idArea</ins>, areaDireita, areaEsquerda, areaSul, areaNorte); 
-* InstanciaItem(<ins>idItem</ins>, quantidade) 
+* InstanciaItem(quantidade) 
 * Item(<ins>idItem</ins>, nome, acao, valor, tipo, descricaoItem, utilizado); 
     * Ferramenta(forca).
 * Feitico(<ins>idFeitico</ins>, nome, efeito, dano, quantidadeUso); 
