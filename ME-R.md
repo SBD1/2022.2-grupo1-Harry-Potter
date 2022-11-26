@@ -30,7 +30,7 @@
 * Disciplina(<ins>idDisciplina</ins>, nomeDisciplina);
 * Casa(<ins>idCasa</ins>, nomeCasa, petCasa);
 * NPC(<ins>idNPC</ins> nomeNPC, tipo);
-    * Inimigo(pontosVida, força);
+    * Inimigo(pontosVida, força, dano);
 * Loja(<ins>idLoja</ins>, descricaoLoja);
 * Mapa(<ins>idMapa</ins>, Regiao);
 * Regiao(<ins>idRegiao</ins>, descricaoRegiao); 
