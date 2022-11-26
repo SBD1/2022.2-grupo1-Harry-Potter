@@ -33,7 +33,7 @@
     * Inimigo(pontosVida, força);
 * Loja(<ins>idLoja</ins>, descricaoLoja);
 * Mapa(<ins>idMapa</ins>, Regiao);
-* Regiao(<ins>idRegiao</ins>, descricaoArea); 
+* Regiao(<ins>idRegiao</ins>, descricaoRegiao); 
 * Area(<ins>idArea</ins>, areaDireita, areaEsquerda, areaSul, areaNorte); 
 * InstanciaItem(quantidade) 
 * Item(<ins>idItem</ins>, nome, acao, valor, tipo, descricaoItem, utilizado); 
