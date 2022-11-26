@@ -25,7 +25,7 @@
 * GRIMORIO.
 
 ## Atributos
-* Jogador(<ins>idJogador</ins>, nome);
+* Jogador(<ins>idJogador</ins>, nome, pontosVida);
 * Inventario(dinheiro); 
 * Disciplina(<ins>idDisciplina</ins>, nomeDisciplina);
 * Casa(<ins>idCasa</ins>, nomeCasa, petCasa);
