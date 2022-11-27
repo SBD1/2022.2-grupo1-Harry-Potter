@@ -27,14 +27,14 @@
 ## Atributos
 * Jogador(<ins>idJogador</ins>, nome, pontosVida);
 * Inventario(dinheiro); 
-* Disciplina(<ins>idDisciplina</ins>, nomeDisciplina);
+* Disciplina(<ins>idDisciplina</ins>, idNPC, nomeDisciplina);
 * Casa(<ins>idCasa</ins>, nomeCasa, petCasa);
 * NPC(<ins>idNPC</ins> nomeNPC, tipo);
-    * Inimigo(pontosVida, força, dano);
+    * Inimigo(pontosVida, multiplicador);
 * Loja(<ins>idLoja</ins>, descricaoLoja);
-* Mapa(<ins>idMapa</ins>, Regiao);
+* Mapa(<ins>idMapa</ins>, regiao, descricao);
 * Regiao(<ins>idRegiao</ins>, descricaoRegiao); 
-* Area(<ins>idArea</ins>, areaDireita, areaEsquerda, areaSul, areaNorte); 
+* Area(<ins>idArea</ins>, areaLest, areaOeste, areaSul, areaNorte); 
 * InstanciaItem(quantidade) 
 * Item(<ins>idItem</ins>, nome, acao, valor, tipo, descricaoItem, utilizado); 
     * Ferramenta(forca).
@@ -53,8 +53,8 @@
 * **Jogador** - *tem* - **Grimorio**:
     * Um **Jogador** *tem* um **Grimorio** e um **Grimorio** *é tido* por um **Jogador**;
     * Cardinalidade: 1 : 1.
-* **Jogador** - *estar* - **Mapa**:
-    * Um **jogador** *esta* em um **Mapa** e um **Mapa** *tem* um **Jogador**;
+* **Jogador** - *estar* - **Area**:
+    * Um **jogador** *estar* em uma **Area** e uma **Area** *tem* um **Jogador**;
     * Cardinalidade: 1 : 1.
 * **NPC** - *tem* - **Item**:
     * Um ou vários NPC(s) porta um ou vários Item(s) e uma ou vários Item(s) é portado um ou vários NPC(s);
@@ -74,9 +74,3 @@
 * **Grimorio** - *possui* - **Feitico**:
     * Um **Grimorio** *possui* um ou vários **Feitico**(s) e zero ou vários **Feitico**(s) *são possuídos* por um **Grimorio**;
     * Cardinalidade: 0 : N.
-* **Grimorio** - *tem* - **NPC**
-    * Um **Grimorio** *tem* um ou vários **NPC**(s) e um ou vários NPC(s) *é tido* por um **Grimorio**.
-    * Cardinalidade: 1 : N.
-
-
-
