@@ -10,7 +10,7 @@
 
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- | 
-| idJogador | Obrigatório | int | 3 | Identificação do jogador. | harry_potter |
+| idJogador | Obrigatório | int | 3 | Identificação do jogador. | 001 |
 | idDisciplina | Obrigatório | int | 3 |  Identificação das disciplinas do jogador. | 1 |
 | idGrimorio | Obrigatório | int | 3 | Identificação do grimório do jogador. | 1 |
 | idCasa | Obrigatório | int | 3 | Identificação da casa do jogador. | 1 |
