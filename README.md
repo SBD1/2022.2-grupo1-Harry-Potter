@@ -15,3 +15,4 @@ Repositório para desenvolvimento do jogo Harry Potter da disciplina de SBD1 - 2
 
 | Módulo         | Link da gravação       | Data|
 |----------------|------------------------|-----|
+| 1              | [link do youtube](https://www.youtube.com/watch?v=IoXDA8Nn1Ec&ab_channel=IagoCampelo) | 28/11/2022|
