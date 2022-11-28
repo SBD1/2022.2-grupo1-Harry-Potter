@@ -11,7 +11,15 @@ Repositório para desenvolvimento do jogo Harry Potter da disciplina de SBD1 - 2
 |Iago Campelo  | [iagoscm](https://github.com/iagoscm)            | 202023743|
 |Letícia Karla | [leticiaarj](https://github.com/leticiaarj)      | 150135939|
 
-## Videos de apresentação 
+## Videos de apresentação
 
-| Módulo         | Link da gravação       | Data|
-|----------------|------------------------|-----|
+| Módulo         | Link da gravação       | Data |
+|----------------|------------------------|------|
+| 1              | [Apresentação Módulo 1](https://www.youtube.com/watch?v=IoXDA8Nn1Ec&ab_channel=IagoCampelo) | 28/11/2022 |
+
+## Entregas
+
+- Módulo 1
+  - [DER](Imagens/DER_HP.pdf)
+  - [DLD](Imagens/DLD_HP.pdf)
+  - [Dicionário de Dados](Dicionario_Dados.md)
