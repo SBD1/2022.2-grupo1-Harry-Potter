@@ -2,6 +2,7 @@
   |----|------|---------|-----|
   |26/11/2022|0.1|Primeira versão do Dicionário de Dados |[Alexia](https://github.com/alexianaa) e [Letícia](https://github.com/leticiaarj).|
   |27/11/2022|0.2|Adição de Exemplos |[Letícia](https://github.com/leticiaarj).|
+  |05/12/2022|0.2|Correções de acordo com dicas do professor |[Alexia](https://github.com/alexianaa), [Iago](https://github.com/iagoscm)|
  
 # Dicionário de Dados
 
