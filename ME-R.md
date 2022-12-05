@@ -9,7 +9,8 @@
 * JOGADOR;
 * DISCIPLINA;
 * NPC
-    * INIMIGO.
+    * INIMIGO;
+    * MERCADOR.
 * INVENTARIO;
 * INSTANCIAITEM;
 * ITEM;
@@ -21,8 +22,8 @@
 * FEITICO;
 * HABILIDADE;
 * INGREDIENTE;
-* LOJA;
-* GRIMORIO.
+* LOJA; 
+* GRIMORIO. 
 
 ## Atributos
 * Jogador(<ins>idJogador</ins>, nome, pontosVida);
@@ -34,9 +35,9 @@
 * Loja(<ins>idLoja</ins>, descricaoLoja);
 * Mapa(<ins>idMapa</ins>, regiao, descricao);
 * Regiao(<ins>idRegiao</ins>, descricaoRegiao); 
-* Area(<ins>idArea</ins>, areaLest, areaOeste, areaSul, areaNorte); 
-* InstanciaItem(quantidade) 
-* Item(<ins>idItem</ins>, nome, acao, valor, tipo, descricaoItem, utilizado); 
+* Area(<ins>idArea</ins>, areaLeste, areaOeste, areaSul, areaNorte); 
+* InstanciaItem(<ins>idInstancia</ins>, item, quantidade, utilizado) 
+* Item(<ins>idItem</ins>, nome, acao, valor, tipo, descricaoItem); 
     * Ferramenta(forca).
 * Feitico(<ins>idFeitico</ins>, nome, efeito, dano, quantidadeUso); 
 * Grimorio(<ins>idGrimorio</ins>, numSlots);
@@ -53,11 +54,17 @@
 * **Jogador** - *tem* - **Grimorio**:
     * Um **Jogador** *tem* um **Grimorio** e um **Grimorio** *é tido* por um **Jogador**;
     * Cardinalidade: 1 : 1.
+* **Jogador** - *possui* - **Inventario**:
+    * Um **Jogador** *possui* um **Inventario** e um **Inventario** *é possuido* por um **Jogador**;
+    * Cardinalidade: 1 : 1.    
 * **Jogador** - *estar* - **Area**:
-    * Um **jogador** *estar* em uma **Area** e uma **Area** *tem* um **Jogador**;
+    * Um **jogador** *esta* em uma **Area** e uma **Area** *tem* um **Jogador**;
     * Cardinalidade: 1 : 1.
-* **NPC** - *tem* - **Item**:
-    * Um ou vários NPC(s) porta um ou vários Item(s) e uma ou vários Item(s) é portado um ou vários NPC(s);
+* **Inventario** - *possui* - **InstanciaItem**:
+    * Um **Inventario** *possui* nenhuma ou várias **InstanciaItem** e um **Inventario** *é possuido* por um **InstanciaItem**;
+    * Cardinalidade: 1 : 1. 
+* **NPC** - *porta* - **Item**:
+    * Um ou vários **NPC**(s) *porta* um ou vários **Item**(s) e uma ou vários **Item**(s) *é portado* por um ou vários **NPC**(s);
     * Cardinalidade: N : M.
 * **Loja** - *contem* - **Item**:
     *    Uma **Loja** *contem* um ou varios **Item**(s) e um ou varios **Item**(s) *são contidos* por uma Loja;
@@ -71,6 +78,9 @@
 * **Area** - *possui* - **NPC**:
     * Uma **Area** *possui* um ou nenhum **NPC** e um **NPC** *está ou não* em uma **Area**;
     * Cardinalidade: 0 : 1.
+* **Item** - *gera* - **InstanciaItem**:
+    * Um **Item** *gera* uma ou várias **InstanciaItem** e uma **InstanciaItem** *é gerada* por um **Item**;
+    * Cardinalidade: N : 1.
 * **Grimorio** - *possui* - **Feitico**:
     * Um **Grimorio** *possui* um ou vários **Feitico**(s) e zero ou vários **Feitico**(s) *são possuídos* por um **Grimorio**;
     * Cardinalidade: 0 : N.

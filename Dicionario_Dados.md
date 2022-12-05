@@ -15,7 +15,7 @@
 | idGrimorio | Obrigatório | int | 3 | Identificação do grimório do jogador. | 1 |
 | idCasa | Obrigatório | int | 3 | Identificação da casa do jogador. | 1 |
 | idArea | Obrigatório | int | 3 | Identificação do mapa do jogador. | 1 |
-| nome | Obrigatório | varchar | 30 | Nickname do jogador. | Harry Potter |
+| nome | Obrigatório | char | 20 | Nickname do jogador. | Harry Potter |
 | pontosVida | Obrigatório | int | 30 | Quantidade de vida que o jogador tem. | 100 |
 
 ## Entidade: Casa
@@ -24,7 +24,7 @@
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- | 
 | idCasa | Obrigatório | int | 3 | Identificação da casa. | 1 |
-| nomeCasa | Obrigatório | varchar | 10 | nome da casa. | Grifinória |
+| nomeCasa | Obrigatório | char | 10 | nome da casa. | Grifinória |
 | petCasa | Obrigatório | varchar | 8 | animal de cada casa. | Leão | 
 | idNPC | Obrigatório  | int | 3 | Identificação do professor da casa. | 1 |
 
@@ -35,7 +35,7 @@
 | ---- | ---- | ---- | ---- | ---- | ---- | 
 | idDisciplina | Obrigatório | int | 3 | Identificação da disciplina. | 1 |
 | idNPC| Obrigatório | int | 3 | Identificação do NPC. | 1 |
-| nomeDisciplina | Obrigatório | varchar | 20 | Nome identificador da disciplina. | Defesa contra as Artes das Trevas |
+| nomeDisciplina | Obrigatório | char | 20 | Nome identificador da disciplina. | Defesa contra as Artes das Trevas |
 
 ## Entidade: NPC
 #### Descrição: Personagem não jogável.
@@ -44,8 +44,8 @@
 | ---- | ---- | ---- | ---- | ---- | ---- | 
 | idNPC | Obrigatório | int | 3 | Identificador do NPC. | 1 |
 | idItem | Não obrigatório | int | 3 | NPC pode deixar ou entregar um item para o jogador. | 1 |
-| nomeNPC | Obrigatório | varchar | 30 | nome identificador do NPC. | Severus Snape |
-| tipo | Obrigatório | varchar | 10 | Especialização do NPC. | Professor |
+| nomeNPC | Obrigatório | char | 20 | nome identificador do NPC. | Severus Snape |
+| tipo | Obrigatório | char | 10 | Especialização do NPC. | Professor |
 
 ## Entidade: Inimigo
 #### Descrição: NPC hostil ao jogador.
@@ -85,7 +85,7 @@
 
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
-| idIngrediente | Obrigatório | varchar | 15 | Identificação do ingrediente. | 1 |
+| idIngrediente | Obrigatório | char | 15 | Identificação do ingrediente. | 1 |
 
 
 ## Entidade: Livro
@@ -102,8 +102,8 @@
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
 | idMapa | Obrigatório  | int | 3 | Identificação do Mapa.  | 1 |
-| Regiao | Obrigatório | varchar | 10 | Local que abriga as regiões. | Altas Terras da Escócia |
-| Descricao | Obrigatório | varchar | 10 | Descrição do local que abriga as regiões. | Zona montanhosa do norte da Escócia. |
+| regiao | Obrigatório | char | 10 | Local que abriga as regiões. | Altas Terras da Escócia |
+| descricao | Obrigatório | varchar | 40 | Descrição do local que abriga as regiões. | Zona montanhosa do norte da Escócia. |
 
 
 ## Entidade: Regiao
@@ -133,6 +133,7 @@
 
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
+| idInstanciaItem | Obrigatório  | int | 3 | Identificação da InstanciaItem. | 1 | 
 | idItem | Obrigatório  | int | 3 | Identificação do Item. | 1 | 
 | idJogador | Não Obrigatório  | int | 3 | Identificação do Jogador. | 1 | 
 | quantidade | Obrigatório  | numeric  | 2,1 | Quantidade de itens que um jogador tem. | 2 |
@@ -142,10 +143,10 @@
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo | 
 | ---- | ---- | ---- | ---- | ---- | ---- |  
 | idItem | Obrigatório  | int | 3 | Identificação do Item. | 1 |
-| nome | Obrigatório  | varchar | 30 | Nome do Item. | Mapa do Maroto |
-| acao | Obrigatório  | varchar | 30 | A ação que esse item pode realizar dentro do jogo. |É capaz de mostrar a localização exata de cada pessoa dentro dos limites de Hogwarts, além de indicar caminhos, passagens secretas e outros pontos de interesse pelo castelo e seus terrenos. |
+| nome | Obrigatório  | char | 30 | Nome do Item. | Mapa do Maroto |
+| acao | Obrigatório  | char | 30 | A ação que esse item pode realizar dentro do jogo. |É capaz de mostrar a localização exata de cada pessoa dentro dos limites de Hogwarts, além de indicar caminhos, passagens secretas e outros pontos de interesse pelo castelo e seus terrenos. |
 | valor | Obrigatório  | numeric | 2,1 | Valor monetário que esse item tem dentro do jogo. | 1000 |
-| tipo | Obrigatório  | varchar | 20 | Tipo de item. | Acessório de Navegação. |
+| tipo | Obrigatório  | char | 20 | Tipo de item. | Acessório de Navegação. |
 | descricaoItem | Obrigatório | varchar | 60 | A atuação do item dentro do jogo. | Um mapa. |
 | utilizado | Obrigatório  | boolean | 1 | Se o item foi utilizado ou não. | False |
 
@@ -155,8 +156,8 @@
 | Atributo      | Obrigatoriedade | Tipo    | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
 | idFeitico | Obrigatório  | int | 3 | Identificação do Feitiço. | 1 |
-| nome | Obrigatório  | varchar | 30 | Nome do Feitiço. | Expecto Patronum |
-| efeito | Obrigatório  | varchar | 60 | Define qual o efeito produzido pelo feitiço. | Conjura uma espécie de espírito protetor, um guardião de magia capaz de proteger o bruxo de criaturas das trevas.|
+| nome | Obrigatório  | char | 30 | Nome do Feitiço. | Expecto Patronum |
+| efeito | Obrigatório  | varchar | 40 | Define qual o efeito produzido pelo feitiço. | Conjura uma espécie de espírito protetor, um guardião de magia capaz de proteger o bruxo de criaturas das trevas.|
 | dano | Obrigatório  | numeric | 2,1 | Define qual o dano produzido pelo feitiço. | 0 |
 | quantidadeUso | Obrigatório  | numeric | 2,1 | Define qual a quantidade de uso do feitiço. | 0 |
 
@@ -166,7 +167,7 @@
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
 | idHabilidade | Obrigatório  | int | 3 | Identificação da Habilidade. | 1 |
-| nomeHabilidade | Obrigatório  | varchar | 30 | Nome da Habilidade. | Ofidioglossia. |
+| nomeHabilidade | Obrigatório  | char | 30 | Nome da Habilidade. | Ofidioglossia. |
 | dano | Obrigatório  | numeric | 2,1 | Define qual o dano produzido pela habilidade. | 10 |
 | descricaoHabilidade | Obrigatório | varchar | 60 | A atuação da habilidade dentro do jogo. | A língua das cobras é falada num som sibilante, semelhante ao de uma serpente; como tal, as pessoas normais não podem entendê-la. Além da simples comunicação, ofidioglotas parecem ser também capazes de influenciar a vontade das serpentes em certa medida. |
 
