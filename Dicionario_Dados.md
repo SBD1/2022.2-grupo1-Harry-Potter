@@ -103,8 +103,8 @@
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
 | idMapa | Obrigatório  | int | 3 | Identificação do Mapa.  | 1 |
-| regiao | Obrigatório | char | 10 | Local que abriga as regiões. | Altas Terras da Escócia |
-| descricao | Obrigatório | varchar | 40 | Descrição do local que abriga as regiões. | Zona montanhosa do norte da Escócia. |
+| regiao | Obrigatório | char | 30 | Local que abriga as regiões. | Altas Terras da Escócia |
+| descricao | Obrigatório | varchar | 80 | Descrição do local que abriga as regiões. | Zona montanhosa do norte da Escócia com muita neblina. |
 
 
 ## Entidade: Regiao
