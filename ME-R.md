@@ -5,44 +5,50 @@
 # Modelo Entidade-Relacionamento
 
 ## Entidades
+* AREA;
 * CASA;
-* JOGADOR;
 * DISCIPLINA;
-* NPC
-    * INIMIGO;
-    * MERCADOR.
-* INVENTARIO;
+* FEITICO;
+* GRIMORIO; 
+* HABILIDADE;
+* INSTANCIAINIMIGO;
 * INSTANCIAITEM;
+* INSTANCIANPCTIPO;
+* INSTANCIAJOGADORDISCIPLINA;
+* INVENTARIO;
 * ITEM;
     * FERRAMENTA;
-    * POCAO;
-    * LIVRO
-* MAPA;
-* AREA;
-* FEITICO;
-* HABILIDADE;
-* INGREDIENTE;
+    * POCAO.
+* JOGADOR;
 * LOJA; 
-* GRIMORIO. 
+* MAPA;
+* NPC
+    * INIMIGO;
+    * PROFESSOR.
+* REGIAO;
 
 ## Atributos
-* Jogador(<ins>idJogador</ins>, nome, pontosVida);
-* Inventario(dinheiro); 
-* Disciplina(<ins>idDisciplina</ins>, idNPC, nomeDisciplina);
-* Casa(<ins>idCasa</ins>, nomeCasa, petCasa);
-* NPC(<ins>idNPC</ins> nomeNPC, tipo);
-    * Inimigo(pontosVida, multiplicador);
-* Loja(<ins>idLoja</ins>, descricaoLoja);
-* Mapa(<ins>idMapa</ins>, regiao, descricao);
-* Regiao(<ins>idRegiao</ins>, descricaoRegiao); 
 * Area(<ins>idArea</ins>, areaLeste, areaOeste, areaSul, areaNorte); 
-* InstanciaItem(<ins>idInstancia</ins>, item, quantidade, utilizado) 
+* Casa(<ins>idCasa</ins>, nomeCasa, petCasa, professorResponsavel);
+* Disciplina(<ins>idDisciplina</ins>, NPC, nomeDisciplina, feitico);
+* Feitico(<ins>idFeitico</ins>, efeito, ponto);
+* Grimorio(<ins>idGrimorio</ins>, nome, numSlots, feitico);
+* Habilidade(<ins>idHabilidade</ins>, nome, dano, descricao);
+* InstanciaInimigo(<ins>idNPC</ins>, pontosVida, multiplicador)
+* InstanciaItem(<ins>idInstancia</ins>, item);
+* InstanciaNPCTipo(<ins>idNPC</ins>, tipo, area);
+* InstanciaJogadorDisciplina(<ins>idJogador</ins>,codDisciplina); 
+* Inventario(<ins>idJogador</ins>, dinheiro, instanciaItem); 
 * Item(<ins>idItem</ins>, nome, acao, valor, tipo, descricaoItem); 
-    * Ferramenta(forca).
-* Feitico(<ins>idFeitico</ins>, nome, efeito, dano, quantidadeUso); 
-* Grimorio(<ins>idGrimorio</ins>, numSlots);
-* Habilidade(<ins>idHabilidade</ins>, nomeHabilidade, dano, descricaoHabilidade);
-* Ingrediente(<ins>idIngrediente</ins>, nomeIngrediente).
+    * Ferramenta(forca);
+    * Pocao(ingrediente).
+* Jogador(<ins>idJogador</ins>, nome, area, pontosVida, casa, grimorio);
+* Loja(<ins>idLoja</ins>, descricaoLoja, NPC, instanciaItem, area);
+* Mapa(<ins>idMapa</ins>, regiao, descricao);
+* NPC(<ins>idNPC</ins> nomeNPC, tipo, item);
+    * Inimigo(item, moedas, habilidade);
+    * Professor(casa, disciplina).
+* Regiao(<ins>idRegiao</ins>, nome, descricaoRegiao, area);
 
 ## Relacionamentos
 * **Jogador** -  *possui* -  **Casa**:
@@ -75,9 +81,6 @@
 * **Regiao** - *tem* - **Area**:
     * Uma **Regiao** *tem* uma **Area** e uma **Area** *tem* uma ou mais **Regiao**(oes);
     * Cardinalidade: 1 : N
-* **Area** - *possui* - **NPC**:
-    * Uma **Area** *possui* um ou nenhum **NPC** e um **NPC** *está ou não* em uma **Area**;
-    * Cardinalidade: 0 : 1.
 * **Item** - *gera* - **InstanciaItem**:
     * Um **Item** *gera* uma ou várias **InstanciaItem** e uma **InstanciaItem** *é gerada* por um **Item**;
     * Cardinalidade: N : 1.
