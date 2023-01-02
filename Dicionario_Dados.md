@@ -11,11 +11,10 @@
 
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- | 
-| idJogador | Obrigatório | int | 3 | Identificação do jogador. | 001 |
-| idDisciplina | Obrigatório | int | 3 |  Identificação das disciplinas do jogador. | 1 |
-| idGrimorio | Obrigatório | int | 3 | Identificação do grimório do jogador. | 1 |
-| idCasa | Obrigatório | int | 3 | Identificação da casa do jogador. | 1 |
-| idArea | Obrigatório | int | 3 | Identificação do mapa do jogador. | 1 |
+| idJogador | Obrigatório | int | 3 | Identificação do jogador. | 001 | 
+| grimorio | Obrigatório | int | 3 | Identificação do grimório do jogador. | 1 |
+| casa | Obrigatório | int | 3 | Identificação da casa do jogador. | 1 |
+| area | Obrigatório | int | 3 | Identificação do mapa do jogador. | 1 |
 | nome | Obrigatório | char | 20 | Nickname do jogador. | Harry Potter |
 | pontosVida | Obrigatório | int | 30 | Quantidade de vida que o jogador tem. | 100 |
 
@@ -27,7 +26,7 @@
 | idCasa | Obrigatório | int | 3 | Identificação da casa. | 1 |
 | nomeCasa | Obrigatório | char | 10 | nome da casa. | Grifinória |
 | petCasa | Obrigatório | varchar | 8 | animal de cada casa. | Leão | 
-| idNPC | Obrigatório  | int | 3 | Identificação do professor da casa. | 1 |
+| professorResponsavel | Obrigatório  | int | 3 | Identificação do professor da casa. | 1 |
 
 ## Entidade: Disciplina
 #### Descrição: Conjunto de períodos os quais os jogadores estarão aprendendo algo com o professor.
@@ -35,8 +34,9 @@
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- | 
 | idDisciplina | Obrigatório | int | 3 | Identificação da disciplina. | 1 |
-| idNPC| Obrigatório | int | 3 | Identificação do NPC. | 1 |
+| NPC| Obrigatório | int | 3 | Identificação do NPC. | 1 |
 | nomeDisciplina | Obrigatório | char | 20 | Nome identificador da disciplina. | Defesa contra as Artes das Trevas |
+| feitico | Não obrigatório | int | 3 | Identificação do feitico aprendido na disciplina | 6 |
 
 ## Entidade: NPC
 #### Descrição: Personagem não jogável.
@@ -46,23 +46,25 @@
 | idNPC | Obrigatório | int | 3 | Identificador do NPC. | 1 |
 | idItem | Não obrigatório | int | 3 | NPC pode deixar ou entregar um item para o jogador. | 1 |
 | nomeNPC | Obrigatório | char | 20 | nome identificador do NPC. | Severus Snape |
-| tipo | Obrigatório | char | 10 | Especialização do NPC. | Professor |
 
 ## Entidade: Inimigo
 #### Descrição: NPC hostil ao jogador.
 
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
-| idHabilidade | Obrigatório | int | 3 | Identificador da habilidade do inimigo. | 1 |
-| pontosVida | Obrigatório | int | 100 | Quantidade de vida que o inimigo tem. | 100 |
-| Multiplicador | Obrigatório | int | 5 | Multiplica o dano e aumenta a dificulade no combate. | 100 |
+| habilidade | Obrigatório | int | 3 | Identificador da habilidade do inimigo. | 1 |
+| moedas | Obrigatório | int | 100 | Quantidade de moedas ganha por matar o inimigo. | 10 |
 
-## Entidade: Mercador
-#### Descrição: NPC que vende ou compra itens.
+## Entidade: InstanciaInimigo
+### Descrição: Instancia que vai estar no jogo de cada jogador
 
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
-| idLoja | Obrigatório | int | 3 | Identificador da loja do mercador. | 1 |
+| NPC | Obrigatório | int | 3 | Identificador do NPC | 26 |
+| pontosVida | Obrigatório | int | 100 | Quantidade de vida que o inimigo tem. | 100 |
+| multiplicador | Obrigatório | int | 5 | Multiplica o dano e aumenta a dificulade no combate. | 100 |
+| InstanciaItem | Não obrigatório | int | 3 | Instancia do item o qual o inimigo deixa ao morrer. | 8 |
+| area | Obrigatório | int | 3 | Identificação do mapa do inimigo. | 1 |
 
 ## Entidade: Inventario
 #### Descrição: Espaço para guardar itens e dinheiro do jogador.
@@ -70,14 +72,15 @@
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
 | idJogador | Obrigatório | int | 3 | Identificador do jogador. | 1 |
-| idItem | Não obrigatório | int | 3 | Identificador do item. | 1 |
-| dinheiro | Não obrigatório | int | 9999 | Quantidade de dinheiro que o jogador pode ter. | 20000 |
+| instanciaItem | Não obrigatório | int | 3 | Identificador do item. | 1 |
+| dinheiro | Não obrigatório | int | 9999 | Quantidade de dinheiro que o jogador pode ter. | 2000 |
 
 ## Entidade: Ferramenta
 #### Descrição: Item que pode ser equipado e utilizado.
 
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
+| idItem | Obrigatório | int | 3 | Identificação do item. | 1 |
 | forca | Obrigatório | int | 20 | Pontos de vida que retira do inimigo no ataque. | 50 |
 
 
@@ -86,16 +89,8 @@
 
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
+| idItem | Obrigatório | int | 3 | Identificação do item. | 5 |
 | idIngrediente | Obrigatório | char | 15 | Identificação do ingrediente. | 1 |
-
-
-## Entidade: Livro
-#### Descrição: Livros que contém os feitiços.
-
-|Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
-| ---- | ---- | ---- | ---- | ---- | ---- |  
-| idFeitico | Obrigatório  | int | 3 | Identificação do Feitiço. | 1 |
-
 
 ## Entidade: Mapa
 #### Descrição: Mapa que vai abrigar as regiões.
@@ -122,10 +117,8 @@
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo | 
 | ---- | ---- | ---- | ---- | ---- | ---- |  
 | idArea | Obrigatório  | int | 3 | Identificação da Área. | 1 |
-| idRegiao | Obrigatório  | int | 3 | Identificação da Região. | 1 |
-| idNPC | Obrigatório  | int | 3 | Identificação do NPC. | 1 |
-| areaDireita | Obrigatório  | int | 3 | Posição na direita. | 2 |
-| areaEsquerda | Obrigatório  |  int | 3 | Posição na Esquerda. | 5 |
+| areaLeste | Obrigatório  | int | 3 | Posição na Leste. | 2 |
+| areaOeste | Obrigatório  |  int | 3 | Posição na Oeste. | 5 |
 | areaSul | Obrigatório  |  int | 3 | Posição no Sul. | 9 |
 | areaNorte | Obrigatório  |  int | 3 | Posição no Norte. | 1 |
 
@@ -136,8 +129,6 @@
 | ---- | ---- | ---- | ---- | ---- | ---- |  
 | idInstanciaItem | Obrigatório  | int | 3 | Identificação da InstanciaItem. | 1 | 
 | idItem | Obrigatório  | int | 3 | Identificação do Item. | 1 | 
-| idJogador | Não Obrigatório  | int | 3 | Identificação do Jogador. | 1 | 
-| quantidade | Obrigatório  | numeric  | 2,1 | Quantidade de itens que um jogador tem. | 2 |
 ## Entidade: Item
 #### Descrição: Itens que um jogador pode ter.
 
@@ -145,10 +136,18 @@
 | ---- | ---- | ---- | ---- | ---- | ---- |  
 | idItem | Obrigatório  | int | 3 | Identificação do Item. | 1 |
 | nome | Obrigatório  | char | 30 | Nome do Item. | Mapa do Maroto |
-| acao | Obrigatório  | char | 30 | A ação que esse item pode realizar dentro do jogo. |É capaz de mostrar a localização exata de cada pessoa dentro dos limites de Hogwarts, além de indicar caminhos, passagens secretas e outros pontos de interesse pelo castelo e seus terrenos. |
-| valor | Obrigatório  | numeric | 2,1 | Valor monetário que esse item tem dentro do jogo. | 1000 |
+| acao | Obrigatório  | varchar | 200 | A ação que esse item pode realizar dentro do jogo. | É capaz de mostrar a localização exata de cada pessoa dentro dos limites de Hogwarts, além de indicar caminhos, passagens secretas e outros pontos de interesse pelo castelo e seus terrenos. |
+| valor | Obrigatório  | numeric | 2,1 | Valor monetário que esse item tem dentro do jogo. | 50 |
 | tipo | Obrigatório  | char | 20 | Tipo de item. | Acessório de Navegação. |
 | descricaoItem | Obrigatório | varchar | 60 | A atuação do item dentro do jogo. | Um mapa. |
+
+## Entidade: InstanciaItem
+## Descrição: Instancia dos itens do jogo
+
+|Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo | 
+| ---- | ---- | ---- | ---- | ---- | ---- |  
+| idInstanciaItem | Obrigatório  | int | 3 | Identificação da Intancia do Item. | 1 |
+| item | Obrigatório  | int | 3 | Identificação do Item. | 1 |
 | utilizado | Obrigatório  | boolean | 1 | Se o item foi utilizado ou não. | False |
 
 ## Entidade: Feitico
@@ -159,7 +158,7 @@
 | idFeitico | Obrigatório  | int | 3 | Identificação do Feitiço. | 1 |
 | nome | Obrigatório  | char | 30 | Nome do Feitiço. | Expecto Patronum |
 | efeito | Obrigatório  | varchar | 40 | Define qual o efeito produzido pelo feitiço. | Conjura uma espécie de espírito protetor, um guardião de magia capaz de proteger o bruxo de criaturas das trevas.|
-| dano | Obrigatório  | numeric | 2,1 | Define qual o dano produzido pelo feitiço. | 0 |
+| ponto | Obrigatório  | numeric | 2,1 | Define quantos pontos de dano ou cura é produzido pelo feitiço. | 0 |
 | quantidadeUso | Obrigatório  | numeric | 2,1 | Define qual a quantidade de uso do feitiço. | 0 |
 
 ## Entidade: Habilidade
@@ -168,9 +167,9 @@
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
 | idHabilidade | Obrigatório  | int | 3 | Identificação da Habilidade. | 1 |
-| nomeHabilidade | Obrigatório  | char | 30 | Nome da Habilidade. | Ofidioglossia. |
+| nome | Obrigatório  | char | 30 | Nome da Habilidade. | Ofidioglossia. |
 | dano | Obrigatório  | numeric | 2,1 | Define qual o dano produzido pela habilidade. | 10 |
-| descricaoHabilidade | Obrigatório | varchar | 60 | A atuação da habilidade dentro do jogo. | A língua das cobras é falada num som sibilante, semelhante ao de uma serpente; como tal, as pessoas normais não podem entendê-la. Além da simples comunicação, ofidioglotas parecem ser também capazes de influenciar a vontade das serpentes em certa medida. |
+| descricao | Obrigatório | varchar | 60 | A atuação da habilidade dentro do jogo. | A língua das cobras é falada num som sibilante, semelhante ao de uma serpente; como tal, as pessoas normais não podem entendê-la. Além da simples comunicação, ofidioglotas parecem ser também capazes de influenciar a vontade das serpentes em certa medida. |
 
 ## Entidade: Loja
 #### Descrição: Local em que o jogador pode vender ou comprar itens.
@@ -178,8 +177,9 @@
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
 | idLoja | Obrigatório  | int | 3 | Identificação da Loja. | 1 |
-| idItem | Obrigatório  | int | 3 | Identificação do Item. | 1 |
+| instanciaItem | Obrigatório  | int | 3 | Identificação da Intancia do Item. | 1 |
 | descricaoLoja | Obrigatório | varchar | 60 | Detalhamento das características da Loja. | Floreios e Borrões é uma livraria no Lado Norte, Beco Diagonal. É onde os alunos de Hogwarts adquire seus livros escolares. |
+| NPC | Obrigatório | int | 3 | Identificador do NPC responsável pela Loja | 2 |
 
 
 ## Entidade: Grimorio
@@ -188,7 +188,7 @@
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
 | idGrimorio | Obrigatório | int | 3 | Identificação do Grimório. | 1 
-| idFeitico | Obrigatório  | int | 3 | Identificação do Feitiço. | 1 |
+| feitico | Obrigatório  | int | 3 | Identificação do Feitiço. | 1 |
 | numSlots | Obrigatório  | int | 3 | Quantidade de Feitiços que um jogador pode ter. | 20 |
 
 ## Entidade: Ingrediente

@@ -11,6 +11,7 @@
 * FEITICO;
 * GRIMORIO; 
 * HABILIDADE;
+* INGREDIENTE;
 * INSTANCIAINIMIGO;
 * INSTANCIAITEM;
 * INSTANCIANPCTIPO;
@@ -31,12 +32,13 @@
 * Area(<ins>idArea</ins>, areaLeste, areaOeste, areaSul, areaNorte); 
 * Casa(<ins>idCasa</ins>, nomeCasa, petCasa, professorResponsavel);
 * Disciplina(<ins>idDisciplina</ins>, NPC, nomeDisciplina, feitico);
-* Feitico(<ins>idFeitico</ins>, efeito, ponto);
+* Feitico(<ins>idFeitico</ins>, efeito, ponto, quantidadeUso);
 * Grimorio(<ins>idGrimorio</ins>, nome, numSlots, feitico);
 * Habilidade(<ins>idHabilidade</ins>, nome, dano, descricao);
-* InstanciaInimigo(<ins>idNPC</ins>, pontosVida, multiplicador)
-* InstanciaItem(<ins>idInstancia</ins>, item);
-* InstanciaNPCTipo(<ins>idNPC</ins>, tipo, area);
+* Ingrediente(<ins>idIngrediente</ins>, nome);
+* InstanciaInimigo(<ins>NPC</ins>, pontosVida, multiplicador, area, instanciaItem)
+* InstanciaItem(<ins>idInstanciaItem</ins>, item, utilizado);
+* InstanciaNPCTipo(<ins>NPC</ins>, tipo, area);
 * InstanciaJogadorDisciplina(<ins>idJogador</ins>,codDisciplina); 
 * Inventario(<ins>idJogador</ins>, dinheiro, instanciaItem); 
 * Item(<ins>idItem</ins>, nome, acao, valor, tipo, descricaoItem); 
@@ -45,8 +47,8 @@
 * Jogador(<ins>idJogador</ins>, nome, area, pontosVida, casa, grimorio);
 * Loja(<ins>idLoja</ins>, descricaoLoja, NPC, instanciaItem, area);
 * Mapa(<ins>idMapa</ins>, regiao, descricao);
-* NPC(<ins>idNPC</ins> nomeNPC, tipo, item);
-    * Inimigo(item, moedas, habilidade);
+* NPC(<ins>idNPC</ins> nomeNPC, item);
+    * Inimigo(moedas, habilidade);
     * Professor(casa, disciplina).
 * Regiao(<ins>idRegiao</ins>, nome, descricaoRegiao, area);
 
