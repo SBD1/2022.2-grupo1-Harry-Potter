@@ -90,7 +90,7 @@
 |Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
 | ---- | ---- | ---- | ---- | ---- | ---- |  
 | idItem | Obrigatório | int | 3 | Identificação do item. | 5 |
-| idIngrediente | Obrigatório | char | 15 | Identificação do ingrediente. | 1 |
+| ingrediente | Obrigatório | char | 30 | nome do ingrediente. | Sangue de salamandra |
 
 ## Entidade: Mapa
 #### Descrição: Mapa que vai abrigar as regiões.
@@ -191,10 +191,3 @@
 | feitico | Obrigatório  | int | 3 | Identificação do Feitiço. | 1 |
 | numSlots | Obrigatório  | int | 3 | Quantidade de Feitiços que um jogador pode ter. | 20 |
 
-## Entidade: Ingrediente
-#### Descrição: Ingredientes necessários para produzir uma poção.
-
-|Atributo| Obrigatoriedade| Tipo | Tamanho | Descrição| Exemplo |
-| ---- | ---- | ---- | ---- | ---- | ---- |  
-| idIngrediente | Obrigatório  | int | 3 | Identificação do Ingrediente. | 1 |
-| nomeIngrediente | Obrigatório  | varchar | 30 | Nome do Ingrediente. | Bezoar. |

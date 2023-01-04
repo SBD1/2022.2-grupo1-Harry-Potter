@@ -11,7 +11,6 @@
 * FEITICO;
 * GRIMORIO; 
 * HABILIDADE;
-* INGREDIENTE;
 * INSTANCIAINIMIGO;
 * INSTANCIAITEM;
 * INSTANCIANPCTIPO;
@@ -35,7 +34,6 @@
 * Feitico(<ins>idFeitico</ins>, efeito, ponto, quantidadeUso);
 * Grimorio(<ins>idGrimorio</ins>, nome, numSlots, feitico);
 * Habilidade(<ins>idHabilidade</ins>, nome, dano, descricao);
-* Ingrediente(<ins>idIngrediente</ins>, nome);
 * InstanciaInimigo(<ins>NPC</ins>, pontosVida, multiplicador, area, instanciaItem)
 * InstanciaItem(<ins>idInstanciaItem</ins>, item, utilizado);
 * InstanciaNPCTipo(<ins>NPC</ins>, tipo, area);
