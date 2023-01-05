@@ -1,4 +1,4 @@
-  |Data|Versão|Alteração|Autor| 
+  |Data|Versão|Alteração|Autor(es)| 
   |----|------|---------|-----|
   |26/11/2022|0.1|Primeira versão do Dicionário de Dados |[Alexia](https://github.com/alexianaa) e [Letícia](https://github.com/leticiaarj).|
   |27/11/2022|0.2|Adição de Exemplos |[Letícia](https://github.com/leticiaarj).|
