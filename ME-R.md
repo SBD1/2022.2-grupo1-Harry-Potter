@@ -87,3 +87,12 @@
 * **Grimorio** - *possui* - **Feitico**:
     * Um **Grimorio** *possui* um ou vários **Feitico**(s) e zero ou vários **Feitico**(s) *são possuídos* por um **Grimorio**;
     * Cardinalidade: 0 : N.
+* **Professor** - *responsável* - **Casa**:
+    * Um **Professor** *é responsável* por uma **Casa** e uma **Casa** *é responsabilidade* de um **Professor**;
+    * Cardinalidade: 1 : 1.
+* **Disciplina** - *tem* - **Professor**:
+    * Uma **Disciplina** *tem* um **Professor** e um **Professor** *tem* uma **Disciplina**;
+    * Cardinalidade: 1 : 1.
+* **Disciplina** - *ensina* - **Feitico**:
+    * Uma **Disciplina** *ensina* zero ou mais **Feitico**(s) e um **Feitico** *é ensinado* por uma **Disciplina**;
+    * Cardinalidade: 1 : 1.
