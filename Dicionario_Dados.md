@@ -2,7 +2,8 @@
   | ---------- | ------ | ------------------------------------------ | ---------------------------------------------------------------------------------- |
   | 26/11/2022 | 0.1    | Primeira versão do Dicionário de Dados     | [Alexia](https://github.com/alexianaa) e [Letícia](https://github.com/leticiaarj). |
   | 27/11/2022 | 0.2    | Adição de Exemplos                         | [Letícia](https://github.com/leticiaarj).                                          |
-  | 05/12/2022 | 0.2    | Correções de acordo com dicas do professor | [Alexia](https://github.com/alexianaa), [Iago](https://github.com/iagoscm)         |
+  | 05/12/2022 | 0.2    | Correções de acordo com dicas do professor | [Alexia](https://github.com/alexianaa) e [Iago](https://github.com/iagoscm)        |
+  | 08/01/2023 | 0.3    | Correções no tamanho das variáveis         | [Alexia](https://github.com/alexianaa)                                             |
  
 # Dicionário de Dados
 
@@ -129,6 +130,7 @@
 | --------------- | --------------- | ------- | ------- | ------------------------------- | ------- |
 | idInstanciaItem | Obrigatório     | tinyint | 1       | Identificação da InstanciaItem. | 1       |
 | idItem          | Obrigatório     | tinyint | 1       | Identificação do Item.          | 1       |
+| utilizado       | Obrigatório     | boolean | 1       | Se o item foi utilizado ou não. | False   |
 ## Entidade: Item
 #### Descrição: Itens que um jogador pode ter.
 
@@ -140,15 +142,6 @@
 | valor         | Obrigatório     | numeric | 2,1     | Valor monetário que esse item tem dentro do jogo.  | 50                                                                                                                                                                                            |
 | tipo          | Obrigatório     | char    | 20      | Tipo de item.                                      | Acessório de Navegação.                                                                                                                                                                       |
 | descricaoItem | Obrigatório     | varchar | 60      | A atuação do item dentro do jogo.                  | Um mapa.                                                                                                                                                                                      |
-
-## Entidade: InstanciaItem
-## Descrição: Instancia dos itens do jogo
-
-| Atributo        | Obrigatoriedade | Tipo    | Tamanho | Descrição                           | Exemplo |
-| --------------- | --------------- | ------- | ------- | ----------------------------------- | ------- |
-| idInstanciaItem | Obrigatório     | tinyint | 1       | Identificação da Instancia do Item. | 1       |
-| item            | Obrigatório     | tinyint | 1       | Identificação do Item.              | 1       |
-| utilizado       | Obrigatório     | boolean | 1       | Se o item foi utilizado ou não.     | False   |
 
 ## Entidade: Feitico
 #### Descrição: Os feitiços que podem ser realizados dentro do jogo.
@@ -164,23 +157,23 @@
 ## Entidade: Habilidade
 #### Descrição: As habilidades que um NPC - Inimigo pode ter .
 
-| Atributo     | Obrigatoriedade | Tipo    | Tamanho | Descrição                                     | Exemplo        |
-| ------------ | --------------- | ------- | ------- | --------------------------------------------- | -------------- |
-| idHabilidade | Obrigatório     | tinyint | 1       | Identificação da Habilidade.                  | 1              |
-| nome         | Obrigatório     | char    | 30      | Nome da Habilidade.                           | Ofidioglossia. |
-| dano         | Obrigatório     | numeric | 2,1     | Define qual o dano produzido pela habilidade. | 10             |
+| Atributo     | Obrigatoriedade | Tipo    | Tamanho | Descrição                                     | Exemplo                                                                                                                                                                                                                                                        |
+| ------------ | --------------- | ------- | ------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| idHabilidade | Obrigatório     | tinyint | 1       | Identificação da Habilidade.                  | 1                                                                                                                                                                                                                                                              |
+| nome         | Obrigatório     | char    | 30      | Nome da Habilidade.                           | Ofidioglossia.                                                                                                                                                                                                                                                 |
+| dano         | Obrigatório     | numeric | 2,1     | Define qual o dano produzido pela habilidade. | 10                                                                                                                                                                                                                                                             |
 | descricao    | Obrigatório     | varchar | 60      | A atuação da habilidade dentro do jogo.       | A língua das cobras é falada num som sibilante, semelhante ao de uma serpente; como tal, as pessoas normais não podem entendê-la. Além da simples comunicação, ofidioglotas parecem ser também capazes de influenciar a vontade das serpentes em certa medida. |
 
 ## Entidade: Loja
 #### Descrição: Local em que o jogador pode vender ou comprar itens.
 
-| Atributo      | Obrigatoriedade | Tipo    | Tamanho | Descrição                                  | Exemplo                                                                                                                     |
-| ------------- | --------------- | ------- | ------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
-| idLoja        | Obrigatório     | tinyint | 1       | Identificação da Loja.                     | 1                                                                                                                           |
-| instanciaItem | Obrigatório     | tinyint | 1       | Identificação da Instancia do Item.        | 1                                                                                                                           |
-| descricaoLoja | Obrigatório     | varchar | 60      | Detalhamento das características da Loja.  | Floreios e Borrões é uma livraria no Lado Norte, Beco Diagonal. É onde os alunos de Hogwarts adquire seus livros escolares. |
-| NPC           | Obrigatório     | tinyint | 1       | Identificador do NPC responsável pela Loja | 2                                                                                                                           |
-
+| Atributo      | Obrigatoriedade | Tipo    | Tamanho | Descrição                                     | Exemplo                                                                                                                     |
+| ------------- | --------------- | ------- | ------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| idLoja        | Obrigatório     | tinyint | 1       | Identificação da Loja.                        | 1                                                                                                                           |
+| instanciaItem | Obrigatório     | tinyint | 1       | Identificação da Instancia do Item.           | 1                                                                                                                           |
+| descricaoLoja | Obrigatório     | varchar | 60      | Detalhamento das características da Loja.     | Floreios e Borrões é uma livraria no Lado Norte, Beco Diagonal. É onde os alunos de Hogwarts adquire seus livros escolares. |
+| NPC           | Obrigatório     | tinyint | 1       | Identificador do NPC responsável pela Loja    | 2                                                                                                                           |
+| area          | Obrigatório     | tinyint | 1       | Identificação da localização da loja no mapa. | 63                                                                                                                          |
 
 ## Entidade: Grimorio
 #### Descrição: Coleção de feitiços, rituais e encantamentos mágicos.
