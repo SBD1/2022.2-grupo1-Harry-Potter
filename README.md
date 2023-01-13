@@ -20,6 +20,6 @@ Repositório para desenvolvimento do jogo Harry Potter da disciplina de SBD1 - 2
 ## Entregas
 
 - Módulo 1
-  - [DER](Imagens/DER_HP.pdf)
-  - [DLD](Imagens/DLD_HP.pdf)
+  - [DER](Imagens/DER_HarryPotter_v4.0.pdf)
+  - [DLD](Imagens/DLD_HarryPotter_v.4.0.pdf)
   - [Dicionário de Dados](Dicionario_Dados.md)
