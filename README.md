@@ -23,5 +23,3 @@ Repositório para desenvolvimento do jogo Harry Potter da disciplina de SBD1 - 2
   - [DER](Imagens/DER_HP.pdf)
   - [DLD](Imagens/DLD_HP.pdf)
   - [Dicionário de Dados](Dicionario_Dados.md)
-  - [Vídeo de Apresentação](https://unbbr.sharepoint.com/:v:/s/SBD1-20222/EejUfL9qXfpEsDy2qnnhH1YBqo5rGOxfywmj5EtrEw4qOQ)
-
