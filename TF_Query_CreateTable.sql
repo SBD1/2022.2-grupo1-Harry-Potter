@@ -32,16 +32,6 @@ CREATE TABLE IF NOT EXISTS GRIMORIO(
    FOREIGN KEY (feitico) REFERENCES FEITICO (idFeitico)
 );
 
--- Tabela AREA
-
-CREATE TABLE IF NOT EXISTS AREA(
-   idArea        SERIAL PRIMARY KEY,
-   areaLeste     INT  NOT NULL,
-   areaOeste     INT  NOT NULL,
-   areaSul       INT  NOT NULL,
-   areaNorte     INT  NOT NULL
-);
-
 -- Tabela ITEM
 
 CREATE TABLE IF NOT EXISTS ITEM(
@@ -126,3 +116,101 @@ CREATE TABLE IF NOT EXISTS INVENTARIO(
    FOREIGN KEY (instanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
 );
 
+-- Tabela INSTANCIA_JOGADOR_DISCIPLINA
+
+CREATE TABLE IF NOT EXISTS INSTANCIA_JOGADOR_DISCIPLINA(
+   idJogador            INT NOT NULL,
+   idDisciplina         INT NULL,           
+   FOREIGN KEY (idJogador) REFERENCES JOGADOR (idJogador),
+   FOREIGN KEY (idDisciplina) REFERENCES DISCIPLINA (idDisciplina)
+);
+
+-- Tabela INIMIGO
+
+CREATE TABLE IF NOT EXISTS INIMIGO(
+   idNPC            INT NOT NULL,
+   idHabilidade     INT NULL,        
+   moedas           INT NOT NULL,   
+   FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
+   FOREIGN KEY (idHabilidade) REFERENCES HABILIDADE (idHabilidade)
+);
+
+-- Tabela INSTANCIA_INIMIGO
+
+CREATE TABLE IF NOT EXISTS INSTANCIA_INIMIGO(
+   idNPC             INT NOT NULL,
+   idArea            INT NOT NULL,  
+   idInstanciaItem   INT NULL, 
+   pontosVida        INT NOT NULL,
+   multiplicador     INT NOT NULL, 
+   FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
+   FOREIGN KEY (idArea) REFERENCES AREA (idArea),
+   FOREIGN KEY (idInstanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
+);
+
+-- Tabela HABILIDADE
+
+CREATE TABLE IF NOT EXISTS HABILIDADE(
+   idHabilidade     SERIAL PRIMARY KEY,
+   nomeHabilidade   CHAR(30) NOT NULL,  
+   dano             INT NULL, 
+   descricao        CHAR(60) NOT NULL,
+);
+
+-- Tabela FERRAMENTA
+
+CREATE TABLE IF NOT EXISTS FERRAMENTA(
+   idItem          INT NOT NULL,
+   forca           INT NULL,  
+   FOREIGN KEY (idItem) REFERENCES ITEM (idItem),
+);
+
+-- Tabela POCAO
+
+CREATE TABLE IF NOT EXISTS POCAO(
+   idItem            INT NOT NULL,
+   ingrediente       CHAR(30) NOT NULL,   
+   FOREIGN KEY (idItem) REFERENCES ITEM (idItem)
+);
+
+-- Tabela LOJA
+
+CREATE TABLE IF NOT EXISTS LOJA(
+   idLoja            SERIAL PRIMARY KEY,
+   idNPC             INT NOT NULL, 
+   idArea              INT NOT NULL,  
+   idInstanciaItem   INT NOT NULL, 
+   descricao         CHAR(60) NOT NULL,
+   FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
+   FOREIGN KEY (idArea) REFERENCES AREA (idArea),
+   FOREIGN KEY (idInstanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
+);
+
+-- Tabela MAPA
+
+CREATE TABLE IF NOT EXISTS MAPA(
+   idMapa            SERIAL PRIMARY KEY,
+   descricao         CHAR(60) NOT NULL, 
+);
+
+-- Tabela REGIAO
+
+CREATE TABLE IF NOT EXISTS REGIAO(
+   idRegiao          SERIAL PRIMARY KEY,
+   idMapa            INT NOT NULL, 
+   descricao         INT NOT NULL,  
+   nome              CHAR(20) NOT NULL,
+   FOREIGN KEY (idMapa) REFERENCES MAPA (idMapa),
+);
+
+-- Tabela AREA
+
+CREATE TABLE IF NOT EXISTS AREA(
+   idArea        SERIAL PRIMARY KEY, 
+   idRegiao      INT NOT NULL,
+   areaLeste     INT  NOT NULL,
+   areaOeste     INT  NOT NULL,
+   areaSul       INT  NOT NULL,
+   areaNorte     INT  NOT NULL,
+   FOREIGN KEY (idRegiao) REFERENCES REGIAO (idRegiao)
+);
