@@ -3,13 +3,15 @@
 -- Autor(es) ..............: Felipe Moura e Letícia Araújo
 -- Versao ..............: 1.0
 -- Banco de Dados .........: PostgreSQL
--- Descricao .........: Criando primeiras tabelas do banco de dados 
+-- Descricao .........: Criando primeiras tabelas do banco de dados
 -- ------------------------------------------------------------------
 
 -- Tabela FEITICO
 
+CREATE DATABASE IF NOT EXISTS HARRY_POTTER;
+
 CREATE TABLE IF NOT EXISTS FEITICO(
-   idFeitico       SERIAL PRIMARY KEY, 
+   idFeitico       SERIAL PRIMARY KEY,
    nome            CHAR(20) NOT NULL,
    efeito          CHAR(20) NOT NULL,
    ponto           NUMERIC(4,2) NOT NULL,
@@ -19,7 +21,7 @@ CREATE TABLE IF NOT EXISTS FEITICO(
 -- Tabela GRIMORIO
 
 CREATE TABLE IF NOT EXISTS GRIMORIO(
-   idGrimorio  SERIAL PRIMARY KEY, 
+   idGrimorio  SERIAL PRIMARY KEY,
    numSlots    INT  NOT NULL,
    feitico     INT  NOT NULL,
    FOREIGN KEY (feitico) REFERENCES FEITICO (idFeitico)
@@ -28,7 +30,7 @@ CREATE TABLE IF NOT EXISTS GRIMORIO(
 -- Tabela AREA
 
 CREATE TABLE IF NOT EXISTS AREA(
-   idArea        SERIAL PRIMARY KEY, 
+   idArea        SERIAL PRIMARY KEY,
    areaLeste     INT  NOT NULL,
    areaOeste     INT  NOT NULL,
    areaSul       INT  NOT NULL,
@@ -38,7 +40,7 @@ CREATE TABLE IF NOT EXISTS AREA(
 -- Tabela ITEM
 
 CREATE TABLE IF NOT EXISTS ITEM(
-   idItem           SERIAL PRIMARY KEY, 
+   idItem           SERIAL PRIMARY KEY,
    nome             VARCHAR(30) NOT NULL,
    acao             VARCHAR(200) NOT NULL,
    valor            NUMERIC(4,2) NOT NULL,
@@ -49,7 +51,7 @@ CREATE TABLE IF NOT EXISTS ITEM(
 -- Tabela NPC
 
 CREATE TABLE IF NOT EXISTS NPC(
-   idNPC      SERIAL PRIMARY KEY, 
+   idNPC      SERIAL PRIMARY KEY,
    item       INT  NOT NULL,
    nome       CHAR(20) NOT NULL,
    FOREIGN KEY (item) REFERENCES ITEM (idItem)
@@ -58,7 +60,7 @@ CREATE TABLE IF NOT EXISTS NPC(
 -- Tabela CASA
 
 CREATE TABLE IF NOT EXISTS CASA(
-   idCasa                       SERIAL PRIMARY KEY, 
+   idCasa                       SERIAL PRIMARY KEY,
    nomeCasa                     CHAR(10) NOT NULL,
    petCasa                      CHAR(8) NOT NULL,
    professorResponsavel         INT  NOT NULL,
@@ -68,7 +70,7 @@ CREATE TABLE IF NOT EXISTS CASA(
 -- Tabela DISCIPLINA
 
 CREATE TABLE IF NOT EXISTS DISCIPLINA(
-   idDisciplina         SERIAL PRIMARY KEY, 
+   idDisciplina         SERIAL PRIMARY KEY,
    NPC                  INT  NOT NULL,
    nomeDisciplina       CHAR(20) NOT NULL,
    feitico              INT  NOT NULL,
@@ -90,7 +92,7 @@ CREATE TABLE IF NOT EXISTS PROFESSOR(
 -- Tabela JOGADOR
 
 CREATE TABLE IF NOT EXISTS JOGADOR(
-   idJogador  SERIAL PRIMARY KEY, 
+   idJogador  SERIAL PRIMARY KEY,
    idGrimorio INT  NOT NULL,
    nome       CHAR(20) NOT NULL,
    idArea     INT  NOT NULL,
@@ -104,7 +106,7 @@ CREATE TABLE IF NOT EXISTS JOGADOR(
 -- Tabela INSTANCIA_ITEM
 
 CREATE TABLE IF NOT EXISTS INSTANCIA_ITEM(
-   idInstanciaItem      SERIAL PRIMARY KEY, 
+   idInstanciaItem      SERIAL PRIMARY KEY,
    idItem               INT  NOT NULL,
    FOREIGN KEY (idItem) REFERENCES ITEM (idItem)
 );
