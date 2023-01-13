@@ -20,6 +20,7 @@
     * FERRAMENTA;
     * POCAO.
 * JOGADOR;
+* LIVOR;
 * LOJA; 
 * MAPA;
 * NPC
@@ -43,7 +44,8 @@
     * Ferramenta(forca);
     * Pocao(ingrediente).
 * Jogador(<ins>idJogador</ins>, nome, area, pontosVida, casa, grimorio);
-* Loja(<ins>idLoja</ins>, descricaoLoja, NPC, instanciaItem, area);
+* Livro(<ins>idItem</ins>, feitico);
+* Loja(<ins>idLoja</ins>, descricaoLoja, instanciaItem, area);
 * Mapa(<ins>idMapa</ins>, regiao, descricao);
 * NPC(<ins>idNPC</ins> nomeNPC, item);
     * Inimigo(moedas, habilidade);
@@ -73,14 +75,20 @@
     * Um ou vários **NPC**(s) *porta* um ou vários **Item**(s) e uma ou vários **Item**(s) *é portado* por um ou vários **NPC**(s);
     * Cardinalidade: N : M.
 * **Loja** - *contem* - **Item**:
-    *    Uma **Loja** *contem* um ou varios **Item**(s) e um ou varios **Item**(s) *são contidos* por uma Loja;
+    * Uma **Loja** *contem* um ou vários **Item**(s) e um ou vários **Item**(s) *são contidos* por uma **Loja**;
     * Cardinalidade: N : 1.
+* **Livro** - *ensina* - **Feitico**
+    * Uma **Livro** *ensina* um **Feitico**(s) e um **Feitico**(s) *é é ensinado* por um **Livro**;
+    * Cardinalidade: 1 : 1.
 * **Mapa** - *tem* - **Regiao**:
     * Um **Mapa** *tem* uma ou várias **Regiao**(oes) e uma ou várias **Regiao**(oes) *é constituído* por um ou vários **Mapa**(s);
     * Cardinalidade: 1 : N.
 * **Regiao** - *tem* - **Area**:
     * Uma **Regiao** *tem* uma **Area** e uma **Area** *tem* uma ou mais **Regiao**(oes);
-    * Cardinalidade: 1 : N
+    * Cardinalidade: 1 : N.
+* **Area** - *contém* - **Loja**
+    * Uma **Loja** *está contida* em uma ou varias **Area**(s) e uma **Area**(s) *contém* zero ou uma Loja;
+    * Cardinalidade: N : 1.*
 * **Item** - *gera* - **InstanciaItem**:
     * Um **Item** *gera* uma ou várias **InstanciaItem** e uma **InstanciaItem** *é gerada* por um **Item**;
     * Cardinalidade: N : 1.

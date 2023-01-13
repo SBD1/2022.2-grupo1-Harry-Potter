@@ -172,7 +172,6 @@
 | idLoja        | Obrigatório     | tinyint | 1       | Identificação da Loja.                        | 1                                                                                                                           |
 | instanciaItem | Obrigatório     | tinyint | 1       | Identificação da Instancia do Item.           | 1                                                                                                                           |
 | descricaoLoja | Obrigatório     | varchar | 60      | Detalhamento das características da Loja.     | Floreios e Borrões é uma livraria no Lado Norte, Beco Diagonal. É onde os alunos de Hogwarts adquire seus livros escolares. |
-| NPC           | Obrigatório     | tinyint | 1       | Identificador do NPC responsável pela Loja    | 2                                                                                                                           |
 | area          | Obrigatório     | tinyint | 1       | Identificação da localização da loja no mapa. | 63                                                                                                                          |
 
 ## Entidade: Grimorio
@@ -184,3 +183,10 @@
 | feitico    | Obrigatório     | tinyint | 1       | Identificação do Feitiço.                       | 1       |
 | numSlots   | Obrigatório     | tinyint | 1       | Quantidade de Feitiços que um jogador pode ter. | 20      |
 
+# Entidade: Livro
+#### Descrição: Item que armazena um feitiço
+
+| Atributo   | Obrigatoriedade | Tipo    | Tamanho | Descrição                                       | Exemplo |
+| ---------- | --------------- | ------- | ------- | ----------------------------------------------- | ------- |
+| idItem     | Obrigatório     | tinyint | 1       | Identificação do Livro.                         | 56      |
+| feitico    | Obrigatório     | tinyint | 1       | Identificação do Feitiço.                       | 102     |
