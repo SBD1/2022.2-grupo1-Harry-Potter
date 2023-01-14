@@ -1,9 +1,13 @@
 -- -----------------------------------------------------------------
--- Data Criacao ...........: 31/08/2022
+-- Data Criacao ...........: 05/01/2023
 -- Autor(es) ..............: Felipe Moura e Letícia Araújo
 -- Versao ..............: 1.0
 -- Banco de Dados .........: PostgreSQL
--- Descricao .........: Criando primeiras tabelas do banco de dados
+-- Descricao .........: Criando primeiras tabelas do banco de dados.
+-- ------------------------------------------------------------------
+-- Data Atualizacao ...........: 14/01/2023
+-- Autor(es) ..............: Letícia Araújo
+-- Descricao .........: Criando tabelas faltantes.
 -- ------------------------------------------------------------------
 
 -- Tabela MAPA
@@ -204,5 +208,20 @@ CREATE TABLE IF NOT EXISTS LOJA(
    FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
    FOREIGN KEY (idArea) REFERENCES AREA (idArea),
    FOREIGN KEY (idInstanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
+);
+
+CREATE TABLE IF NOT EXISTS LIVRO(
+   idItem           INT NOT NULL,
+   feitico          INT NOT NULL,
+   FOREIGN KEY (idItem) REFERENCES ITEM (idItem),
+   FOREIGN KEY (feitico) REFERENCES FEITICO (idFeitico)
+);
+
+CREATE TABLE IF NOT EXISTS INSTANCIA_NPC_TIPO(
+   idNPC           INT NOT NULL,
+   idArea          INT NOT NULL,
+   tipo            CHAR(30) NOT NULL,
+   FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
+   FOREIGN KEY (idArea) REFERENCES AREA (idArea)
 );
 
