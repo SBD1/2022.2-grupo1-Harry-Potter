@@ -1,5 +1,9 @@
 from database import create_connection
 import sys
+import os
+
+def clear():
+    os.system('cls')
 
 connection = create_connection()
 
@@ -42,11 +46,42 @@ def start_options():
     return option
 
 def create_new_character():
-    print("a")
+    clear()
+    new_name = input('Digite o nome do seu personagem: ')
+
+    print('Qual a casa que o seu personagem pertence?\n')
+    print('1- Grifinória')
+    print('2- Sonserina')
+    print('3- Corvinal')
+    print('4- LufaLufa')
+
+    inp = 0
+
+    while(inp not in [1, 2, 3, 4]):
+        inp = input('> ')
+
+        if inp == '1':
+            new_casa = 1
+            break
+
+        if inp == '2':
+            new_casa = 2
+            break
+
+        if inp == '3':
+            new_casa = 3
+            break
+
+        if inp == '4':
+            new_casa = 4
+            break
+
+        else:
+            print('\nOpção Inválida!')
+
 
 def load_character():
-    nome = input("digite o nome do personagem: ")
-
+    nome = input("digite o id do personagem: ")
 
 if __name__ == '__main__':
 

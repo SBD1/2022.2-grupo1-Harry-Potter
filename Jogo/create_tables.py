@@ -8,6 +8,37 @@ def create_tables():
     """ create tables in the PostgreSQL database """
     comandos = (
         """
+
+        CREATE TABLE IF NOT EXISTS MAPA(
+        idMapa            SERIAL PRIMARY KEY,
+        descricao         CHAR(60) NOT NULL
+        );
+
+        """,
+
+        """
+        CREATE TABLE IF NOT EXISTS REGIAO(
+        idRegiao          SERIAL PRIMARY KEY,
+        idMapa            INT NOT NULL,
+        descricao         INT NOT NULL,
+        nome              CHAR(20) NOT NULL,
+        FOREIGN KEY (idMapa) REFERENCES MAPA (idMapa)
+        );
+
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS AREA(
+        idArea        SERIAL PRIMARY KEY,
+        idRegiao      INT NOT NULL,
+        areaLeste     INT  REFERENCES AREA(idArea),
+        areaOeste     INT  REFERENCES AREA(idArea),
+        areaSul       INT  REFERENCES AREA(idArea),
+        areaNorte     INT  REFERENCES AREA(idArea),
+        FOREIGN KEY (idRegiao) REFERENCES REGIAO (idRegiao)
+        );
+        """,
+
+        """
         CREATE TABLE IF NOT EXISTS FEITICO(
         idFeitico       SERIAL PRIMARY KEY,
         nome            CHAR(20) NOT NULL,
@@ -16,7 +47,6 @@ def create_tables():
         quantidadeUso   NUMERIC(4,2) NOT NULL
         );
         """,
-
         """
         CREATE TABLE IF NOT EXISTS GRIMORIO(
         idGrimorio  SERIAL PRIMARY KEY,
@@ -25,17 +55,6 @@ def create_tables():
         FOREIGN KEY (feitico) REFERENCES FEITICO (idFeitico)
         );
         """,
-
-        """
-        CREATE TABLE IF NOT EXISTS AREA(
-        idArea        SERIAL PRIMARY KEY,
-        areaLeste     INT  NOT NULL,
-        areaOeste     INT  NOT NULL,
-        areaSul       INT  NOT NULL,
-        areaNorte     INT  NOT NULL
-        );
-        """,
-
         """
         CREATE TABLE IF NOT EXISTS ITEM(
         idItem           SERIAL PRIMARY KEY,
@@ -46,7 +65,6 @@ def create_tables():
         descricaoItem    VARCHAR(60) NOT NULL
         );
         """,
-
         """
         CREATE TABLE IF NOT EXISTS NPC(
         idNPC      SERIAL PRIMARY KEY,
@@ -55,7 +73,6 @@ def create_tables():
         FOREIGN KEY (item) REFERENCES ITEM (idItem)
         );
         """,
-
         """
         CREATE TABLE IF NOT EXISTS CASA(
         idCasa                       SERIAL PRIMARY KEY,
@@ -76,7 +93,6 @@ def create_tables():
         FOREIGN KEY (feitico) REFERENCES FEITICO (idFeitico)
         );
         """,
-
         """
         CREATE TABLE IF NOT EXISTS PROFESSOR(
         idNPC            INT  NOT NULL,
@@ -99,7 +115,7 @@ def create_tables():
         FOREIGN KEY (idArea) REFERENCES AREA (idArea),
         FOREIGN KEY (idCasa) REFERENCES CASA (idCasa)
         );
-        """,
+        """ ,
         """
         CREATE TABLE IF NOT EXISTS INSTANCIA_ITEM(
         idInstanciaItem      SERIAL PRIMARY KEY,
@@ -107,8 +123,8 @@ def create_tables():
         FOREIGN KEY (idItem) REFERENCES ITEM (idItem)
         );
         """,
-
         """
+
         CREATE TABLE IF NOT EXISTS INVENTARIO(
         idJogador               INT NOT NULL,
         instanciaItem	         INT NULL,
@@ -116,7 +132,73 @@ def create_tables():
         FOREIGN KEY (idJogador) REFERENCES JOGADOR (idJogador),
         FOREIGN KEY (instanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
         );
-        """,)
+        """,
+
+        """
+        CREATE TABLE IF NOT EXISTS INSTANCIA_JOGADOR_DISCIPLINA(
+        idJogador            INT NOT NULL,
+        idDisciplina         INT NULL,
+        FOREIGN KEY (idJogador) REFERENCES JOGADOR (idJogador),
+        FOREIGN KEY (idDisciplina) REFERENCES DISCIPLINA (idDisciplina)
+        );
+        """,
+
+        """
+        CREATE TABLE IF NOT EXISTS HABILIDADE(
+        idHabilidade     SERIAL PRIMARY KEY,
+        nomeHabilidade   CHAR(30) NOT NULL,
+        dano             INT NULL,
+        descricao        CHAR(60) NOT NULL
+        );
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS INIMIGO(
+        idNPC            INT NOT NULL,
+        idHabilidade     INT NULL,
+        moedas           INT NOT NULL,
+        FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
+        FOREIGN KEY (idHabilidade) REFERENCES HABILIDADE (idHabilidade)
+        );
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS INSTANCIA_INIMIGO(
+        idNPC             INT NOT NULL,
+        idArea            INT NOT NULL,
+        idInstanciaItem   INT NULL,
+        pontosVida        INT NOT NULL,
+        multiplicador     INT NOT NULL,
+        FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
+        FOREIGN KEY (idArea) REFERENCES AREA (idArea),
+        FOREIGN KEY (idInstanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
+        );
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS FERRAMENTA(
+        idItem          INT NOT NULL,
+        forca           INT NULL,
+        FOREIGN KEY (idItem) REFERENCES ITEM (idItem)
+        );
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS POCAO(
+        idItem            INT NOT NULL,
+        ingrediente       CHAR(30) NOT NULL,
+        FOREIGN KEY (idItem) REFERENCES ITEM (idItem)
+        );
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS LOJA(
+        idLoja            SERIAL PRIMARY KEY,
+        idNPC             INT NOT NULL,
+        idArea              INT NOT NULL,
+        idInstanciaItem   INT NOT NULL,
+        descricao         CHAR(60) NOT NULL,
+        FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
+        FOREIGN KEY (idArea) REFERENCES AREA (idArea),
+        FOREIGN KEY (idInstanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
+        );
+
+        """)
     try:
         for comando in comandos:
             cur.execute(comando)
