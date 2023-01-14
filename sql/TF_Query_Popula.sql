@@ -39,7 +39,9 @@ INSERT INTO FEITICO (nome, efeito, ponto, quantidadeUso) VALUES
 ('Aqua Eructo', 'conjura um intenso jato de água', 2, 99),
 ('Bombarda', 'Usado para destruir obstáculos', 3, 99),
 ('Petrificus Totalus', 'etrifica por completo o oponente temporariamente', 5, 99),
-('Expecto Patronum', 'Conjura uma espécie de espírito protetor, um guardião de magia capaz de proteger o bruxo de criaturas das trevas ', 10, 50);
+('Expecto Patronum', 'Conjura uma espécie de espírito protetor, um guardião de magia capaz de proteger o bruxo de criaturas das trevas ', 10, 50),
+('Lapifors', 'Transforma um alvo em um coelho', 1, 99),
+('Up', 'Faz a vassoura subir', 1, 99);
 
 -- Popula Grimorio
 INSERT INTO GRIMORIO (numSlots, feitico) VALUES
@@ -50,7 +52,6 @@ INSERT INTO GRIMORIO (numSlots, feitico) VALUES
 (99, 5),
 (99, 6);
 
-
 -- Popula Jogador
 INSERT INTO JOGADOR (idGrimorio, nome, idArea, pontosVida, idCasa) VALUES
 (1, 'Harry Potter', 4, 20, 1)
@@ -59,4 +60,66 @@ INSERT INTO JOGADOR (idGrimorio, nome, idArea, pontosVida, idCasa) VALUES
 (4, 'Morgan Kerr', 3, 20, 3)
 (5, 'Edward Simpson', 4, 20, 4)
 (6, 'Emma Parkes', 5, 20, 1);
+
+-- Popula Item
+INSERT INTO ITEM(nome, acao, valor, tipo, descricaoItem) VALUES
+('Varinha', 'Realiza Feiticos', 900, 'ATAQUE', 'Uma varinha é um instrumento mágico quase consciente pelo qual um bruxo canaliza seus poderes mágicos'),
+('Mapa do Maroto', 'Mostra a localização exata de cada pessoa dentro dos limites de Hogwarts', 400, 'LOCOMOCAO', 'Indica caminhos, passagens secretas e outros pontos de interesse pelo castelo'),
+('Capa da Invisibilidade', 'Torna o usuário invisível', 600, 'DEFESA', 'Única capa de invisibilidade conhecida que não se desvaneceria com a idade e proporcionaria proteção eterna ao usuário'),
+('Desiluminador', 'Remove e devolve fontes de luz à suas devidas fontes', 100, 'DEFESA', 'Aparenta ser um isqueiro de prata padrão'),
+('Livros de Feitiços', 'Explica ao leitor como realizar feitiços', 1000, 'ATAQUE', 'Existem vários tipos'),
+('Livros de Poções', 'Explica ao leitor como realizar poções', 700, 'DEFESA', 'Existem vários tipos'),
+('Livros de Criaturas Mágicas', 'EXplica sobre as criaturas mágicas', 'ATAQUE', 'Existem vários tipos');
+
+-- Popula NPC
+INSERT INTO NPC(item, nome) VALUES
+(5, 'Albus Dumbledore'),
+(2, 'Remo Lupin'),
+(3, 'Tiago Potter'),
+(4, 'Ron Weasley'),
+(5, 'Minerva McGonagall'),
+(6, 'Severus Snape'),
+(1, 'Rolanda Hooch'),
+(7, 'Rúbeo Hagrid'),
+(5, 'Séptima Vector');
+
+-- Popula DISCIPLINA
+INSERT INTO NPC(NPC, nomeDisciplina, feitico) VALUES
+(1, 'DEFESA CONTRA AS ARTES DAS TREVAS', 5),
+(2, 'TRANSFORMAÇÕES', 7),
+(7, 'VÔO COM VASSOURAS', 7),
+(8, 'TRATO DE CRIATURAS MÁGICAS', 2),
+(6, 'POÇÕES', 2),
+(9, 'ARITMANCIA', 2),
+
+-- Popula PROFESSOR
+INSERT INTO NPC(idNPC, casa, disciplina) VALUES
+(1, 1, 1),
+(2, 1, 1),
+(5, 1, 2),
+(6, 2, 5),
+(7, 3, 3),
+(8, 1, 4)
+(9, 4, 6);
+
+-- Popula INSTANCIA_ITEM
+INSERT INTO INSTANCIA_ITEM(idItem)
+(1),
+(2),
+(3),
+(4),
+(5),
+(6);
+
+-- Popula INVENTARIO
+INSERT INTO INVENTARIO(idJogador, instanciaItem, dinheiro)
+(1, 1, 2000),
+(2, 2, 2000),
+(3, 3, 2000),
+(4, 4, 2000),
+(5, 5, 200),
+(6, 6, 2000);
+
+
+
 
