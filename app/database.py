@@ -5,5 +5,5 @@ def create_connection():
         host="localhost",
         database="HARRY_POTTER",
         user="postgres",
-        password="postgres")
+        password="1234")
     return connect

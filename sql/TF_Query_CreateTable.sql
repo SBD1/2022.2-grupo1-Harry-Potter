@@ -6,12 +6,41 @@
 -- Descricao .........: Criando primeiras tabelas do banco de dados
 -- ------------------------------------------------------------------
 
+-- Tabela MAPA
+
+CREATE TABLE IF NOT EXISTS MAPA(
+   idMapa            SERIAL PRIMARY KEY,
+   descricao         CHAR(60) NOT NULL
+);
+
+-- Tabela REGIAO
+
+CREATE TABLE IF NOT EXISTS REGIAO(
+   idRegiao          SERIAL PRIMARY KEY,
+   idMapa            INT NOT NULL,
+   descricao         VARCHAR NOT NULL,
+   nome              CHAR(20) NOT NULL,
+   FOREIGN KEY (idMapa) REFERENCES MAPA (idMapa)
+);
+
+-- Tabela AREA
+
+CREATE TABLE IF NOT EXISTS AREA(
+   idArea        SERIAL PRIMARY KEY,
+   idRegiao      INT NOT NULL,
+   areaLeste     INT  REFERENCES AREA(idArea),
+   areaOeste     INT  REFERENCES AREA(idArea),
+   areaSul       INT  REFERENCES AREA(idArea),
+   areaNorte     INT  REFERENCES AREA(idArea),
+   FOREIGN KEY (idRegiao) REFERENCES REGIAO (idRegiao)
+);
+
 -- Tabela FEITICO
 
 CREATE TABLE IF NOT EXISTS FEITICO(
    idFeitico       SERIAL PRIMARY KEY,
    nome            CHAR(20) NOT NULL,
-   efeito          CHAR(20) NOT NULL,
+   efeito          VARCHAR NOT NULL,
    ponto           NUMERIC(4,2) NOT NULL,
    quantidadeUso   NUMERIC(4,2) NOT NULL
 );
@@ -50,9 +79,7 @@ CREATE TABLE IF NOT EXISTS NPC(
 CREATE TABLE IF NOT EXISTS CASA(
    idCasa                       SERIAL PRIMARY KEY,
    nomeCasa                     CHAR(10) NOT NULL,
-   petCasa                      CHAR(8) NOT NULL,
-   professorResponsavel         INT  NOT NULL,
-   FOREIGN KEY (professorResponsavel) REFERENCES NPC (idNPC)
+   petCasa                      CHAR(8) NOT NULL
 );
 
 -- Tabela DISCIPLINA
@@ -66,7 +93,7 @@ CREATE TABLE IF NOT EXISTS DISCIPLINA(
    FOREIGN KEY (feitico) REFERENCES FEITICO (idFeitico)
 );
 
--- Tabela GRIMPROFESSORORIO
+-- Tabela PROFESSOR
 
 CREATE TABLE IF NOT EXISTS PROFESSOR(
    idNPC            INT  NOT NULL,
@@ -113,17 +140,26 @@ CREATE TABLE IF NOT EXISTS INVENTARIO(
 
 CREATE TABLE IF NOT EXISTS INSTANCIA_JOGADOR_DISCIPLINA(
    idJogador            INT NOT NULL,
-   idDisciplina         INT NULL,           
+   idDisciplina         INT NULL,
    FOREIGN KEY (idJogador) REFERENCES JOGADOR (idJogador),
    FOREIGN KEY (idDisciplina) REFERENCES DISCIPLINA (idDisciplina)
+);
+
+-- Tabela HABILIDADE
+
+CREATE TABLE IF NOT EXISTS HABILIDADE(
+   idHabilidade     SERIAL PRIMARY KEY,
+   nomeHabilidade   CHAR(30) NOT NULL,
+   dano             INT NULL,
+   descricao        CHAR(60) NOT NULL
 );
 
 -- Tabela INIMIGO
 
 CREATE TABLE IF NOT EXISTS INIMIGO(
    idNPC            INT NOT NULL,
-   idHabilidade     INT NULL,        
-   moedas           INT NOT NULL,   
+   idHabilidade     INT NULL,
+   moedas           INT NOT NULL,
    FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
    FOREIGN KEY (idHabilidade) REFERENCES HABILIDADE (idHabilidade)
 );
@@ -132,37 +168,28 @@ CREATE TABLE IF NOT EXISTS INIMIGO(
 
 CREATE TABLE IF NOT EXISTS INSTANCIA_INIMIGO(
    idNPC             INT NOT NULL,
-   idArea            INT NOT NULL,  
-   idInstanciaItem   INT NULL, 
+   idArea            INT NOT NULL,
+   idInstanciaItem   INT NULL,
    pontosVida        INT NOT NULL,
-   multiplicador     INT NOT NULL, 
+   multiplicador     INT NOT NULL,
    FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
    FOREIGN KEY (idArea) REFERENCES AREA (idArea),
    FOREIGN KEY (idInstanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
-);
-
--- Tabela HABILIDADE
-
-CREATE TABLE IF NOT EXISTS HABILIDADE(
-   idHabilidade     SERIAL PRIMARY KEY,
-   nomeHabilidade   CHAR(30) NOT NULL,  
-   dano             INT NULL, 
-   descricao        CHAR(60) NOT NULL,
 );
 
 -- Tabela FERRAMENTA
 
 CREATE TABLE IF NOT EXISTS FERRAMENTA(
    idItem          INT NOT NULL,
-   forca           INT NULL,  
-   FOREIGN KEY (idItem) REFERENCES ITEM (idItem),
+   forca           INT NULL,
+   FOREIGN KEY (idItem) REFERENCES ITEM (idItem)
 );
 
 -- Tabela POCAO
 
 CREATE TABLE IF NOT EXISTS POCAO(
    idItem            INT NOT NULL,
-   ingrediente       CHAR(30) NOT NULL,   
+   ingrediente       CHAR(30) NOT NULL,
    FOREIGN KEY (idItem) REFERENCES ITEM (idItem)
 );
 
@@ -170,40 +197,12 @@ CREATE TABLE IF NOT EXISTS POCAO(
 
 CREATE TABLE IF NOT EXISTS LOJA(
    idLoja            SERIAL PRIMARY KEY,
-   idNPC             INT NOT NULL, 
-   idArea              INT NOT NULL,  
-   idInstanciaItem   INT NOT NULL, 
+   idNPC             INT NOT NULL,
+   idArea              INT NOT NULL,
+   idInstanciaItem   INT NOT NULL,
    descricao         CHAR(60) NOT NULL,
    FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
    FOREIGN KEY (idArea) REFERENCES AREA (idArea),
    FOREIGN KEY (idInstanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
 );
 
--- Tabela MAPA
-
-CREATE TABLE IF NOT EXISTS MAPA(
-   idMapa            SERIAL PRIMARY KEY,
-   descricao         CHAR(60) NOT NULL, 
-);
-
--- Tabela REGIAO
-
-CREATE TABLE IF NOT EXISTS REGIAO(
-   idRegiao          SERIAL PRIMARY KEY,
-   idMapa            INT NOT NULL, 
-   descricao         INT NOT NULL,  
-   nome              CHAR(20) NOT NULL,
-   FOREIGN KEY (idMapa) REFERENCES MAPA (idMapa),
-);
-
--- Tabela AREA
-
-CREATE TABLE IF NOT EXISTS AREA(
-   idArea        SERIAL PRIMARY KEY, 
-   idRegiao      INT NOT NULL,
-   areaLeste     INT  NOT NULL,
-   areaOeste     INT  NOT NULL,
-   areaSul       INT  NOT NULL,
-   areaNorte     INT  NOT NULL,
-   FOREIGN KEY (idRegiao) REFERENCES REGIAO (idRegiao)
-);
