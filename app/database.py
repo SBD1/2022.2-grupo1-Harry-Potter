@@ -9,7 +9,7 @@ class DataBase():
             host="localhost",
             database="HARRY_POTTER",
             user="postgres",
-            password="Andre203")
+            password="SUASENHA")
         return connect
 
     def create_new_character(connection, nome, casa):
