@@ -128,7 +128,8 @@ CREATE TABLE IF NOT EXISTS JOGADOR(
    FOREIGN KEY (idGrimorio) REFERENCES GRIMORIO (idGrimorio),
    FOREIGN KEY (idArea) REFERENCES AREA (idArea),
    FOREIGN KEY (idCasa) REFERENCES CASA (idCasa),
-   UNIQUE(nome)
+   UNIQUE (nome)
+
 );
 ALTER SEQUENCE jogador_id_seq OWNED BY JOGADOR.idJogador;
 
