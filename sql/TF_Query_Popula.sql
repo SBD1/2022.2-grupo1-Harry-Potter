@@ -10,6 +10,8 @@
 -- Descricao .........: Finalizando popula das tabelas.
 -- ------------------------------------------------------------------
 
+
+
 -- Popula casas
 INSERT INTO CASA (nomecasa, petcasa ) VALUES
 ('Grifinória', 'Águia'),
@@ -36,13 +38,13 @@ INSERT INTO REGIAO (idMapa, descricao, nome) VALUES
 (6, 'É uma loja bem popular entre os alunos de Hogwarts pelos variados doces que nela se encontra, vai dos mais simples até os bem exóticos', 'Dedos de Mel');
 
 -- Popula Area
-INSERT INTO AREA(idArea, idRegiao, areaLeste, areaOeste, areaSul, areaNorte) VALUES
-(1, 1, 1, 1, 1, 1),
-(2, 2, 2, 2, 2, 2),
-(3, 3, 1, 1, 4, 1),
-(4, 4, 1, 1, 4, 1),
-(5, 5, 1, 4, 4, 4),
-(6, 6, 1, 1, 1, 3);
+INSERT INTO AREA(idArea, idRegiao, nome, areaLeste, areaOeste, areaSul, areaNorte) VALUES
+(-1, 1, 'Nada', -1, -1, -1, -1),
+(1, 1,'Portao de Hogwarts', -1, -1, 5, 2),
+(2, 1,'Salao Principal', 4, -1, 1, 3),
+(3, 1,'Refeitorio', -1, -1, 2, -1),
+(4, 1,'Biblioteca', -1, 2, -1, -1),
+(5, 1,'Floresta',-1, -1, -1, 1);
 
 -- Popula Feitico
 INSERT INTO FEITICO (nome, efeito, ponto, quantidadeUso) VALUES
