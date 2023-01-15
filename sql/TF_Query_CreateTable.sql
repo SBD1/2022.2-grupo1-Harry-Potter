@@ -11,7 +11,7 @@
 -- ------------------------------------------------------------------
 
 -- Tabela MAPA
-CREATE SEQUENCE mapa_id_seq;
+CREATE SEQUENCE mapa_id_seq START 1;
 CREATE TABLE IF NOT EXISTS MAPA(
    idMapa            int NOT NULL DEFAULT nextval('mapa_id_seq') PRIMARY KEY,
    descricao         CHAR(60) NOT NULL
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS MAPA(
 ALTER SEQUENCE mapa_id_seq OWNED BY MAPA.idMapa;
 
 -- Tabela REGIAO
-CREATE SEQUENCE regiao_id_seq;
+CREATE SEQUENCE regiao_id_seq START 1;
 CREATE TABLE IF NOT EXISTS REGIAO(
    idRegiao          int NOT NULL DEFAULT nextval('regiao_id_seq') PRIMARY KEY,
    idMapa            INT NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS REGIAO(
 ALTER SEQUENCE regiao_id_seq OWNED BY REGIAO.idRegiao;
 
 -- Tabela AREA
-CREATE SEQUENCE area_id_seq;
+CREATE SEQUENCE area_id_seq START 1;
 CREATE TABLE IF NOT EXISTS AREA(
    idArea        int NOT NULL DEFAULT nextval('area_id_seq') PRIMARY KEY,
    idRegiao      INT NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS AREA(
 ALTER SEQUENCE area_id_seq OWNED BY AREA.idArea;
 
 -- Tabela FEITICO
-CREATE SEQUENCE feitico_id_seq;
+CREATE SEQUENCE feitico_id_seq START 1;
 CREATE TABLE IF NOT EXISTS FEITICO(
    idFeitico       int NOT NULL DEFAULT nextval('feitico_id_seq') PRIMARY KEY,
    nome            CHAR(20) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS FEITICO(
 ALTER SEQUENCE feitico_id_seq OWNED BY FEITICO.idFeitico;
 
 -- Tabela GRIMORIO
-CREATE SEQUENCE grimorio_id_seq;
+CREATE SEQUENCE grimorio_id_seq START 1;
 CREATE TABLE IF NOT EXISTS GRIMORIO(
    idGrimorio  int NOT NULL DEFAULT nextval('grimorio_id_seq') PRIMARY KEY,
    numSlots    INT  NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS GRIMORIO(
 ALTER SEQUENCE grimorio_id_seq OWNED BY GRIMORIO.idGrimorio;
 
 -- Tabela ITEM
-CREATE SEQUENCE item_id_seq;
+CREATE SEQUENCE item_id_seq START 1;
 CREATE TABLE IF NOT EXISTS ITEM(
    idItem           int NOT NULL DEFAULT nextval('item_id_seq') PRIMARY KEY,
    nome             VARCHAR(30) NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS ITEM(
 ALTER SEQUENCE item_id_seq OWNED BY ITEM.idItem;
 
 -- Tabela NPC
-CREATE SEQUENCE npc_id_seq;
+CREATE SEQUENCE npc_id_seq START 1;
 CREATE TABLE IF NOT EXISTS NPC(
    idNPC      int NOT NULL DEFAULT nextval('npc_id_seq') PRIMARY KEY,
    item       INT  NOT NULL,
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS NPC(
 ALTER SEQUENCE npc_id_seq OWNED BY NPC.idNPC;
 
 -- Tabela CASA
-CREATE SEQUENCE casa_id_seq;
+CREATE SEQUENCE casa_id_seq START 1;
 CREATE TABLE IF NOT EXISTS CASA(
    idCasa         int NOT NULL DEFAULT nextval('casa_id_seq') PRIMARY KEY,
    nomeCasa       CHAR(10) NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS CASA(
 ALTER SEQUENCE casa_id_seq OWNED BY CASA.idCasa;
 
 -- Tabela DISCIPLINA
-CREATE SEQUENCE disciplina_id_seq;
+CREATE SEQUENCE disciplina_id_seq START 1;
 CREATE TABLE IF NOT EXISTS DISCIPLINA(
    idDisciplina         int NOT NULL DEFAULT nextval('disciplina_id_seq') PRIMARY KEY,
    NPC                  INT  NOT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS PROFESSOR(
 );
 
 -- Tabela JOGADOR
-CREATE SEQUENCE jogador_id_seq;
+CREATE SEQUENCE jogador_id_seq START 1;
 CREATE TABLE IF NOT EXISTS JOGADOR(
    idJogador    INT NOT NULL DEFAULT nextval('jogador_id_seq') PRIMARY KEY,
    idGrimorio   INT  NOT NULL,
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS JOGADOR(
 ALTER SEQUENCE jogador_id_seq OWNED BY JOGADOR.idJogador;
 
 -- Tabela INSTANCIA_ITEM
-CREATE SEQUENCE instancia_item_id_seq;
+CREATE SEQUENCE instancia_item_id_seq START 1;
 CREATE TABLE IF NOT EXISTS INSTANCIA_ITEM(
    idInstanciaItem      INT NOT NULL DEFAULT nextval('instancia_item_id_seq') PRIMARY KEY,
    idItem               INT  NOT NULL,
@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS INSTANCIA_JOGADOR_DISCIPLINA(
 );
 
 -- Tabela HABILIDADE
-CREATE SEQUENCE habilidade_id_seq;
+CREATE SEQUENCE habilidade_id_seq START 1;
 CREATE TABLE IF NOT EXISTS HABILIDADE(
    idHabilidade     INT NOT NULL DEFAULT nextval('habilidade_id_seq') PRIMARY KEY,
    nomeHabilidade   CHAR(30) NOT NULL,
@@ -204,7 +204,7 @@ CREATE TABLE IF NOT EXISTS POCAO(
 );
 
 -- Tabela LOJA
-CREATE SEQUENCE loja_id_seq;
+CREATE SEQUENCE loja_id_seq START 1;
 CREATE TABLE IF NOT EXISTS LOJA(
    idLoja              INT NOT NULL DEFAULT nextval('loja_id_seq') PRIMARY KEY,
    idNPC               INT NOT NULL,
