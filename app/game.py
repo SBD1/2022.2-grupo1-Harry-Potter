@@ -92,6 +92,7 @@ def create_new_character():
     DataBase.create_new_character(connection, new_name, new_casa)
     print("OPA, TO AQUI\n")
     id_player = DataBase.find_character(connection, new_name)
+    gameplay()
 
 
 def gameplay():
@@ -146,8 +147,7 @@ def load_character():
     while(id_player == -1):
         nome = input("Jogador não encontrado! digite outro: ")
         id_player = DataBase.find_character(connection, nome)
-
-    print(id_player)
+    gameplay()
 
 
 if __name__ == '__main__':
