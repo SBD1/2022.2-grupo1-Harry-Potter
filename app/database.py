@@ -1,6 +1,6 @@
 import psycopg2
 from classes import *
- 
+
 
 class DataBase():
 
@@ -35,7 +35,7 @@ class DataBase():
         rtn = cursor.fetchone()
         if(rtn == None):
             cursor.close()
-            return -1
+            return Player(-1, -1, -1, -1, -1, -1)
         else:
             querry = """SELECT * FROM JOGADOR
                     WHERE( JOGADOR.nome = '%s') 
@@ -45,7 +45,7 @@ class DataBase():
 
             cursor.close()
             return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa)
-        
+
     def get_casa(connection, id_casa):
         cursor = connection.cursor()
 
@@ -57,7 +57,6 @@ class DataBase():
         cursor.close()
 
         return nome_casa
-
 
     def update_player_area(connection, id, area):
 
@@ -81,12 +80,11 @@ class DataBase():
         cursor.close()
         return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa)
 
-
     def get_area(connection, id_area):
         cursor = connection.cursor()
 
         querry = """SELECT * FROM AREA WHERE (AREA.idArea = %s) """ % (id_area)
         cursor.execute(querry)
-        idArea, idRegiao, nome, areaLeste, areaOeste, areaSul, areaNorte  = cursor.fetchone()
+        idArea, idRegiao, nome, areaLeste, areaOeste, areaSul, areaNorte = cursor.fetchone()
         cursor.close()
         return Area(idArea, idRegiao, nome, areaLeste, areaOeste, areaSul, areaNorte)
