@@ -10,6 +10,7 @@
 -- Descricao .........: Criando tabelas faltantes e modificando o tipo do ID.
 -- ------------------------------------------------------------------
 
+
 -- Tabela MAPA
 CREATE SEQUENCE mapa_id_seq START 1;
 CREATE TABLE IF NOT EXISTS MAPA(
@@ -34,6 +35,7 @@ CREATE SEQUENCE area_id_seq START 1;
 CREATE TABLE IF NOT EXISTS AREA(
    idArea        int NOT NULL DEFAULT nextval('area_id_seq') PRIMARY KEY,
    idRegiao      INT NOT NULL,
+   nome          CHAR(25) NOT NULL,
    areaLeste     INT  REFERENCES AREA(idArea),
    areaOeste     INT  REFERENCES AREA(idArea),
    areaSul       INT  REFERENCES AREA(idArea),
