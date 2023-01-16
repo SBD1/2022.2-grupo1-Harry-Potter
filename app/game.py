@@ -7,13 +7,13 @@ import os
 def clear():
     os.system('cls')
 
+
 class Game:
 
-    def __init__(self) :
+    def __init__(self):
         self.connection = DataBase.create_connection()
         self.player = Player(-1, -1, ' ', -1, -1, -1)
         pass
-    
 
     def start(self):
 
@@ -30,8 +30,8 @@ class Game:
         print('Escolha uma das opções abaixo(1-3):\n')
 
         print('1 - Criar Novo Personagem\n' +
-            '2 - Carregar Personagem\n' +
-            '3 - Sair\n\n\n')
+              '2 - Carregar Personagem\n' +
+              '3 - Sair\n\n\n')
 
         print('Digite a opção desejada: \n')
 
@@ -55,12 +55,13 @@ class Game:
             else:
                 print('\nOpção Inválida!')
 
-
     def create_new_character(self):
         clear()
         new_name = input('Digite o nome do seu personagem: ')
-        while(DataBase.find_character(self.connection, new_name) != -1):
+        self.player = DataBase.find_character(self.connection, new_name)
+        while(self.player.idJogador != -1):
             new_name = input('Nome já registrado, escolha outro:')
+            self.player = DataBase.find_character(self.connection, new_name)
 
         print('Qual a casa que o seu personagem pertence?\n')
         print('1- Grifinória')
@@ -94,6 +95,9 @@ class Game:
 
         DataBase.create_new_character(self.connection, new_name, new_casa)
         self.player = DataBase.find_character(self.connection, new_name)
+        print(
+            f'Seja bem vinde ao jogo _{new_name}_! Você está chegando no portão da escola!\nAproveite a estadia.\n')
+        input('pressione _enter_ para continuar...')
         self.gameplay()
 
     def load_character(self):
@@ -110,51 +114,64 @@ class Game:
             clear()
             self.show_player_info()
 
-            current_area = DataBase.get_area(self.connection, self.player.idArea)
-            area_norte = DataBase.get_area(self.connection, current_area.areaNorte).nome
+            current_area = DataBase.get_area(
+                self.connection, self.player.idArea)
+            area_norte = DataBase.get_area(
+                self.connection, current_area.areaNorte).nome
 
             # Completa o nome do mapa oeste com espacos em branco para manter um tamanho fixo e manter a estrutura do mapa
-            area_oeste = DataBase.get_area(self.connection, current_area.areaOeste).nome
+            area_oeste = DataBase.get_area(
+                self.connection, current_area.areaOeste).nome
             while len((area_oeste)) < 25:
                 area_oeste = area_oeste + ' '
 
-            area_leste = DataBase.get_area(self.connection, current_area.areaLeste).nome
-            area_sul = DataBase.get_area(self.connection, current_area.areaSul).nome
+            area_leste = DataBase.get_area(
+                self.connection, current_area.areaLeste).nome
+            area_sul = DataBase.get_area(
+                self.connection, current_area.areaSul).nome
 
             print(f"\nArea atual: {current_area.nome}\n")
 
             print(f'                            N. {area_norte}\n')
             print(f'          O. {area_oeste}' + f'         L. {area_leste}\n')
             print(f'                            S. {area_sul}\n')
+            print('######################################################\n')
+            print('Q. sair do jogo\n')
 
             inp = 0
-            while(inp not in ['N', 'n', 'O', 'o', 'L', 'l', 'S', 's']):
+            while(inp not in ['N', 'n', 'O', 'o', 'L', 'l', 'S', 's', 'q', 'Q']):
                 inp = input('> ')
                 if inp == 'N' or inp == 'n':
                     if current_area.areaNorte != -1:
-                        self.player = DataBase.update_player_area(self.connection, self.player.idJogador, current_area.areaNorte)
+                        self.player = DataBase.update_player_area(
+                            self.connection, self.player.idJogador, current_area.areaNorte)
                         break
                 if inp == 'O' or inp == 'o':
                     if current_area.areaOeste != -1:
-                        self.player = DataBase.update_player_area(self.connection, self.player.idJogador, current_area.areaOeste)
+                        self.player = DataBase.update_player_area(
+                            self.connection, self.player.idJogador, current_area.areaOeste)
                         break
                 if inp == 'L' or inp == 'l':
                     if current_area.areaLeste != -1:
-                        self.player = DataBase.update_player_area(self.connection, self.player.idJogador, current_area.areaLeste)
+                        self.player = DataBase.update_player_area(
+                            self.connection, self.player.idJogador, current_area.areaLeste)
                         break
                 if inp == 'S' or inp == 's':
                     if current_area.areaSul != -1:
-                        self.player = DataBase.update_player_area(self.connection, self.player.idJogador, current_area.areaSul)
+                        self.player = DataBase.update_player_area(
+                            self.connection, self.player.idJogador, current_area.areaSul)
                         break
+                if inp == 'q' or inp == 'Q':
+                    print("obrigado por jogar hoje, até a próxima!\n")
+                    exit()
                 else:
                     print('\nOpção Inválida!')
-    
+
     def show_player_info(self):
         print(f'Nome: {self.player.nome}\n' +
               f'Casa: {DataBase.get_casa(self.connection, self.player.idCasa)}\n' +
               f'PV: {self.player.pontosVida}'
               )
-
 
 
 if __name__ == '__main__':
