@@ -1,6 +1,35 @@
+
+![asd](./Documentos/Imagens/Harry_Potter_wordmark.png)
+
 # 2022.2-grupo1-Harry-Potter
 Repositório para desenvolvimento do jogo Harry Potter da disciplina de SBD1 - 2022.2
 
+## Como rodar o jogo:
+
+
+Para rodar o jogo, primeiramente verifique se a porta localhost (5432) está disponível.
+
+Após isso, para subir o banco tendo em vista que já possua o docker instalado, basta executar o comando:
+
+```
+docker-compose up
+```
+
+Por fim para rodar o jogo estando na pasta do projeto, basta executar:
+
+```
+python app/game.py
+```
+
+## Como acessar o banco de dados:
+
+Para acessar o banco de dados, verifique se este está rodando pelo docker e execute o comando:
+
+```
+psql -U postgres
+```
+
+E insira a senha ```postgres```
 ## Integrantes da equipe
 
 | Nome         | Perfil do github                                 | Matrícula|
@@ -15,11 +44,16 @@ Repositório para desenvolvimento do jogo Harry Potter da disciplina de SBD1 - 2
 
 | Módulo         | Link da gravação       | Data |
 |----------------|------------------------|------|
-| 1              | [Apresentação Módulo 1](https://www.youtube.com/watch?v=IoXDA8Nn1Ec&ab_channel=IagoCampelo) | 28/11/2022 |
+| 1              | [Apresentação Módulo 1](https://unbbr.sharepoint.com/:v:/s/SBD1-20222/EejUfL9qXfpEsDy2qnnhH1YBqo5rGOxfywmj5EtrEw4qOQ) | 28/11/2022 |
 
 ## Entregas
 
 - Módulo 1
-  - [DER](Imagens/DER_HP.pdf)
-  - [DLD](Imagens/DLD_HP.pdf)
+  - [DER](Imagens/DER_HarryPotter_v4.0.pdf)
+  - [DLD](Imagens/DLD_HarryPotter_v.4.0.pdf)
   - [Dicionário de Dados](Dicionario_Dados.md)
+
+- Modulo 2
+  - [Queries](sql/)
+  - [Código do Jogo](app/)
+  - [Docker](docker-compose.yml)
