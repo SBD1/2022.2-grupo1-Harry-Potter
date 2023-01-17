@@ -42,9 +42,9 @@
 * Inventario(<ins>idJogador</ins>, dinheiro, instanciaItem); 
 * Item(<ins>idItem</ins>, nome, acao, valor, tipo, descricaoItem); 
     * Ferramenta(forca);
-    * Pocao(ingrediente).
+    * Pocao(ingrediente);
+    * Livro(feitico).
 * Jogador(<ins>idJogador</ins>, nome, area, pontosVida, casa, grimorio);
-* Livro(<ins>idItem</ins>, feitico);
 * Loja(<ins>idLoja</ins>, descricaoLoja, instanciaItem, area);
 * Mapa(<ins>idMapa</ins>, regiao, descricao);
 * NPC(<ins>idNPC</ins> nomeNPC, item);
