@@ -3,7 +3,7 @@
 -- Autor(es) ..............: Letícia Araújo
 -- Versao ..............: 1.0
 -- Banco de Dados .........: PostgreSQL
--- Descricao .........: Iniciando popula das tabelas
+-- Descricao .........: Criando triggers para especialização
 -- ------------------------------------------------------------------
 
 -- TRIGGER ITEM (Generalização e especialização)
