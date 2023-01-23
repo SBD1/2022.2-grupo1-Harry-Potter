@@ -1,3 +1,11 @@
+-- -----------------------------------------------------------------
+-- Data Criacao ...........: 23/01/2023
+-- Autor(es) ..............: Letícia Araújo
+-- Versao ..............: 1.0
+-- Banco de Dados .........: PostgreSQL
+-- Descricao .........: Iniciando popula das tabelas
+-- ------------------------------------------------------------------
+
 -- TRIGGER ITEM (Generalização e especialização)
 
 CREATE OR REPLACE FUNCTION check_livro_fc() RETURNS trigger AS $check_livro_fc$
