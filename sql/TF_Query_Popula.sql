@@ -242,3 +242,8 @@ INSERT INTO INSTANCIA_NPC_TIPO(idNPC, idArea, tipo) VALUES
 (18, 3, 'Vendedor'),
 (19, 3, 'Vendedor'),
 (20, 3, 'Vendedor');
+
+-- Popula Falas
+INSERT INTO FALAS(idNPC, momento, fala) VALUES
+(1,1,"Bem vindo a Hogwards"),
+(8,1,"Lembre-se, animais devem ser protegidos... mesmo que eles tenham o triplo do seu tamanho e talvez tentem te matar.");

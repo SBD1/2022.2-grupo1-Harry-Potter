@@ -237,3 +237,11 @@ CREATE TABLE IF NOT EXISTS INSTANCIA_NPC_TIPO(
    FOREIGN KEY (idArea) REFERENCES AREA (idArea)
 );
 
+-- Tabela Falas
+CREATE TABLE IF NOT EXISTS FALAS(
+   idNPC           INT NOT NULL,
+   momento         INT NOT NULL,
+   fala            VARCHAR(300),
+   FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
+   FOREIGN KEY (idArea) REFERENCES AREA (idArea)
+);
