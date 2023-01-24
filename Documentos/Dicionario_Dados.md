@@ -198,4 +198,4 @@
 | ---------- | --------------- | ------- | ------- | ----------------------------------------------- | ---------------------- |
 | idNPC      | Obrigatório     | int     | 4       | Identificador do NPC                            | 42                     |
 | momento    | Obrigatório     | int     | 4       | Identificador de qual fala deve ser mostrada    | 5                      |
-| fala       | Não obrigatório | varchar | 300     | Texto de fala do NPC                            | É Leviosa, não Leviosá |
+| texto      | Não obrigatório | varchar | 300     | Texto de fala do NPC                            | É Leviosa, não Leviosá |
