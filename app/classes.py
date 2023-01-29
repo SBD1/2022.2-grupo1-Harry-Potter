@@ -18,3 +18,32 @@ class Area:
         self.areaOeste = areaOeste
         self.areaSul = areaSul
         self.areaNorte = areaNorte
+
+
+class Inimigo:
+    def __init__(self, idInstInim, idNPC, nome, idArea, idInstanciaItem, nomeItem, moedas, pontosVida, multiplicador):
+        self.idInstInim = idInstInim
+        self.idNPC = idNPC
+        self.nome = nome
+        self. idArea = idArea
+        self.idInstanciaItem = idInstanciaItem
+        self.nomeItem = nomeItem
+        self.moedas = moedas
+        self.pontosVida = pontosVida
+        self.multiplicador = multiplicador
+
+class Feitico:
+    def __init__(self, idfeitico, nome, efeito, ponto, quantidadeUso):
+        self.idfeitico = idfeitico
+        self.nome = nome
+        self.efeito = efeito
+        self.ponto = ponto
+        self.quantidadeUso = quantidadeUso
+        
+class Habilidade:
+    def __init__(self, idHabilidade, nomeHabilidade, dano, descricao):
+        self.idHabilidade = idHabilidade
+        self.nomeHabilidade = nomeHabilidade
+        self.dano = dano
+        self.descricao = descricao
+        

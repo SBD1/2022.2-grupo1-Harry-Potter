@@ -15,7 +15,7 @@ class DataBase():
     def create_new_character(connection, nome, casa):
         cursor = connection.cursor()
 
-        querry = "INSERT INTO JOGADOR (idGrimorio, nome, idArea, pontosVida, idCasa) VALUES ( 1 , '%s', 1, 20, %s)" % (
+        querry = "INSERT INTO JOGADOR (idGrimorio, nome, idArea, pontosVida, idCasa) VALUES ( 1 , '%s', 2, 20, %s)" % (
             nome, casa)
 
         cursor.execute(querry)
@@ -23,7 +23,7 @@ class DataBase():
         connection.commit()
         cursor.close()
 
-    def find_character(connection, name):
+    def get_character(connection, name):
 
         cursor = connection.cursor()
 
@@ -88,3 +88,96 @@ class DataBase():
         idArea, idRegiao, nome, areaLeste, areaOeste, areaSul, areaNorte = cursor.fetchone()
         cursor.close()
         return Area(idArea, idRegiao, nome, areaLeste, areaOeste, areaSul, areaNorte)
+
+    def search_enemy(connection, id_area):
+        cursor = connection.cursor()
+
+        querry = """SELECT * FROM INSTANCIA_INIMIGO WHERE (INSTANCIA_INIMIGO.idArea = %s) """ % (id_area)
+        cursor.execute(querry)
+
+        rtn = cursor.fetchone()
+
+        if rtn == None:
+            cursor.close()
+            return Inimigo(-1,-1, '', -1, -1, -1, -1), False
+
+        else:
+            idInstInim, idNPC, idArea, idInstanciaItem, pontosVida, multiplicador = rtn
+
+            querry = """SELECT nome FROM NPC WHERE(NPC.idNPC = %s) """ % (idNPC) 
+            cursor.execute(querry)
+
+            nome = cursor.fetchone()[0]
+
+            querry = """SELECT moedas FROM INIMIGO WHERE(INIMIGO.idNPC = %s) """ % (idNPC) 
+            cursor.execute(querry)
+
+            moedas = cursor.fetchone()[0]
+
+            querry = """SELECT IdItem FROM INSTANCIA_ITEM WHERE(INSTANCIA_ITEM.idInstanciaItem = %s) """ % (idInstanciaItem) 
+            cursor.execute(querry)
+
+            idItem = cursor.fetchone()[0]
+
+            querry = """SELECT nome FROM ITEM WHERE(ITEM.idItem = %s) """ % (idItem) 
+            cursor.execute(querry)
+
+            nomeItem = cursor.fetchone()[0]
+            cursor.close()
+            
+            return Inimigo(idInstInim, idNPC, nome, idArea, idInstanciaItem, nomeItem, moedas, pontosVida, multiplicador), True
+
+    def get_spells(connection, id_Grimorio):
+        cursor = connection.cursor()
+
+        querry = """SELECT feitico FROM GRIMORIO WHERE (GRIMORIO.idGrimorio = %s) """ %(id_Grimorio)
+        cursor.execute(querry)
+
+        idfeitico = cursor.fetchone()
+
+        querry = """SELECT * FROM FEITICO WHERE (FEITICO.idFeitico = %s) """ %(idfeitico)
+        cursor.execute(querry)
+
+        idfeitico, nome, efeito, ponto, quantidadeUso = cursor.fetchone()
+        cursor.close()
+
+        return Feitico(idfeitico, nome, efeito, int(ponto), quantidadeUso)
+
+    def get_habi(connection, idNPC):
+        cursor = connection.cursor()
+
+        querry = """SELECT idHabilidade FROM INIMIGO WHERE (INIMIGO.idNPC = %s) """ %(idNPC)
+        cursor.execute(querry)
+
+        idHabilidade = cursor.fetchone()
+
+        querry = """SELECT * FROM HABILIDADE WHERE (HABILIDADE.idHabilidade = %s) """ %(idHabilidade)
+        cursor.execute(querry)
+
+        idHabilidade, nomeHabilidade, dano, descricao = cursor.fetchone()
+        cursor.close()
+
+        return Habilidade(idHabilidade, nomeHabilidade, dano, descricao)
+
+    def set_player_pv(connection, idJogador, PV):
+        cursor = connection.cursor()
+
+        querry = """UPDATE JOGADOR
+                    SET pontosVida = '%s'
+                    WHERE( JOGADOR.idJogador = '%s') 
+                    """ % (PV, idJogador)
+
+        cursor.execute(querry)
+        connection.commit()
+
+        querry = """SELECT * FROM JOGADOR
+                    WHERE( JOGADOR.idJogador = '%s') 
+                    """ % (idJogador)
+
+        cursor.execute(querry)
+        id_player, id_grimorio, nome, id_area, pontos_vida, id_casa = cursor.fetchone()
+
+        cursor.close()
+        return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa)
+
+

@@ -47,7 +47,7 @@ begin;
    CREATE TABLE IF NOT EXISTS AREA(
       idArea        int NOT NULL DEFAULT nextval('area_id_seq') PRIMARY KEY,
       idRegiao      INT NOT NULL,
-      nome          CHAR(25) NOT NULL,
+      nome          VARCHAR(25) NOT NULL,
       areaLeste     INT  REFERENCES AREA(idArea),
       areaOeste     INT  REFERENCES AREA(idArea),
       areaSul       INT  REFERENCES AREA(idArea),
@@ -64,7 +64,7 @@ begin;
    CREATE SEQUENCE feitico_id_seq START 1;
    CREATE TABLE IF NOT EXISTS FEITICO(
       idFeitico       int NOT NULL DEFAULT nextval('feitico_id_seq') PRIMARY KEY,
-      nome            CHAR(20) NOT NULL,
+      nome            VARCHAR(20) NOT NULL,
       efeito          VARCHAR NOT NULL,
       ponto           NUMERIC(4,2) NOT NULL,
       quantidadeUso   NUMERIC(4,2) NOT NULL
@@ -110,7 +110,7 @@ begin;
    CREATE TABLE IF NOT EXISTS NPC(
       idNPC      int NOT NULL DEFAULT nextval('npc_id_seq') PRIMARY KEY,
       item       INT  NOT NULL,
-      nome       CHAR(20) NOT NULL,
+      nome       VARCHAR(20) NOT NULL,
       FOREIGN KEY (item) REFERENCES ITEM (idItem)
    );
    ALTER SEQUENCE npc_id_seq OWNED BY NPC.idNPC;
@@ -123,7 +123,7 @@ begin;
    CREATE SEQUENCE casa_id_seq START 1;
    CREATE TABLE IF NOT EXISTS CASA(
       idCasa         int NOT NULL DEFAULT nextval('casa_id_seq') PRIMARY KEY,
-      nomeCasa       CHAR(10) NOT NULL,
+      nomeCasa       VARCHAR(10) NOT NULL,
       petCasa        CHAR(8) NOT NULL
    );
    ALTER SEQUENCE casa_id_seq OWNED BY CASA.idCasa;
@@ -137,7 +137,7 @@ begin;
    CREATE TABLE IF NOT EXISTS DISCIPLINA(
       idDisciplina         int NOT NULL DEFAULT nextval('disciplina_id_seq') PRIMARY KEY,
       NPC                  INT  NOT NULL,
-      nomeDisciplina       CHAR(20) NOT NULL,
+      nomeDisciplina       VARCHAR(20) NOT NULL,
       feitico              INT  NOT NULL,
       FOREIGN KEY (NPC) REFERENCES NPC (idNPC),
       FOREIGN KEY (feitico) REFERENCES FEITICO (idFeitico)
@@ -167,7 +167,7 @@ begin;
    CREATE TABLE IF NOT EXISTS JOGADOR(
       idJogador    INT NOT NULL DEFAULT nextval('jogador_id_seq') PRIMARY KEY,
       idGrimorio   INT  NOT NULL,
-      nome         CHAR(20) NOT NULL,
+      nome         VARCHAR(20) NOT NULL,
       idArea       INT  NOT NULL,
       pontosVida   INT  NOT NULL,
       idCasa       INT  NOT NULL,
@@ -224,9 +224,9 @@ begin;
    CREATE SEQUENCE habilidade_id_seq START 1;
    CREATE TABLE IF NOT EXISTS HABILIDADE(
       idHabilidade     INT NOT NULL DEFAULT nextval('habilidade_id_seq') PRIMARY KEY,
-      nomeHabilidade   CHAR(30) NOT NULL,
+      nomeHabilidade   VARCHAR(30) NOT NULL,
       dano             INT NULL,
-      descricao        CHAR(60) NOT NULL
+      descricao        VARCHAR(60) NOT NULL
    );
    ALTER SEQUENCE habilidade_id_seq OWNED BY HABILIDADE.idHabilidade;
    savepoint create_tb_HABILIDADE;
@@ -247,17 +247,22 @@ commit;
 
 
 -- Tabela INSTANCIA_INIMIGO
-CREATE TABLE IF NOT EXISTS INSTANCIA_INIMIGO(
-   idNPC             INT NOT NULL,
-   idArea            INT NOT NULL,
-   idInstanciaItem   INT NULL,
-   pontosVida        INT NOT NULL,
-   multiplicador     INT NOT NULL,
-   FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
-   FOREIGN KEY (idArea) REFERENCES AREA (idArea),
-   FOREIGN KEY (idInstanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
-);
-
+begin;
+   CREATE SEQUENCE instancia_inimigo_id_seq START 1;
+   CREATE TABLE IF NOT EXISTS INSTANCIA_INIMIGO(
+      idInstancia_Inimigo INT NOT NULL DEFAULT nextval('instancia_inimigo_id_seq') PRIMARY KEY,
+      idNPC             INT NOT NULL,
+      idArea            INT NOT NULL,
+      idInstanciaItem   INT NULL,
+      pontosVida        INT NOT NULL,
+      multiplicador     INT NOT NULL,
+      FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
+      FOREIGN KEY (idArea) REFERENCES AREA (idArea),
+      FOREIGN KEY (idInstanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
+   );
+   ALTER SEQUENCE instancia_inimigo_id_seq OWNED BY INSTANCIA_INIMIGO.idInstancia_Inimigo;
+   savepoint create_tb_INSTANCIA_INIMIGO;
+commit;
 
 -- Tabela FERRAMENTA
 begin;
@@ -289,7 +294,7 @@ begin;
       idNPC               INT NOT NULL,
       idArea              INT NOT NULL,
       idInstanciaItem     INT NOT NULL,
-      descricao           CHAR(60) NOT NULL,
+      descricao           VARCHAR(60) NOT NULL,
       FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
       FOREIGN KEY (idArea) REFERENCES AREA (idArea),
       FOREIGN KEY (idInstanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
