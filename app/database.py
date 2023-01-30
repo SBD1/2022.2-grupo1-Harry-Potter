@@ -92,50 +92,57 @@ class DataBase():
     def search_enemy(connection, id_area):
         cursor = connection.cursor()
 
-        querry = """SELECT * FROM INSTANCIA_INIMIGO WHERE (INSTANCIA_INIMIGO.idArea = %s) """ % (id_area)
+        querry = """SELECT * FROM INSTANCIA_INIMIGO WHERE (INSTANCIA_INIMIGO.idArea = %s) """ % (
+            id_area)
         cursor.execute(querry)
 
         rtn = cursor.fetchone()
 
         if rtn == None:
             cursor.close()
-            return Inimigo(-1,-1, '', -1, -1, -1, -1), False
+            return Inimigo(-1, -1, '', -1, -1, -1, -1, -1, -1), False
 
         else:
             idInstInim, idNPC, idArea, idInstanciaItem, pontosVida, multiplicador = rtn
 
-            querry = """SELECT nome FROM NPC WHERE(NPC.idNPC = %s) """ % (idNPC) 
+            querry = """SELECT nome FROM NPC WHERE(NPC.idNPC = %s) """ % (
+                idNPC)
             cursor.execute(querry)
 
             nome = cursor.fetchone()[0]
 
-            querry = """SELECT moedas FROM INIMIGO WHERE(INIMIGO.idNPC = %s) """ % (idNPC) 
+            querry = """SELECT moedas FROM INIMIGO WHERE(INIMIGO.idNPC = %s) """ % (
+                idNPC)
             cursor.execute(querry)
 
             moedas = cursor.fetchone()[0]
 
-            querry = """SELECT IdItem FROM INSTANCIA_ITEM WHERE(INSTANCIA_ITEM.idInstanciaItem = %s) """ % (idInstanciaItem) 
+            querry = """SELECT IdItem FROM INSTANCIA_ITEM WHERE(INSTANCIA_ITEM.idInstanciaItem = %s) """ % (
+                idInstanciaItem)
             cursor.execute(querry)
 
             idItem = cursor.fetchone()[0]
 
-            querry = """SELECT nome FROM ITEM WHERE(ITEM.idItem = %s) """ % (idItem) 
+            querry = """SELECT nome FROM ITEM WHERE(ITEM.idItem = %s) """ % (
+                idItem)
             cursor.execute(querry)
 
             nomeItem = cursor.fetchone()[0]
             cursor.close()
-            
+
             return Inimigo(idInstInim, idNPC, nome, idArea, idInstanciaItem, nomeItem, moedas, pontosVida, multiplicador), True
 
     def get_spells(connection, id_Grimorio):
         cursor = connection.cursor()
 
-        querry = """SELECT feitico FROM GRIMORIO WHERE (GRIMORIO.idGrimorio = %s) """ %(id_Grimorio)
+        querry = """SELECT feitico FROM GRIMORIO WHERE (GRIMORIO.idGrimorio = %s) """ % (
+            id_Grimorio)
         cursor.execute(querry)
 
         idfeitico = cursor.fetchone()
 
-        querry = """SELECT * FROM FEITICO WHERE (FEITICO.idFeitico = %s) """ %(idfeitico)
+        querry = """SELECT * FROM FEITICO WHERE (FEITICO.idFeitico = %s) """ % (
+            idfeitico)
         cursor.execute(querry)
 
         idfeitico, nome, efeito, ponto, quantidadeUso = cursor.fetchone()
@@ -146,12 +153,14 @@ class DataBase():
     def get_habi(connection, idNPC):
         cursor = connection.cursor()
 
-        querry = """SELECT idHabilidade FROM INIMIGO WHERE (INIMIGO.idNPC = %s) """ %(idNPC)
+        querry = """SELECT idHabilidade FROM INIMIGO WHERE (INIMIGO.idNPC = %s) """ % (
+            idNPC)
         cursor.execute(querry)
 
         idHabilidade = cursor.fetchone()
 
-        querry = """SELECT * FROM HABILIDADE WHERE (HABILIDADE.idHabilidade = %s) """ %(idHabilidade)
+        querry = """SELECT * FROM HABILIDADE WHERE (HABILIDADE.idHabilidade = %s) """ % (
+            idHabilidade)
         cursor.execute(querry)
 
         idHabilidade, nomeHabilidade, dano, descricao = cursor.fetchone()
@@ -179,5 +188,3 @@ class DataBase():
 
         cursor.close()
         return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa)
-
-
