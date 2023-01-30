@@ -1,8 +1,9 @@
 from database import DataBase
 from classes import *
+from commands import Commands
 import sys
 import os
-
+import random
 
 def clear():
     os.system('cls')
@@ -13,6 +14,7 @@ class Game:
     def __init__(self):
         self.connection = DataBase.create_connection()
         self.player = Player(-1, -1, ' ', -1, -1, -1)
+        self.valid_cmd = 0
         pass
 
     def start(self):
@@ -58,10 +60,10 @@ class Game:
     def create_new_character(self):
         clear()
         new_name = input('Digite o nome do seu personagem: ')
-        self.player = DataBase.find_character(self.connection, new_name)
+        self.player = DataBase.get_character(self.connection, new_name)
         while(self.player.idJogador != -1):
             new_name = input('Nome já registrado, escolha outro:')
-            self.player = DataBase.find_character(self.connection, new_name)
+            self.player = DataBase.get_character(self.connection, new_name)
 
         print('Qual a casa que o seu personagem pertence?\n')
         print('1- Grifinória')
@@ -94,20 +96,21 @@ class Game:
                 print('\nOpção Inválida!')
 
         DataBase.create_new_character(self.connection, new_name, new_casa)
-        self.player = DataBase.find_character(self.connection, new_name)
+        self.player = DataBase.get_character(self.connection, new_name)
         print(
-            f'Seja bem vinde ao jogo _{new_name}_! Você está chegando no portão da escola!\nAproveite a estadia.\n')
+            f'\nSeja bem vinde ao jogo _{new_name}_! Você está chegando no portão da escola!\nAproveite a estadia.\n')
         input('pressione _enter_ para continuar...')
         self.gameplay()
 
     def load_character(self):
         clear()
         nome = input("Digite o nome do personagem: ")
-        self.player = DataBase.find_character(self.connection, nome)
+        self.player = DataBase.get_character(self.connection, nome)
         while(self.player.idJogador == -1):
             nome = input("Jogador não encontrado! digite outro: ")
-            self.player = DataBase.find_character(self.connection, nome)
+            self.player = DataBase.get_character(self.connection, nome)
         self.gameplay()
+
 
     def gameplay(self):
         while(True):
@@ -118,7 +121,6 @@ class Game:
                 self.connection, self.player.idArea)
             area_norte = DataBase.get_area(
                 self.connection, current_area.areaNorte).nome
-
             # Completa o nome do mapa oeste com espacos em branco para manter um tamanho fixo e manter a estrutura do mapa
             area_oeste = DataBase.get_area(
                 self.connection, current_area.areaOeste).nome
@@ -130,42 +132,104 @@ class Game:
             area_sul = DataBase.get_area(
                 self.connection, current_area.areaSul).nome
 
+            # Procura se ha algum inimigo na area
+            Inimigo, valid_inim = DataBase.search_enemy(self.connection, current_area.idArea)
+
+            if valid_inim == True:
+                print("\nInimigo na area: ")
+                print(f"{Inimigo.nome}\n")
+
+            
+
+
             print(f"\nArea atual: {current_area.nome}\n")
 
             print(f'                            N. {area_norte}\n')
             print(f'          O. {area_oeste}' + f'         L. {area_leste}\n')
             print(f'                            S. {area_sul}\n')
             print('######################################################\n')
-            print('Q. sair do jogo\n')
 
             inp = 0
-            while(inp not in ['N', 'n', 'O', 'o', 'L', 'l', 'S', 's', 'q', 'Q']):
+            self.valid_cmd = 0 
+            while(self.valid_cmd == False or self.valid_cmd == 'help'):
                 inp = input('> ')
-                if inp == 'N' or inp == 'n':
-                    if current_area.areaNorte != -1:
+                self.valid_cmd = Commands.cmd(inp)
+
+                if (inp == 'mover N' or inp == 'mover n' or inp == 'Mover N' or inp == 'Mover n') and self.valid_cmd == 'mover':
+                    if current_area.areaNorte != 1:
                         self.player = DataBase.update_player_area(
                             self.connection, self.player.idJogador, current_area.areaNorte)
-                        break
-                if inp == 'O' or inp == 'o':
-                    if current_area.areaOeste != -1:
+                    break
+                elif (inp == 'mover O' or inp == 'mover o' or inp == 'Mover O' or inp == 'Mover o') and self.valid_cmd == 'mover':
+                    if current_area.areaOeste != 1:
                         self.player = DataBase.update_player_area(
                             self.connection, self.player.idJogador, current_area.areaOeste)
-                        break
-                if inp == 'L' or inp == 'l':
-                    if current_area.areaLeste != -1:
+                    break
+                elif (inp == 'mover L' or inp == 'mover l' or inp == 'Mover L' or inp == 'Mover l') and self.valid_cmd == 'mover':
+                    if current_area.areaLeste != 1:
                         self.player = DataBase.update_player_area(
                             self.connection, self.player.idJogador, current_area.areaLeste)
-                        break
-                if inp == 'S' or inp == 's':
-                    if current_area.areaSul != -1:
+                    break
+                elif (inp == 'mover S' or inp == 'mover s' or inp == 'Mover S' or inp == 'Mover s') and self.valid_cmd == 'mover':
+                    if current_area.areaSul != 1:
                         self.player = DataBase.update_player_area(
                             self.connection, self.player.idJogador, current_area.areaSul)
-                        break
-                if inp == 'q' or inp == 'Q':
-                    print("obrigado por jogar hoje, até a próxima!\n")
-                    exit()
-                else:
+                    break
+                elif(self.valid_cmd == 'combate'):
+                    self.combat(Inimigo)
+                    break
+                elif self.valid_cmd == False:
                     print('\nOpção Inválida!')
+
+    def combat(self, Inimigo):
+        clear()
+        while(self.player.pontosVida > 0 and Inimigo.pontosVida > 0):
+            Feitico = DataBase.get_spells(self.connection, self.player.idGrimorio)
+            Habilidade = DataBase.get_habi(self.connection, Inimigo.idNPC)
+
+            self.show_player_info()
+
+            print(f"\nInimigo: {Inimigo.nome}")
+            print(f"PV Inimigo: {Inimigo.pontosVida}\n")
+            
+            inp = 0
+            self.valid_cmd = 0 
+            while(self.valid_cmd == False or self.valid_cmd == 'help'):
+                inp = input('> ')
+                self.valid_cmd = Commands.cmd(inp)
+
+                if(self.valid_cmd == 'atacar'):
+                    dano_player = random.randint(0, Feitico.ponto)
+                    Inimigo.pontosVida = Inimigo.pontosVida - dano_player
+                    print(f"\n{self.player.nome} usou {Feitico.nome} causando {dano_player} de dano!\n")
+
+                    if Inimigo.pontosVida <= 0:
+                        break
+
+                    dano_inimigo = random.randint(0, Habilidade.dano)
+                    self.player.pontosVida = self.player.pontosVida - dano_inimigo 
+                    print(f"{Inimigo.nome} usou {Habilidade.nomeHabilidade} causando {dano_inimigo} de dano!\n")
+                elif self.valid_cmd == False:
+                    print('\nOpção Inválida!')
+
+            
+
+        if Inimigo.pontosVida <= 0:
+            print(f'{Inimigo.nome} derrotado!')
+            print(f'Moedas ganhas: {Inimigo.moedas}')
+            print(f'Itens ganhos: {Inimigo.nomeItem}')
+            input('\npressione _enter_ para continuar...')
+
+            self.player = DataBase.set_player_pv(self.connection, self.player.idJogador, self.player.pontosVida)
+
+        elif self.player.pontosVida <= 0:
+            print("Você morreu!")
+
+            input('Pressione  enter_ para renascer no Portão de Hogwarts')
+
+            self.player = DataBase.set_player_pv(self.connection, self.player.idJogador, 20)
+            self.player = DataBase.update_player_area(self.connection, self.player.idJogador, 2)
+
 
     def show_player_info(self):
         print(f'Nome: {self.player.nome}\n' +
