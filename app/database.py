@@ -188,3 +188,23 @@ class DataBase():
 
         cursor.close()
         return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa)
+
+    def getSpeech(connection, area, momento):
+        cursor = connection.cursor()
+
+        querry = """SELECT texto FROM falas WHERE (idArea = '%s' AND momento = '%s')""" % (area ,momento)
+        cursor.execute(querry)
+        texto = cursor.fetchone()[0]
+
+        querry = """SELECT idNPC FROM falas WHERE (idArea = '%s' AND momento = '%s')""" % (area ,momento)
+        cursor.execute(querry)
+        idnpc = cursor.fetchone()
+
+        querry = """SELECT nome FROM NPC WHERE (idNPC = '%s')""" % (idnpc)
+        cursor.execute(querry)
+        nome = cursor.fetchone()[0]
+
+        cursor.close()
+
+        return nome + ': ' + texto
+

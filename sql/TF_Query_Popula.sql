@@ -248,6 +248,6 @@ INSERT INTO INSTANCIA_NPC_TIPO(idNPC, idArea, tipo) VALUES
 (20, 3, 'Vendedor');
 
 -- Popula Falas
-INSERT INTO FALAS(idNPC, momento, fala) VALUES
-(1,1,"Bem vindo a Hogwards"),
-(8,1,"Lembre-se, animais devem ser protegidos... mesmo que eles tenham o triplo do seu tamanho e talvez tentem te matar.");
+INSERT INTO FALAS(idNPC, idArea, momento, texto) VALUES
+(1,2,1,'Bem vindo à Hogwards'),
+(8,5,1,'Novo por aqui? Cuidado para não se perder! Olá, eu sou o Rúbeo Hagrid.');

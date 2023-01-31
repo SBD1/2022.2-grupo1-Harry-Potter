@@ -315,6 +315,17 @@ begin;
    savepoint create_tb_LIVRO;
 commit;
 
+-- Tabela Falas
+begin;
+   CREATE TABLE IF NOT EXISTS FALAS(
+      idNPC           INT NOT NULL,
+      idArea          INT NOT NULL,
+      momento         INT NOT NULL,
+      texto            VARCHAR(300),
+      FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
+      FOREIGN KEY (idArea) REFERENCES AREA (idArea)
+   );
+commit;
 
 -- Tabela Instancia_NPC_Tipo
 begin;
@@ -327,12 +338,3 @@ begin;
    );
    savepoint create_tb_INSTANCIA_NPC_TIPO;
 commit;
-
--- Tabela Falas
-CREATE TABLE IF NOT EXISTS FALAS(
-   idNPC           INT NOT NULL,
-   momento         INT NOT NULL,
-   fala            VARCHAR(300),
-   FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
-   FOREIGN KEY (idArea) REFERENCES AREA (idArea)
-);

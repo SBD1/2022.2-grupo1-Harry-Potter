@@ -100,6 +100,7 @@ class Game:
         print(
             f'\nSeja bem vinde ao jogo _{new_name}_! Você está chegando no portão da escola!\nAproveite a estadia.\n')
         input('pressione _enter_ para continuar...')
+       
         self.gameplay()
 
     def load_character(self):
@@ -113,6 +114,7 @@ class Game:
 
 
     def gameplay(self):
+        momento = 1
         while(True):
             clear()
             self.show_player_info()
@@ -135,14 +137,19 @@ class Game:
             # Procura se ha algum inimigo na area
             Inimigo, valid_inim = DataBase.search_enemy(self.connection, current_area.idArea)
 
+            if current_area.idArea == 2 and momento == 1: # Fala de boas vindas a hargwards
+                print('#----------------------------------------------------#\n')
+                print(DataBase.getSpeech(self.connection, current_area.idArea, momento)) 
+                momento = 2
+                print('#----------------------------------------------------#\n')
+
             if valid_inim == True:
                 print("\nInimigo na area: ")
                 print(f"{Inimigo.nome}\n")
-
             
 
-
             print(f"\nArea atual: {current_area.nome}\n")
+
 
             print(f'                            N. {area_norte}\n')
             print(f'          O. {area_oeste}' + f'         L. {area_leste}\n')
@@ -154,7 +161,7 @@ class Game:
             while(self.valid_cmd == False or self.valid_cmd == 'help'):
                 inp = input('> ')
                 self.valid_cmd = Commands.cmd(inp)
-
+                
                 if (inp == 'mover N' or inp == 'mover n' or inp == 'Mover N' or inp == 'Mover n') and self.valid_cmd == 'mover':
                     if current_area.areaNorte != 1:
                         self.player = DataBase.update_player_area(
