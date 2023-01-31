@@ -10,8 +10,6 @@
 -- Descricao .........: Finalizando popula das tabelas.
 -- ------------------------------------------------------------------
 
-
-
 -- Popula casas
 INSERT INTO CASA (nomecasa, petcasa ) VALUES
 ('Grifinória', 'Águia'),
@@ -39,16 +37,16 @@ INSERT INTO REGIAO (idMapa, descricao, nome) VALUES
 
 -- Popula Area
 INSERT INTO AREA(idArea, idRegiao, nome, areaLeste, areaOeste, areaSul, areaNorte) VALUES
-(-1, 1, 'Nada', -1, -1, -1, -1),
-(1, 1,'Portao de Hogwarts', -1, -1, 5, 2),
-(2, 1,'Salao Principal', 4, -1, 1, 3),
-(3, 1,'Refeitorio', -1, -1, 2, -1),
-(4, 1,'Biblioteca', -1, 2, -1, -1),
-(5, 1,'Floresta',-1, -1, -1, 1);
+(1, 1, 'Nada', 1, 1, 1, 1),
+(2, 1,'Portao de Hogwarts', 1, 1, 6, 3),
+(3, 1,'Salao Principal', 5, 1, 2, 4),
+(4, 1,'Refeitorio', 1, 1, 3, 1),
+(5, 1,'Biblioteca', 1, 3, 1, 1),
+(6, 1,'Floresta', 1, 1, 1, 4);
 
 -- Popula Feitico
 INSERT INTO FEITICO (nome, efeito, ponto, quantidadeUso) VALUES
-('Expelliarmus', 'Derrubar a arma do inimigo', 1, 99),
+('Expelliarmus', 'Derrubar a arma do inimigo', 6, 99),
 ('Accio', 'Este feitiço é usado para convocar objetos', 0, 99),
 ('Aqua Eructo', 'conjura um intenso jato de água', 2, 99),
 ('Bombarda', 'Usado para destruir obstáculos', 3, 99),
@@ -85,7 +83,8 @@ INSERT INTO ITEM(nome, acao, valor, tipo, descricaoItem) VALUES
 ('Livros de Poções', 'Explica ao leitor como realizar poções', 70, 'DEFESA', 'Existem vários tipos'),
 ('Livros de Criaturas Mágicas', 'Explica sobre as criaturas mágicas', 50, 'ATAQUE', 'Existem vários tipos'),
 ('Vassoura', 'Usada para moder voar', 50, 'DEFESA', 'Transporte entre locais'),
-('Vira-tempo', 'Utilizado para viajar no tempo', 50, 'DEFESA', 'Retorna horas ao passado');
+('Vira-tempo', 'Utilizado para viajar no tempo', 50, 'DEFESA', 'Retorna horas ao passado'),
+('Osso', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Um osso em perfeito estado');
 
 -- Popula NPC
 INSERT INTO NPC(item, nome) VALUES
@@ -108,7 +107,8 @@ INSERT INTO NPC(item, nome) VALUES
 (1, 'Fred Weasley'),
 (1, 'Daisy Dodderidge'),
 (1, 'Sr. Borgin'),
-(1, ' Barnabas Cuffe');
+(1, ' Barnabas Cuffe'),
+(1, 'Lobo');
 
 -- Popula DISCIPLINA
 INSERT INTO DISCIPLINA (NPC, nomeDisciplina, feitico) VALUES
@@ -136,7 +136,8 @@ INSERT INTO INSTANCIA_ITEM(idItem) VALUES
 (3),
 (4),
 (5),
-(6);
+(6),
+(10);
 
 -- Popula INVENTARIO
 INSERT INTO INVENTARIO(idJogador, instanciaItem, dinheiro) VALUES
@@ -164,7 +165,8 @@ INSERT INTO HABILIDADE(nomeHabilidade, dano, descricao) VALUES
 ('Legilimência', 7, 'Capacidade de entrar nas mentes das outras pessoas'),
 ('Oclumência', 0, 'Capacidade de proteger suas mentes dos Legilimens'),
 ('Ofidioglossia', 5, 'Capacidade natural de falar língua de cobra'),
-('Realizar Feitiços', 5, 'Realizar feitiços com a varinha');
+('Realizar Feitiços', 5, 'Realizar feitiços com a varinha'),
+('Mordida', 4, 'O lobo morde o jogador');
 
 -- Popula INIMIGO
 INSERT INTO INIMIGO(idNPC, idHabilidade, moedas) VALUES
@@ -173,16 +175,18 @@ INSERT INTO INIMIGO(idNPC, idHabilidade, moedas) VALUES
 (11, 6, 1000),
 (12, 6, 1000),
 (13, 6, 1000),
-(14, 6, 1000);
+(14, 6, 1000),
+(21, 8, 4);
 
 -- Popula INSTANCIA_INIMIGO
 INSERT INTO INSTANCIA_INIMIGO(idNPC, idArea, idInstanciaItem, pontosVida, multiplicador) VALUES
 (9, 1, 1, 400, 1),
-(10, 2, 2, 400, 2),
-(11, 3, 3, 400, 3),
-(12, 4, 4, 400, 1),
-(13, 5, 5, 400, 2),
-(14, 6, 6, 400, 3);
+(10, 1, 2, 400, 2),
+(11, 1, 3, 400, 3),
+(12, 1, 4, 400, 1),
+(13, 1, 5, 400, 2),
+(14, 1, 6, 400, 3),
+(21, 6, 7, 10, 1);
 
 -- Popula FERRAMENTA
 INSERT INTO FERRAMENTA(idItem, forca) VALUES
