@@ -6,7 +6,7 @@ import os
 import random
 
 def clear():
-    os.system('cls')
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 class Game:
@@ -149,7 +149,7 @@ class Game:
                 print("\nInimigo na area: ")
                 print(f"{Inimigo.nome}\n")
 
-            
+
 
 
             print(f"\nArea atual: {current_area.nome}\n")
@@ -160,7 +160,7 @@ class Game:
             print('######################################################\n')
 
             inp = 0
-            self.valid_cmd = 0 
+            self.valid_cmd = 0
             while(self.valid_cmd == False or self.valid_cmd == 'help' or valid_inim == True or  valid_loja == True):
                 inp = input('> ')
                 self.valid_cmd = Commands.cmd(inp)
@@ -203,7 +203,7 @@ class Game:
 
                 elif self.valid_cmd == False or (self.valid_cmd == 'combate' and valid_inim == False)or (self.valid_cmd == 'loja' and valid_loja == False):
                     print('\nOpção Inválida!')
-    
+
     def inventario(self):
         clear()
         inp = 0
@@ -217,7 +217,7 @@ class Game:
 
             while(inp != 'sair' and inp != 'Sair'):
                 inp = input('> ')
-                
+
                 if inp != 'sair' and inp != 'Sair':
                     print('\nOpção Inválida!')
 
@@ -236,7 +236,7 @@ class Game:
 
             while(inp != 'sair'):
                 inp = input('> ')
-                
+
                 if inp == 'sair':
                     break
 
@@ -264,9 +264,9 @@ class Game:
 
             print(f"\nInimigo: {Inimigo.nome}")
             print(f"PV Inimigo: {Inimigo.pontosVida}\n")
-            
+
             inp = 0
-            self.valid_cmd = 0 
+            self.valid_cmd = 0
             while(self.valid_cmd == False or self.valid_cmd == 'help'):
                 inp = input('> ')
                 self.valid_cmd = Commands.cmd(inp)
@@ -280,18 +280,18 @@ class Game:
                         break
 
                     dano_inimigo = random.randint(0, Habilidade.dano)
-                    self.player.pontosVida = self.player.pontosVida - dano_inimigo 
+                    self.player.pontosVida = self.player.pontosVida - dano_inimigo
                     print(f"{Inimigo.nome} usou {Habilidade.nomeHabilidade} causando {dano_inimigo} de dano!\n")
                 elif self.valid_cmd == False:
                     print('\nOpção Inválida!')
 
-            
+
 
         if Inimigo.pontosVida <= 0:
             print(f'{Inimigo.nome} derrotado!')
             print(f'Moedas ganhas: {Inimigo.moedas}')
             print(f'Itens ganhos: {Inimigo.nomeItem}')
-            
+
 
             self.player = DataBase.set_player_pv(self.connection, self.player.idJogador, self.player.pontosVida)
             DataBase.gen_new_item_instance(self.connection, Inimigo.idItem, self.player.idJogador)
