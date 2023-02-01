@@ -55,7 +55,13 @@ E insira a senha ```postgres```
   - [DLD](Imagens/DLD_HarryPotter_v.4.0.pdf)
   - [Dicionário de Dados](Dicionario_Dados.md)
 
-- Modulo 2
+- Módulo 2
   - [Queries](sql/)
   - [Código do Jogo](app/)
   - [Docker](docker-compose.yml)
+  
+- Módulo 3
+  - [Views](sql/TF_Query_3_GameActions.sql)
+  - [Triggers and Stored Procedures](sql/TF_Query_4_TriggersAndStoredProcedures.sql)
+  - [Roles e Usuários](sql/TF_Query_AcessControl.sql)
+  - [Implementação de Loja, Combate e outras features no jogo](app/)
