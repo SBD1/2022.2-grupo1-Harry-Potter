@@ -8,7 +8,7 @@ class Player:
         self.pontosVida = pontosvida
         self.idCasa = idCasa
 
-
+        
 class Area:
     def __init__(self, idArea, idRegiao, nome, areaLeste, areaOeste, areaSul, areaNorte):
         self.idArea = idArea
@@ -21,17 +21,23 @@ class Area:
 
 
 class Inimigo:
-    def __init__(self, idInstInim, idNPC, nome, idArea, idInstanciaItem, nomeItem, moedas, pontosVida, multiplicador):
+    def __init__(self, idInstInim, idNPC, nome, idArea, idItem, nomeItem, moedas, pontosVida, multiplicador):
         self.idInstInim = idInstInim
         self.idNPC = idNPC
         self.nome = nome
         self. idArea = idArea
-        self.idInstanciaItem = idInstanciaItem
+        self.idItem = idItem
         self.nomeItem = nomeItem
         self.moedas = moedas
         self.pontosVida = pontosVida
         self.multiplicador = multiplicador
 
+class Loja:
+    def __init__(self, idloja, idarea, descricao):
+        self.idloja = idloja
+        self.idarea = idarea
+        self.descricao = descricao
+        
 class Feitico:
     def __init__(self, idfeitico, nome, efeito, ponto, quantidadeUso):
         self.idfeitico = idfeitico

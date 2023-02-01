@@ -97,8 +97,11 @@ class Game:
 
         DataBase.create_new_character(self.connection, new_name, new_casa)
         self.player = DataBase.get_character(self.connection, new_name)
+        DataBase.create_new_inventory(self.connection, self.player.idJogador)
+        DataBase.gen_new_item_instance(self.connection, 1, self.player.idJogador)
+
         print(
-            f'\nSeja bem vinde ao jogo _{new_name}_! Você está chegando no portão da escola!\nAproveite a estadia.\n')
+            f'\nSeja bem vinde ao jogo {new_name}! Você está chegando no portão da escola!\nAproveite a estadia.\n')
         input('pressione _enter_ para continuar...')
         self.gameplay()
 
@@ -133,6 +136,13 @@ class Game:
                 self.connection, current_area.areaSul).nome
 
             # Procura se ha algum inimigo na area
+            Loja, valid_loja = DataBase.search_store(self.connection, current_area.idArea)
+
+            if valid_loja == True:
+                print("\nLojas na area: ")
+                print(f"{Loja.descricao}\n")
+
+            # Procura se ha algum inimigo na area
             Inimigo, valid_inim = DataBase.search_enemy(self.connection, current_area.idArea)
 
             if valid_inim == True:
@@ -151,7 +161,7 @@ class Game:
 
             inp = 0
             self.valid_cmd = 0 
-            while(self.valid_cmd == False or self.valid_cmd == 'help'):
+            while(self.valid_cmd == False or self.valid_cmd == 'help' or valid_inim == True or  valid_loja == True):
                 inp = input('> ')
                 self.valid_cmd = Commands.cmd(inp)
 
@@ -160,26 +170,89 @@ class Game:
                         self.player = DataBase.update_player_area(
                             self.connection, self.player.idJogador, current_area.areaNorte)
                     break
+
                 elif (inp == 'mover O' or inp == 'mover o' or inp == 'Mover O' or inp == 'Mover o') and self.valid_cmd == 'mover':
                     if current_area.areaOeste != 1:
                         self.player = DataBase.update_player_area(
                             self.connection, self.player.idJogador, current_area.areaOeste)
                     break
+
                 elif (inp == 'mover L' or inp == 'mover l' or inp == 'Mover L' or inp == 'Mover l') and self.valid_cmd == 'mover':
                     if current_area.areaLeste != 1:
                         self.player = DataBase.update_player_area(
                             self.connection, self.player.idJogador, current_area.areaLeste)
                     break
+
                 elif (inp == 'mover S' or inp == 'mover s' or inp == 'Mover S' or inp == 'Mover s') and self.valid_cmd == 'mover':
                     if current_area.areaSul != 1:
                         self.player = DataBase.update_player_area(
                             self.connection, self.player.idJogador, current_area.areaSul)
                     break
-                elif(self.valid_cmd == 'combate'):
+
+                elif(self.valid_cmd == 'combate' and valid_inim == True):
                     self.combat(Inimigo)
                     break
-                elif self.valid_cmd == False:
+
+                elif(self.valid_cmd == 'loja' and valid_loja == True):
+                    self.store(Loja)
+                    break
+
+                elif(self.valid_cmd == 'inventario'):
+                    self.inventario()
+                    break
+
+                elif self.valid_cmd == False or (self.valid_cmd == 'combate' and valid_inim == False)or (self.valid_cmd == 'loja' and valid_loja == False):
                     print('\nOpção Inválida!')
+    
+    def inventario(self):
+        clear()
+        inp = 0
+        while(inp != 'sair'):
+            DataBase.get_view_inventory(self.connection, self.player.idJogador)
+
+            dinheiro = DataBase.get_money(self.connection, self.player.idJogador)
+            print(f'\nDinheiro do Jogador: {dinheiro}')
+
+            print(f'\n(Digite "sair" para voltar)')
+
+            while(inp != 'sair' and inp != 'Sair'):
+                inp = input('> ')
+                
+                if inp != 'sair' and inp != 'Sair':
+                    print('\nOpção Inválida!')
+
+
+
+    def store(self, Loja):
+        clear()
+        inp = 0
+        while(inp != 'sair'):
+            n_items = DataBase.get_view_store(self.connection, Loja.idloja)
+
+            dinheiro = DataBase.get_money(self.connection, self.player.idJogador)
+            print(f'\nDinheiro do Jogador: {dinheiro}')
+
+            print(f'\n(Digite o id do item para comprar-lo, ou digite "sair" para voltar)')
+
+            while(inp != 'sair'):
+                inp = input('> ')
+                
+                if inp == 'sair':
+                    break
+
+                elif inp.isnumeric() == False:
+                    print('\nOpção Inválida!')
+
+                elif DataBase.ver_item_store(self.connection, inp, Loja.idloja) == False:
+                    print('\nOpção Inválida!')
+
+                else:
+                    DataBase.gen_new_item_instance(self.connection, inp, self.player.idJogador)
+                    val_item = DataBase.get_item_value(self.connection, inp)
+                    dinheiro -= int(val_item)
+                    DataBase.update_player_money(self.connection, self.player.idJogador, dinheiro)
+                    break
+
 
     def combat(self, Inimigo):
         clear()
@@ -218,9 +291,14 @@ class Game:
             print(f'{Inimigo.nome} derrotado!')
             print(f'Moedas ganhas: {Inimigo.moedas}')
             print(f'Itens ganhos: {Inimigo.nomeItem}')
-            input('\npressione _enter_ para continuar...')
+            
 
             self.player = DataBase.set_player_pv(self.connection, self.player.idJogador, self.player.pontosVida)
+            DataBase.gen_new_item_instance(self.connection, Inimigo.idItem, self.player.idJogador)
+            dinheiro = DataBase.get_money(self.connection, self.player.idJogador)
+            dinheiro += Inimigo.moedas
+            DataBase.update_player_money(self.connection, self.player.idJogador, dinheiro)
+            input('\npressione _enter_ para continuar...')
 
         elif self.player.pontosVida <= 0:
             print("Você morreu!")

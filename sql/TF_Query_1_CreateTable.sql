@@ -87,17 +87,31 @@ begin;
    savepoint create_tb_GRIMORIO;
 commit;
 
+-- Tabela LOJA
+begin;
+   CREATE SEQUENCE loja_id_seq START 1;
+   CREATE TABLE IF NOT EXISTS LOJA(
+      idLoja              INT NOT NULL DEFAULT nextval('loja_id_seq') PRIMARY KEY,
+      idArea              INT NOT NULL,
+      descricao           VARCHAR(60) NOT NULL,
+      FOREIGN KEY (idArea) REFERENCES AREA (idArea)
+   );
+   ALTER SEQUENCE loja_id_seq OWNED BY LOJA.idLoja;
+   savepoint create_tb_LOJA;
+commit;
 
 -- Tabela ITEM
 begin;
    CREATE SEQUENCE item_id_seq START 1;
    CREATE TABLE IF NOT EXISTS ITEM(
       idItem           int NOT NULL DEFAULT nextval('item_id_seq') PRIMARY KEY,
+      idLoja           INT NULL, 
       nome             VARCHAR(30) NOT NULL,
       acao             VARCHAR(200) NOT NULL,
       valor            NUMERIC(4,2) NOT NULL,
       tipo             CHAR(20) NOT NULL,
-      descricaoItem    VARCHAR(60) NOT NULL
+      descricaoItem    VARCHAR(60) NOT NULL, 
+      FOREIGN KEY (idLoja) REFERENCES LOJA (idLoja)
    );
    ALTER SEQUENCE item_id_seq OWNED BY ITEM.idItem;
    savepoint create_tb_ITEM;
@@ -187,7 +201,9 @@ begin;
    CREATE TABLE IF NOT EXISTS INSTANCIA_ITEM(
       idInstanciaItem      INT NOT NULL DEFAULT nextval('instancia_item_id_seq') PRIMARY KEY,
       idItem               INT  NOT NULL,
-      FOREIGN KEY (idItem) REFERENCES ITEM (idItem)
+      idJogador            INT NULL DEFAULT NULL,
+      FOREIGN KEY (idItem) REFERENCES ITEM (idItem),
+      FOREIGN KEY (idJogador) REFERENCES JOGADOR (idJogador)
    );
    ALTER SEQUENCE instancia_item_id_seq OWNED BY INSTANCIA_ITEM.idInstanciaItem;
    savepoint create_tb_INSTANCIA_ITEM;
@@ -198,13 +214,11 @@ commit;
 begin;
    CREATE TABLE IF NOT EXISTS INVENTARIO(
       idJogador               INT NOT NULL,
-      instanciaItem	         INT NULL,
       dinheiro                INT NULL,
-      FOREIGN KEY (idJogador) REFERENCES JOGADOR (idJogador),
-      FOREIGN KEY (instanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
+      FOREIGN KEY (idJogador) REFERENCES JOGADOR (idJogador)
    );
    savepoint create_tb_INVENTARIO;
-commit;
+commit;  
 
 
 -- Tabela INSTANCIA_JOGADOR_DISCIPLINA
@@ -253,12 +267,12 @@ begin;
       idInstancia_Inimigo INT NOT NULL DEFAULT nextval('instancia_inimigo_id_seq') PRIMARY KEY,
       idNPC             INT NOT NULL,
       idArea            INT NOT NULL,
-      idInstanciaItem   INT NULL,
+      idItem            INT NULL,
       pontosVida        INT NOT NULL,
       multiplicador     INT NOT NULL,
       FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
       FOREIGN KEY (idArea) REFERENCES AREA (idArea),
-      FOREIGN KEY (idInstanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
+      FOREIGN KEY (idItem) REFERENCES ITEM (idItem)
    );
    ALTER SEQUENCE instancia_inimigo_id_seq OWNED BY INSTANCIA_INIMIGO.idInstancia_Inimigo;
    savepoint create_tb_INSTANCIA_INIMIGO;
@@ -284,25 +298,6 @@ CREATE TABLE IF NOT EXISTS POCAO(
 );
    savepoint create_tb_POCAO;
 commit;
-
-
--- Tabela LOJA
-begin;
-   CREATE SEQUENCE loja_id_seq START 1;
-   CREATE TABLE IF NOT EXISTS LOJA(
-      idLoja              INT NOT NULL DEFAULT nextval('loja_id_seq') PRIMARY KEY,
-      idNPC               INT NOT NULL,
-      idArea              INT NOT NULL,
-      idInstanciaItem     INT NOT NULL,
-      descricao           VARCHAR(60) NOT NULL,
-      FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
-      FOREIGN KEY (idArea) REFERENCES AREA (idArea),
-      FOREIGN KEY (idInstanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
-   );
-   ALTER SEQUENCE loja_id_seq OWNED BY LOJA.idLoja;
-   savepoint create_tb_LOJA;
-commit;
-
 
 -- Tabela Livro
 begin;

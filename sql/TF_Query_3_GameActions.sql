@@ -15,11 +15,11 @@ AS J INNER JOIN CASA AS C
 ON (J.idjogador = C.idcasa);
 
 -- Atualizar o dinheiro de um jogador X:
-UPDATE INVENTARIO SET dinheiro = dinheiro - (SELECT ITEM.valor from ITEM where ITEM.iditem = 
-(SELECT INSTANCIA.idItem from INVENTARIO as INVENTARIO INNER JOIN INSTANCIA_ITEM as INSTANCIA
-on (INVENTARIO.instanciaitem = INVENTARIO.idinstanciaitem)
-where INVENTARIO.idjogador  = 1))
-where idjogador = 1; 
+-- UPDATE INVENTARIO SET dinheiro = dinheiro - (SELECT ITEM.valor from ITEM where ITEM.iditem = 
+-- (SELECT INSTANCIA.idItem from INVENTARIO as INVENTARIO INNER JOIN INSTANCIA_ITEM as INSTANCIA
+-- on (INVENTARIO.instanciaitem = INVENTARIO.instanciaitem)
+-- where INVENTARIO.idjogador  = 1))
+-- where idjogador = 1; 
 
 -- Relação Professores e Disciplinas:
 SELECT D.nomeDisciplina, N.nome FROM disciplina d 
@@ -60,21 +60,27 @@ create view feiticos_livro as
 select * from feiticos_livro;
 
 -- Visualizar Ferramentas:
-select I.nome as "Ferramenta", F.forca as "Força"
-from item I
-inner join ferramenta F on (I.iditem = F.iditem);
+--select I.nome as "Ferramenta", F.forca as "Força"
+--from item I
+--inner join ferramenta F on (I.iditem = F.iditem);
   
 -- Visualizar Ingredientes de uma Poção:
-select I.nome as "Poção", P.ingrediente as "Ingredientes"
-from item I
-inner join pocao P on (I.iditem = P.iditem);
+--select I.nome as "Poção", P.ingrediente as "Ingredientes"
+--from item I
+--inner join pocao P on (I.iditem = P.iditem)
 
 -- View inventário de um jogador:
-create view inventario_jogador as
-  select J.nome as "Jogador", I.dinheiro as "Dinheiro", ITM.nome as "Itens"
-  from jogador J
-  inner join Inventario I on (I.idjogador = J.idjogador)
-  inner join instancia_item II on (II.idinstanciaitem  = I.instanciaitem)
-  inner join item ITM on (II.iditem = ITM.iditem);
-  
+create OR REPLACE view inventario_jogador as
+	select I.idjogador as "idjogador", ITM.nome as "Itens", ITM.valor as "Dinheiro"
+	from inventario I
+	inner join instancia_item II on (II.idjogador  = I.idjogador)
+	inner join item ITM on (II.iditem = ITM.iditem);
+
 select * from inventario_jogador;
+
+create OR REPLACE view produtos_loja as
+	select i.idItem as "iditem",  i.nome as "Item",  i.descricaoitem as "Descricao", i.valor as "Valor", i.idloja as "idloja"
+	from loja l
+	inner join item i on(i.idLoja = l.idloja);
+
+select * from produtos_loja;
