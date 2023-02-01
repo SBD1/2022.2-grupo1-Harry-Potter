@@ -87,17 +87,31 @@ begin;
    savepoint create_tb_GRIMORIO;
 commit;
 
+-- Tabela LOJA
+begin;
+   CREATE SEQUENCE loja_id_seq START 1;
+   CREATE TABLE IF NOT EXISTS LOJA(
+      idLoja              INT NOT NULL DEFAULT nextval('loja_id_seq') PRIMARY KEY,
+      idArea              INT NOT NULL,
+      descricao           VARCHAR(60) NOT NULL,
+      FOREIGN KEY (idArea) REFERENCES AREA (idArea)
+   );
+   ALTER SEQUENCE loja_id_seq OWNED BY LOJA.idLoja;
+   savepoint create_tb_LOJA;
+commit;
 
 -- Tabela ITEM
 begin;
    CREATE SEQUENCE item_id_seq START 1;
    CREATE TABLE IF NOT EXISTS ITEM(
       idItem           int NOT NULL DEFAULT nextval('item_id_seq') PRIMARY KEY,
+      idLoja           INT NULL, 
       nome             VARCHAR(30) NOT NULL,
       acao             VARCHAR(200) NOT NULL,
       valor            NUMERIC(4,2) NOT NULL,
       tipo             CHAR(20) NOT NULL,
-      descricaoItem    VARCHAR(60) NOT NULL
+      descricaoItem    VARCHAR(60) NOT NULL, 
+      FOREIGN KEY (idLoja) REFERENCES LOJA (idLoja)
    );
    ALTER SEQUENCE item_id_seq OWNED BY ITEM.idItem;
    savepoint create_tb_ITEM;
@@ -284,25 +298,6 @@ CREATE TABLE IF NOT EXISTS POCAO(
 );
    savepoint create_tb_POCAO;
 commit;
-
-
--- Tabela LOJA
-begin;
-   CREATE SEQUENCE loja_id_seq START 1;
-   CREATE TABLE IF NOT EXISTS LOJA(
-      idLoja              INT NOT NULL DEFAULT nextval('loja_id_seq') PRIMARY KEY,
-      idNPC               INT NOT NULL,
-      idArea              INT NOT NULL,
-      idInstanciaItem     INT NOT NULL,
-      descricao           VARCHAR(60) NOT NULL,
-      FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
-      FOREIGN KEY (idArea) REFERENCES AREA (idArea),
-      FOREIGN KEY (idInstanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
-   );
-   ALTER SEQUENCE loja_id_seq OWNED BY LOJA.idLoja;
-   savepoint create_tb_LOJA;
-commit;
-
 
 -- Tabela Livro
 begin;

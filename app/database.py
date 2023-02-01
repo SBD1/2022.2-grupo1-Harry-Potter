@@ -1,4 +1,5 @@
 import psycopg2
+import pandas as pd
 from classes import *
 
 
@@ -57,6 +58,20 @@ class DataBase():
         cursor.close()
 
         return nome_casa
+
+
+    def get_money(connection, id_jogador):
+
+        cursor = connection.cursor()
+
+        querry = """SELECT dinheiro FROM INVENTARIO
+                    WHERE( INVENTARIO.idJogador = '%s') 
+                    """ % (id_jogador)
+        cursor.execute(querry)
+        dinheiro = cursor.fetchone()[0]
+        cursor.close()
+
+        return dinheiro
 
     def update_player_area(connection, id, area):
 
@@ -131,6 +146,80 @@ class DataBase():
             cursor.close()
 
             return Inimigo(idInstInim, idNPC, nome, idArea, idInstanciaItem, nomeItem, moedas, pontosVida, multiplicador), True
+
+    def search_store(connection, id_area):
+        cursor = connection.cursor()
+
+        querry = """SELECT * FROM LOJA WHERE (LOJA.idArea = %s) """ % (
+            id_area)
+        cursor.execute(querry)
+
+        rtn = cursor.fetchone()
+
+        if rtn == None:
+            cursor.close()
+            return Loja(-1, -1,  ''), False
+        else:
+            idloja, idarea, descricao = rtn
+            return Loja(idloja, idarea, descricao), True
+            
+    def get_view_store(connection, idLoja):
+        cursor = connection.cursor()
+
+        querry = """SELECT * FROM produtos_loja WHERE (idLoja = %s) """ % (
+            idLoja)
+        cursor.execute(querry)            
+    
+        rtn = cursor.fetchall()
+        table = pd.DataFrame(rtn, columns=['Id do Item', 'Nome', 'Descrição', 'Valor', 'id Loja'])
+        table = table.set_index('Id do Item')
+        table = table.drop('id Loja', axis=1)
+        print(table)
+
+        querry = """ SELECT COUNT(*) FROM produtos_loja WHERE (idLoja = %s) """ % (
+            idLoja)
+        cursor.execute(querry)
+
+        n_items = cursor.fetchone()
+
+        
+        cursor.close()
+
+        return n_items
+
+    def get_item_store(connection, idItem, idLoja):
+        cursor = connection.cursor()
+
+        querry = """SELECT * FROM produtos_loja WHERE (idLoja = %s) """ % (
+            idLoja)
+        cursor.execute(querry)
+
+        rtn = cursor.fetchall()
+
+        
+
+
+
+    def gen_new_item_instance(connection, id_Item):
+        cursor = connection.cursor()
+
+        querry = """INSERT INTO INSTANCIA_ITEM(idItem) VALUES (%s);""" % (
+            id_Item)
+        cursor.execute(querry)
+        connection.commit()
+
+        querry = """SELECT timestamp, id 
+                    FROM INSTANCIA_ITEM 
+                    ORDER BY timestamp DESC 
+                    LIMIT 1"""
+        
+        cursor.execute()
+
+        idInstanciaItem = cursor.fetchone()
+        cursor.close()
+
+        return idInstanciaItem       
+        
 
     def get_spells(connection, id_Grimorio):
         cursor = connection.cursor()

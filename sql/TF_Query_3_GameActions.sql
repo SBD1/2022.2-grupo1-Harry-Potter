@@ -15,11 +15,11 @@ AS J INNER JOIN CASA AS C
 ON (J.idjogador = C.idcasa);
 
 -- Atualizar o dinheiro de um jogador X:
-UPDATE INVENTARIO SET dinheiro = dinheiro - (SELECT ITEM.valor from ITEM where ITEM.iditem = 
-(SELECT INSTANCIA.idItem from INVENTARIO as INVENTARIO INNER JOIN INSTANCIA_ITEM as INSTANCIA
-on (INVENTARIO.instanciaitem = INVENTARIO.idinstanciaitem)
-where INVENTARIO.idjogador  = 1))
-where idjogador = 1; 
+-- UPDATE INVENTARIO SET dinheiro = dinheiro - (SELECT ITEM.valor from ITEM where ITEM.iditem = 
+-- (SELECT INSTANCIA.idItem from INVENTARIO as INVENTARIO INNER JOIN INSTANCIA_ITEM as INSTANCIA
+-- on (INVENTARIO.instanciaitem = INVENTARIO.instanciaitem)
+-- where INVENTARIO.idjogador  = 1))
+-- where idjogador = 1; 
 
 -- Relação Professores e Disciplinas:
 SELECT D.nomeDisciplina, N.nome FROM disciplina d 
@@ -78,3 +78,12 @@ create view inventario_jogador as
   inner join item ITM on (II.iditem = ITM.iditem);
   
 select * from inventario_jogador;
+
+
+drop view if exists produtos_loja;
+
+create OR REPLACE view produtos_loja as
+ select i.idItem as "iditem",  i.nome as "Item",  i.descricaoitem as "Descricao", i.valor as "Valor", i.idloja as "idloja"
+ from loja l
+ inner join item i on(i.idLoja = l.idloja);
+select * from produtos_loja;

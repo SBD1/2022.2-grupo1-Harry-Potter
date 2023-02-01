@@ -133,6 +133,13 @@ class Game:
                 self.connection, current_area.areaSul).nome
 
             # Procura se ha algum inimigo na area
+            Loja, valid_loja = DataBase.search_store(self.connection, current_area.idArea)
+
+            if valid_loja == True:
+                print("\nLojas na area: ")
+                print(f"{Loja.descricao}\n")
+
+            # Procura se ha algum inimigo na area
             Inimigo, valid_inim = DataBase.search_enemy(self.connection, current_area.idArea)
 
             if valid_inim == True:
@@ -151,7 +158,7 @@ class Game:
 
             inp = 0
             self.valid_cmd = 0 
-            while(self.valid_cmd == False or self.valid_cmd == 'help'):
+            while(self.valid_cmd == False or self.valid_cmd == 'help' or valid_inim == True or  valid_loja == True):
                 inp = input('> ')
                 self.valid_cmd = Commands.cmd(inp)
 
@@ -175,11 +182,44 @@ class Game:
                         self.player = DataBase.update_player_area(
                             self.connection, self.player.idJogador, current_area.areaSul)
                     break
-                elif(self.valid_cmd == 'combate'):
+                elif(self.valid_cmd == 'combate' and valid_inim == True):
                     self.combat(Inimigo)
                     break
-                elif self.valid_cmd == False:
+                elif(self.valid_cmd == 'loja' and valid_loja == True):
+                    self.store(Loja)
+                    break
+                elif self.valid_cmd == False or (self.valid_cmd == 'combate' and valid_inim == False)or (self.valid_cmd == 'loja' and valid_loja == False):
                     print('\nOpção Inválida!')
+    
+    def store(self, Loja):
+        clear()
+
+        n_items = DataBase.get_view_store(self.connection, Loja.idloja)
+
+        dinheiro = DataBase.get_money(self.connection, self.player.idJogador)
+        print(f'\nDinheiro do Jogador: {dinheiro}')
+
+        print(f'\n(Digite o id do item para comprar-lo, ou digite "sair" para voltar)')
+
+        inp = 0
+        while(inp != 'sair'):
+            inp = input('> ')
+            
+            if inp == 'sair':
+                break
+
+            elif inp.isnumeric() == False:
+                print('\nOpção Inválida!')
+
+            elif int(inp) <= 0 or inp > int(n_items):
+                print('\nOpção Inválida!') 
+            else:
+                cursor = self.connection.cursor()
+
+                for i in range(inp):
+                    cursor.execute('SELECT * FROM produtos_loja WHERE (LOJA.idLoja = %s)' % (Loja.idLoja) )
+
+
 
     def combat(self, Inimigo):
         clear()

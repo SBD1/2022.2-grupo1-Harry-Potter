@@ -73,18 +73,27 @@ INSERT INTO JOGADOR (idGrimorio, nome, idArea, pontosVida, idCasa) VALUES
 (5, 'Edward Simpson', 4, 20, 4),
 (6, 'Emma Parkes', 5, 20, 1);
 
+-- Popula LOJA
+INSERT INTO LOJA(idArea, descricao) VALUES
+(1, ' Sorveteria Florean Fortescue'),
+(1, 'Olivaras Varinhas'),
+(1, 'Genialidades Weasley'),
+(3, ' Caldeirão Furado'),
+(1, ' Borgin e Burkes'),
+(1, 'Profeta Diário');
+
 -- Popula Item
-INSERT INTO ITEM(nome, acao, valor, tipo, descricaoItem) VALUES
-('Varinha', 'Realiza Feiticos', 90, 'ATAQUE', 'Onde um bruxo canaliza seus poderes mágicos'),
-('Mapa do Maroto', 'Mostra a localização exata de cada pessoa dentro dos limites de Hogwarts', 40, 'LOCOMOCAO', 'Indica pontos de interesse pelo castelo'),
-('Capa da Invisibilidade', 'Torna o usuário invisível', 60, 'DEFESA', 'Única capa de invisibilidade conhecida'),
-('Desiluminador', 'Remove e devolve fontes de luz à suas devidas fontes', 10, 'DEFESA', 'Aparenta ser um isqueiro de prata padrão'),
-('Livros de Feitiços', 'Explica ao leitor como realizar feitiços', 50, 'ATAQUE', 'Existem vários tipos'),
-('Livros de Poções', 'Explica ao leitor como realizar poções', 70, 'DEFESA', 'Existem vários tipos'),
-('Livros de Criaturas Mágicas', 'Explica sobre as criaturas mágicas', 50, 'ATAQUE', 'Existem vários tipos'),
-('Vassoura', 'Usada para moder voar', 50, 'DEFESA', 'Transporte entre locais'),
-('Vira-tempo', 'Utilizado para viajar no tempo', 50, 'DEFESA', 'Retorna horas ao passado'),
-('Osso', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Um osso em perfeito estado');
+INSERT INTO ITEM(IdLoja, nome, acao, valor, tipo, descricaoItem) VALUES
+(4, 'Varinha', 'Realiza Feiticos', 90, 'ATAQUE', 'Onde um bruxo canaliza seus poderes mágicos'),
+(4, 'Mapa do Maroto', 'Mostra a localização exata de cada pessoa dentro dos limites de Hogwarts', 40, 'LOCOMOCAO', 'Indica pontos de interesse pelo castelo'),
+(4, 'Capa da Invisibilidade', 'Torna o usuário invisível', 60, 'DEFESA', 'Única capa de invisibilidade conhecida'),
+(4, 'Desiluminador', 'Remove e devolve fontes de luz à suas devidas fontes', 10, 'DEFESA', 'Aparenta ser um isqueiro de prata padrão'),
+(4, 'Livros de Feitiços', 'Explica ao leitor como realizar feitiços', 50, 'ATAQUE', 'Existem vários tipos'),
+(4, 'Livros de Poções', 'Explica ao leitor como realizar poções', 70, 'DEFESA', 'Existem vários tipos'),
+(4, 'Livros de Criaturas Mágicas', 'Explica sobre as criaturas mágicas', 50, 'ATAQUE', 'Existem vários tipos'),
+(4, 'Vassoura', 'Usada para moder voar', 50, 'DEFESA', 'Transporte entre locais'),
+(4, 'Vira-tempo', 'Utilizado para viajar no tempo', 50, 'DEFESA', 'Retorna horas ao passado'),
+(4, 'Osso', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Um osso em perfeito estado');
 
 -- Popula NPC
 INSERT INTO NPC(item, nome) VALUES
@@ -206,14 +215,7 @@ INSERT INTO POCAO(idItem, ingrediente) VALUES
 (6, 'Ovo de Cinzal'),
 (6, 'Chifre de Unicórnio');
 
--- Popula LOJA
-INSERT INTO LOJA(idNPC, idArea, idInstanciaItem, descricao) VALUES
-(15, 3, 1, ' Sorveteria Florean Fortescue'),
-(16, 3, 1, 'Olivaras Varinhas'),
-(17, 3, 1, 'Gemialidades Weasley'),
-(18, 3, 1, ' Caldeirão Furado'),
-(19, 3, 1, ' Borgin e Burkes'),
-(20, 3, 1, 'Profeta Diário');
+
 
 -- Popula LIVRO
 INSERT INTO LIVRO(idItem, feitico) VALUES
