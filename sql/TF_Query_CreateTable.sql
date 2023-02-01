@@ -171,6 +171,7 @@ begin;
       idArea       INT  NOT NULL,
       pontosVida   INT  NOT NULL,
       idCasa       INT  NOT NULL,
+      estado       INT  NOT NULL DEFAULT 1,
       FOREIGN KEY (idGrimorio) REFERENCES GRIMORIO (idGrimorio),
       FOREIGN KEY (idArea) REFERENCES AREA (idArea),
       FOREIGN KEY (idCasa) REFERENCES CASA (idCasa),
@@ -320,8 +321,8 @@ begin;
    CREATE TABLE IF NOT EXISTS FALAS(
       idNPC           INT NOT NULL,
       idArea          INT NOT NULL,
+      texto           VARCHAR(300),
       momento         INT NOT NULL,
-      texto            VARCHAR(300),
       FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
       FOREIGN KEY (idArea) REFERENCES AREA (idArea)
    );

@@ -13,7 +13,7 @@ class Game:
 
     def __init__(self):
         self.connection = DataBase.create_connection()
-        self.player = Player(-1, -1, ' ', -1, -1, -1)
+        self.player = Player(-1, -1, ' ', -1, -1, -1, -1)
         self.valid_cmd = 0
         pass
 
@@ -114,7 +114,6 @@ class Game:
 
 
     def gameplay(self):
-        momento = 1
         while(True):
             clear()
             self.show_player_info()
@@ -136,12 +135,13 @@ class Game:
 
             # Procura se ha algum inimigo na area
             Inimigo, valid_inim = DataBase.search_enemy(self.connection, current_area.idArea)
-
-            if current_area.idArea == 2 and momento == 1: # Fala de boas vindas a hargwards
-                print('#----------------------------------------------------#\n')
-                print(DataBase.getSpeech(self.connection, current_area.idArea, momento)) 
-                momento = 2
-                print('#----------------------------------------------------#\n')
+            
+            print('\n#----------------------------------------------------#')
+            texto = DataBase.getSpeech(self.connection, current_area.idArea, self.player.estado)
+            if texto != None:
+                print(DataBase.getSpeech(self.connection, current_area.idArea, self.player.estado)) 
+                DataBase.updateState(self.connection, self.player.idJogador, self.player.estado+1)
+            print('#----------------------------------------------------#\n')
 
             if valid_inim == True:
                 print("\nInimigo na area: ")
