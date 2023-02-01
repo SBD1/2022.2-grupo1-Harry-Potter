@@ -139,14 +139,14 @@ INSERT INTO PROFESSOR(idNPC, casa, disciplina) VALUES
 (9, 4, 6);
 
 -- Popula INSTANCIA_ITEM
-INSERT INTO INSTANCIA_ITEM(idItem) VALUES
-(1),
-(2),
-(3),
-(4),
-(5),
-(6),
-(10);
+INSERT INTO INSTANCIA_ITEM(idItem, idJogador) VALUES
+(1, NULL),
+(2, NULL),
+(3, NULL),
+(4, NULL),
+(5, NULL),
+(6, NULL),
+(10, 1);
 
 -- Popula INVENTARIO
 INSERT INTO INVENTARIO(idJogador, dinheiro) VALUES
@@ -188,14 +188,14 @@ INSERT INTO INIMIGO(idNPC, idHabilidade, moedas) VALUES
 (21, 8, 4);
 
 -- Popula INSTANCIA_INIMIGO
-INSERT INTO INSTANCIA_INIMIGO(idNPC, idArea, idInstanciaItem, pontosVida, multiplicador) VALUES
+INSERT INTO INSTANCIA_INIMIGO(idNPC, idArea, idItem, pontosVida, multiplicador) VALUES
 (9, 1, 1, 400, 1),
 (10, 1, 2, 400, 2),
 (11, 1, 3, 400, 3),
 (12, 1, 4, 400, 1),
 (13, 1, 5, 400, 2),
 (14, 1, 6, 400, 3),
-(21, 6, 7, 10, 1);
+(21, 6, 10, 10, 1);
 
 -- Popula FERRAMENTA
 INSERT INTO FERRAMENTA(idItem, forca) VALUES

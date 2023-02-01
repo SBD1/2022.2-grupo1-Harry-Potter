@@ -60,29 +60,27 @@ create view feiticos_livro as
 select * from feiticos_livro;
 
 -- Visualizar Ferramentas:
-select I.nome as "Ferramenta", F.forca as "Força"
-from item I
-inner join ferramenta F on (I.iditem = F.iditem);
+--select I.nome as "Ferramenta", F.forca as "Força"
+--from item I
+--inner join ferramenta F on (I.iditem = F.iditem);
   
 -- Visualizar Ingredientes de uma Poção:
-select I.nome as "Poção", P.ingrediente as "Ingredientes"
-from item I
-inner join pocao P on (I.iditem = P.iditem)
+--select I.nome as "Poção", P.ingrediente as "Ingredientes"
+--from item I
+--inner join pocao P on (I.iditem = P.iditem)
 
 -- View inventário de um jogador:
-create view inventario_jogador as
-  select j.idjogador as "idJogador",J.nome as "Jogador", I.dinheiro as "Dinheiro", ITM.nome as "Itens"
-  from jogador J
-  inner join Inventario I on (I.idjogador = J.idjogador)
-  inner join instancia_item II on (II.idjogador  = I.idjogador)
-  inner join item ITM on (II.iditem = ITM.iditem);
-  
-select * from inventario_jogador
+create OR REPLACE view inventario_jogador as
+	select I.idjogador as "idjogador", ITM.nome as "Itens", ITM.valor as "Dinheiro"
+	from inventario I
+	inner join instancia_item II on (II.idjogador  = I.idjogador)
+	inner join item ITM on (II.iditem = ITM.iditem);
 
-drop view if exists produtos_loja;
+select * from inventario_jogador;
 
 create OR REPLACE view produtos_loja as
- select i.idItem as "iditem",  i.nome as "Item",  i.descricaoitem as "Descricao", i.valor as "Valor", i.idloja as "idloja"
- from loja l
- inner join item i on(i.idLoja = l.idloja);
+	select i.idItem as "iditem",  i.nome as "Item",  i.descricaoitem as "Descricao", i.valor as "Valor", i.idloja as "idloja"
+	from loja l
+	inner join item i on(i.idLoja = l.idloja);
+
 select * from produtos_loja;

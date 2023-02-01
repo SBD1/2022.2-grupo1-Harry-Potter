@@ -1,6 +1,21 @@
 version: "3.9"
 
 services:
+  hp-game:
+    image: harry-potter-game
+    container_name: harry-potter-game
+    build:
+      context: .
+      dockerfile: gameDockerFile
+    entrypoint: "tail -f /dev/null"
+    volumes:
+      - ".:/app"
+    depends_on:
+      - db
+    restart: always
+    networks:
+      - postgres-connection
+
   db:
     container_name: postgres_container
     build: 
@@ -18,20 +33,7 @@ services:
     networks:
       - postgres-connection
 
-  hp-game:
-    image: harry-potter-game
-    container_name: harry-potter-game
-    build:
-      context: .
-      dockerfile: gameDockerFile
-    entrypoint: "tail -f /dev/null"
-    volumes:
-      - ".:/app"
-    depends_on:
-      - db
-    restart: always
-    networks:
-      - postgres-connection
+  
 
 networks:
   postgres-connection:

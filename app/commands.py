@@ -7,7 +7,7 @@ class Commands:
             help -> informa os comandos disponíveis.
             mover + N/S/L/O -> Movimenta o jogador pelo mapa nas direções Norte, Sul, Leste e Oeste, respectivamente, quando for possível se deslocar.
             loja -> Abre a loja da área.
-            (não implementado)inventario -> Abre o inventario.
+            inventario -> Abre o inventario.
             (não implementado)grimorio -> Informa as magias disponíveis para o jogador.
             combate -> Inicia o combate com o inimigo da área.
             atacar -> Ataca o unimigo com a magia equipada.
@@ -44,6 +44,9 @@ class Commands:
 
         elif inp == "loja" or inp == "Loja":
             return 'loja'
+
+        elif inp == "inventario" or inp == "Inventario":
+            return 'inventario'
 
         else:
             return False

@@ -267,12 +267,12 @@ begin;
       idInstancia_Inimigo INT NOT NULL DEFAULT nextval('instancia_inimigo_id_seq') PRIMARY KEY,
       idNPC             INT NOT NULL,
       idArea            INT NOT NULL,
-      idInstanciaItem   INT NULL,
+      idItem            INT NULL,
       pontosVida        INT NOT NULL,
       multiplicador     INT NOT NULL,
       FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
       FOREIGN KEY (idArea) REFERENCES AREA (idArea),
-      FOREIGN KEY (idInstanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
+      FOREIGN KEY (idItem) REFERENCES ITEM (idItem)
    );
    ALTER SEQUENCE instancia_inimigo_id_seq OWNED BY INSTANCIA_INIMIGO.idInstancia_Inimigo;
    savepoint create_tb_INSTANCIA_INIMIGO;

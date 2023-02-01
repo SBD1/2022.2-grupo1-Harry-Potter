@@ -24,6 +24,18 @@ class DataBase():
         connection.commit()
         cursor.close()
 
+    def create_new_inventory(connection, id_jogador):
+
+        cursor = connection.cursor()
+
+        querry = "INSERT INTO INVENTARIO (idJogador, dinheiro) VALUES (%s, 100)" % (
+            id_jogador)
+
+        cursor.execute(querry)
+
+        connection.commit()
+        cursor.close()
+
     def get_character(connection, name):
 
         cursor = connection.cursor()
@@ -107,6 +119,23 @@ class DataBase():
         connection.commit()
         cursor.close()
 
+    def get_view_inventory(connection, id_jogador):
+        
+        cursor = connection.cursor()
+
+        querry = """SELECT * FROM inventario_jogador WHERE (idjogador = %s) """ % (
+            id_jogador)
+        cursor.execute(querry)            
+    
+        rtn = cursor.fetchall()
+        table = pd.DataFrame(rtn, columns=['idJogador', 'Item', 'Valor'])
+        table = table.drop('idJogador', axis=1)
+        table = table.set_index('Item')
+        
+        print(table)
+        cursor.close()
+
+        
 
     def get_area(connection, id_area):
         cursor = connection.cursor()
@@ -131,7 +160,7 @@ class DataBase():
             return Inimigo(-1, -1, '', -1, -1, -1, -1, -1, -1), False
 
         else:
-            idInstInim, idNPC, idArea, idInstanciaItem, pontosVida, multiplicador = rtn
+            idInstInim, idNPC, idArea, idItem, pontosVida, multiplicador = rtn
 
             querry = """SELECT nome FROM NPC WHERE(NPC.idNPC = %s) """ % (
                 idNPC)
@@ -145,12 +174,6 @@ class DataBase():
 
             moedas = cursor.fetchone()[0]
 
-            querry = """SELECT IdItem FROM INSTANCIA_ITEM WHERE(INSTANCIA_ITEM.idInstanciaItem = %s) """ % (
-                idInstanciaItem)
-            cursor.execute(querry)
-
-            idItem = cursor.fetchone()[0]
-
             querry = """SELECT nome FROM ITEM WHERE(ITEM.idItem = %s) """ % (
                 idItem)
             cursor.execute(querry)
@@ -158,7 +181,7 @@ class DataBase():
             nomeItem = cursor.fetchone()[0]
             cursor.close()
 
-            return Inimigo(idInstInim, idNPC, nome, idArea, idInstanciaItem, nomeItem, moedas, pontosVida, multiplicador), True
+            return Inimigo(idInstInim, idNPC, nome, idArea, idItem, nomeItem, moedas, pontosVida, multiplicador), True
 
     def search_store(connection, id_area):
         cursor = connection.cursor()
