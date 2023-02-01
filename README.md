@@ -46,6 +46,7 @@ E insira a senha ```postgres```
 |----------------|------------------------|------|
 | 1              | [Apresentação Módulo 1](https://unbbr.sharepoint.com/:v:/s/SBD1-20222/EejUfL9qXfpEsDy2qnnhH1YBqo5rGOxfywmj5EtrEw4qOQ) | 28/11/2022 |
 | 2              | [Apresentação Módulo 2](https://unbbr-my.sharepoint.com/:v:/g/personal/200014447_aluno_unb_br/EUAUxqW0gJlPk9X95PemVJsBupmwQM0x_uJ2BQkhjIR8tg?e=gTtRAi) | 16/01/2023 |
+| 3              | [Apresentação Módulo 3](https://unbbr-my.sharepoint.com/:v:/g/personal/200030469_aluno_unb_br/ETnUByFmnXtLp5LSV3T9dpUBL-LRKV6ezbwrexVFy4ZI_Q?e=8W1Kqs) | 01/02/2023 |
 
 
 ## Entregas
