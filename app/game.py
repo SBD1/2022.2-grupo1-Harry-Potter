@@ -159,6 +159,7 @@ class Game:
             print(f'                            S. {area_sul}\n')
             print('######################################################\n')
 
+            print('(Digite "help" para ver todos os comandos disponíveis)')
             inp = 0
             self.valid_cmd = 0
             while(self.valid_cmd == False or self.valid_cmd == 'help' or valid_inim == True or  valid_loja == True):
