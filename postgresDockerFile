@@ -3,3 +3,4 @@ FROM postgres:latest
 ADD ./sql/TF_Query_1_CreateTable.sql /docker-entrypoint-initdb.d
 ADD ./sql/TF_Query_2_Popula.sql /docker-entrypoint-initdb.d
 ADD ./sql/TF_Query_3_GameActions.sql /docker-entrypoint-initdb.d
+# ADD ./sql/TF_Query_1_TriggersAndStoredProcedures.sql /docker-entrypoint-initdb.d

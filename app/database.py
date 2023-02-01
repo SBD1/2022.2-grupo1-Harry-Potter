@@ -95,6 +95,19 @@ class DataBase():
         cursor.close()
         return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa)
 
+    def update_player_money(connection, id_jogador, dinheiro):
+        cursor = connection.cursor()
+
+        querry = """UPDATE INVENTARIO
+                    SET dinheiro = '%s'
+                    WHERE( idJogador = '%s') 
+                    """ % (dinheiro, id_jogador)
+
+        cursor.execute(querry)
+        connection.commit()
+        cursor.close()
+
+
     def get_area(connection, id_area):
         cursor = connection.cursor()
 
@@ -187,39 +200,40 @@ class DataBase():
 
         return n_items
 
-    def get_item_store(connection, idItem, idLoja):
+    def ver_item_store(connection, idItem, idLoja):
         cursor = connection.cursor()
 
-        querry = """SELECT * FROM produtos_loja WHERE (idLoja = %s) """ % (
-            idLoja)
+        querry = """SELECT * FROM ITEM WHERE (ITEM.idLoja = %s) AND (ITEM.idItem = %s) """ % (
+            idLoja, idItem)
         cursor.execute(querry)
 
         rtn = cursor.fetchall()
 
-        
+        if rtn == None:
+            return False
+        else:
+            return True
 
 
-
-    def gen_new_item_instance(connection, id_Item):
+    def gen_new_item_instance(connection, id_Item, Id_jogador):
         cursor = connection.cursor()
 
-        querry = """INSERT INTO INSTANCIA_ITEM(idItem) VALUES (%s);""" % (
-            id_Item)
+        querry = """INSERT INTO INSTANCIA_ITEM(idItem, idJogador) VALUES (%s, %s);""" % (
+            id_Item, Id_jogador)
         cursor.execute(querry)
         connection.commit()
-
-        querry = """SELECT timestamp, id 
-                    FROM INSTANCIA_ITEM 
-                    ORDER BY timestamp DESC 
-                    LIMIT 1"""
+        cursor.close()
         
-        cursor.execute()
+    def get_item_value(connection, id_item):
+        cursor = connection.cursor()
 
-        idInstanciaItem = cursor.fetchone()
+        querry = """SELECT valor FROM ITEM WHERE (ITEM.idItem = %s) """ % (
+            id_item)
+        cursor.execute(querry)
+        value = cursor.fetchone()[0]
         cursor.close()
 
-        return idInstanciaItem       
-        
+        return value
 
     def get_spells(connection, id_Grimorio):
         cursor = connection.cursor()

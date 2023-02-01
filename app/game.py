@@ -193,31 +193,37 @@ class Game:
     
     def store(self, Loja):
         clear()
-
-        n_items = DataBase.get_view_store(self.connection, Loja.idloja)
-
-        dinheiro = DataBase.get_money(self.connection, self.player.idJogador)
-        print(f'\nDinheiro do Jogador: {dinheiro}')
-
-        print(f'\n(Digite o id do item para comprar-lo, ou digite "sair" para voltar)')
-
         inp = 0
         while(inp != 'sair'):
-            inp = input('> ')
-            
-            if inp == 'sair':
-                break
+            n_items = DataBase.get_view_store(self.connection, Loja.idloja)
 
-            elif inp.isnumeric() == False:
-                print('\nOpção Inválida!')
+            dinheiro = DataBase.get_money(self.connection, self.player.idJogador)
+            print(f'\nDinheiro do Jogador: {dinheiro}')
 
-            elif int(inp) <= 0 or inp > int(n_items):
-                print('\nOpção Inválida!') 
-            else:
-                cursor = self.connection.cursor()
+            print(f'\n(Digite o id do item para comprar-lo, ou digite "sair" para voltar)')
 
-                for i in range(inp):
-                    cursor.execute('SELECT * FROM produtos_loja WHERE (LOJA.idLoja = %s)' % (Loja.idLoja) )
+            while(inp != 'sair'):
+                inp = input('> ')
+                
+                if inp == 'sair':
+                    break
+
+                elif inp.isnumeric() == False:
+                    print('\nOpção Inválida!')
+
+                elif DataBase.ver_item_store(self.connection, inp, Loja.idloja) == False:
+                    print('\nOpção Inválida!')
+
+                else:
+                    DataBase.gen_new_item_instance(self.connection, inp, self.player.idJogador)
+                    val_item = DataBase.get_item_value(self.connection, inp)
+                    dinheiro -= int(val_item)
+                    DataBase.update_player_money(self.connection, self.player.idJogador, dinheiro)
+                    break
+
+
+
+                
 
 
 

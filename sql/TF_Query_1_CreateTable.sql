@@ -201,7 +201,9 @@ begin;
    CREATE TABLE IF NOT EXISTS INSTANCIA_ITEM(
       idInstanciaItem      INT NOT NULL DEFAULT nextval('instancia_item_id_seq') PRIMARY KEY,
       idItem               INT  NOT NULL,
-      FOREIGN KEY (idItem) REFERENCES ITEM (idItem)
+      idJogador            INT NULL DEFAULT NULL,
+      FOREIGN KEY (idItem) REFERENCES ITEM (idItem),
+      FOREIGN KEY (idJogador) REFERENCES JOGADOR (idJogador)
    );
    ALTER SEQUENCE instancia_item_id_seq OWNED BY INSTANCIA_ITEM.idInstanciaItem;
    savepoint create_tb_INSTANCIA_ITEM;
@@ -212,13 +214,11 @@ commit;
 begin;
    CREATE TABLE IF NOT EXISTS INVENTARIO(
       idJogador               INT NOT NULL,
-      instanciaItem	         INT NULL,
       dinheiro                INT NULL,
-      FOREIGN KEY (idJogador) REFERENCES JOGADOR (idJogador),
-      FOREIGN KEY (instanciaItem) REFERENCES INSTANCIA_ITEM (idInstanciaItem)
+      FOREIGN KEY (idJogador) REFERENCES JOGADOR (idJogador)
    );
    savepoint create_tb_INVENTARIO;
-commit;
+commit;  
 
 
 -- Tabela INSTANCIA_JOGADOR_DISCIPLINA

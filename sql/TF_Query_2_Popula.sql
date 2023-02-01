@@ -149,13 +149,13 @@ INSERT INTO INSTANCIA_ITEM(idItem) VALUES
 (10);
 
 -- Popula INVENTARIO
-INSERT INTO INVENTARIO(idJogador, instanciaItem, dinheiro) VALUES
-(1, 1, 2000),
-(2, 2, 2000),
-(3, 3, 2000),
-(4, 4, 2000),
-(5, 5, 200),
-(6, 6, 2000);
+INSERT INTO INVENTARIO(idJogador, dinheiro) VALUES
+(1, 2000),
+(2, 2000),
+(3, 2000),
+(4, 2000),
+(5, 200),
+(6, 2000);
 
 -- Popula INSTANCIA_JOGADOR_DISCIPLINA
 INSERT INTO INSTANCIA_JOGADOR_DISCIPLINA(idJogador, idDisciplina) VALUES

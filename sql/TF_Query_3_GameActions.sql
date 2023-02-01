@@ -70,14 +70,14 @@ from item I
 inner join pocao P on (I.iditem = P.iditem);
 
 -- View inventário de um jogador:
-create view inventario_jogador as
-  select J.nome as "Jogador", I.dinheiro as "Dinheiro", ITM.nome as "Itens"
-  from jogador J
-  inner join Inventario I on (I.idjogador = J.idjogador)
-  inner join instancia_item II on (II.idinstanciaitem  = I.instanciaitem)
-  inner join item ITM on (II.iditem = ITM.iditem);
-  
-select * from inventario_jogador;
+-- create view inventario_jogador as
+--   select J.nome as "Jogador", I.dinheiro as "Dinheiro", ITM.nome as "Itens"
+--   from jogador J
+--   inner join Inventario I on (I.idjogador = J.idjogador)
+--   inner join instancia_item II on (II.idinstanciaitem  = I.instanciaitem)
+--   inner join item ITM on (II.iditem = ITM.iditem);
+--   
+-- select * from inventario_jogador;
 
 
 drop view if exists produtos_loja;
