@@ -248,10 +248,15 @@ class Game:
                     print('\nOpção Inválida!')
 
                 else:
-                    DataBase.gen_new_item_instance(self.connection, inp, self.player.idJogador)
                     val_item = DataBase.get_item_value(self.connection, inp)
-                    dinheiro -= int(val_item)
-                    DataBase.update_player_money(self.connection, self.player.idJogador, dinheiro)
+                    if (dinheiro - int(val_item)) >= 0:
+                        DataBase.gen_new_item_instance(self.connection, inp, self.player.idJogador)
+                        dinheiro -= int(val_item)
+                        DataBase.update_player_money(self.connection, self.player.idJogador, dinheiro)
+                    else:
+                        print("\n------------------------------------")
+                        print("Dinheiro insuficiente para compra ")
+                        print("------------------------------------")
                     break
 
 
