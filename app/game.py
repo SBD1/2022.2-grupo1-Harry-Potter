@@ -138,10 +138,11 @@ class Game:
 
             # Procura se ha alguma loja na area
             Loja, valid_loja = DataBase.search_store(self.connection, current_area.idArea)
-
+            
             if valid_loja == True:
                 print("\nLojas na area: ")
-                print(f"{Loja.descricao}\n")
+                for i in Loja:
+                    print(f"{i[2]}")
 
             # Procura se ha algum inimigo na area
             Inimigo, valid_inim = DataBase.search_enemy(self.connection, current_area.idArea)
@@ -170,45 +171,74 @@ class Game:
             self.valid_cmd = 0
             while(self.valid_cmd == False or self.valid_cmd == 'help' or valid_inim == True or  valid_loja == True):
                 inp = input('> ')
-                self.valid_cmd = Commands.cmd(inp)
+                inp = inp.lower()
+                Commands.cmd(inp)
                 
-                if (inp == 'mover N' or inp == 'mover n' or inp == 'Mover N' or inp == 'Mover n') and self.valid_cmd == 'mover':
+                if inp == 'mover n':
                     if current_area.areaNorte != 1:
                         self.player = DataBase.update_player_area(
                             self.connection, self.player.idJogador, current_area.areaNorte)
                     break
 
-                elif (inp == 'mover O' or inp == 'mover o' or inp == 'Mover O' or inp == 'Mover o') and self.valid_cmd == 'mover':
+                elif inp == 'mover o':
                     if current_area.areaOeste != 1:
                         self.player = DataBase.update_player_area(
                             self.connection, self.player.idJogador, current_area.areaOeste)
                     break
 
-                elif (inp == 'mover L' or inp == 'mover l' or inp == 'Mover L' or inp == 'Mover l') and self.valid_cmd == 'mover':
+                elif inp == 'mover l':
                     if current_area.areaLeste != 1:
                         self.player = DataBase.update_player_area(
                             self.connection, self.player.idJogador, current_area.areaLeste)
                     break
 
-                elif (inp == 'mover S' or inp == 'mover s' or inp == 'Mover S' or inp == 'Mover s') and self.valid_cmd == 'mover':
+                elif inp == 'mover s':
                     if current_area.areaSul != 1:
                         self.player = DataBase.update_player_area(
                             self.connection, self.player.idJogador, current_area.areaSul)
                     break
 
-                elif(self.valid_cmd == 'combate' and valid_inim == True):
+                elif inp == 'combate' and valid_inim == True:
                     self.combat(Inimigo)
                     break
 
-                elif(self.valid_cmd == 'loja' and valid_loja == True):
-                    self.store(Loja)
+                elif inp == 'loja sorveteria florean fortescue' and valid_loja == True:
+                    self.store('Sorveteria Florean Fortescue')
                     break
 
-                elif(self.valid_cmd == 'inventario'):
+                elif inp == 'loja olivaras varinhas' and valid_loja == True:
+                    self.store('Olivaras Varinhas')
+                    break
+
+                elif inp == 'loja gemialidades weasley' and valid_loja == True:
+                    self.store('Gemialidades Weasley')
+                    break
+
+                elif inp == 'loja caldeirão furado' and valid_loja == True:
+                    self.store('Caldeirão Furado')
+                    break
+
+                elif inp == 'loja profeta diario' and valid_loja == True:
+                    self.store('Profeta Diario')
+                    break
+
+                elif inp == 'loja vassourax' and valid_loja == True:
+                    self.store('Vassourax')
+                    break
+
+                elif inp == 'loja floreios e borroes' and valid_loja == True:
+                    self.store('Floreios e Borroes')
+                    break
+
+                elif inp == 'loja farmácia' and valid_loja == True:
+                    self.store('Farmacia')
+                    break
+                
+                elif inp == 'inventario':
                     self.inventario()
                     break
 
-                elif self.valid_cmd == False or (self.valid_cmd == 'combate' and valid_inim == False)or (self.valid_cmd == 'loja' and valid_loja == False):
+                elif inp == False or (inp == 'combate' and valid_inim == False)or (inp == 'loja' and valid_loja == False):
                     print('\nOpção Inválida!')
 
     def inventario(self):
@@ -234,7 +264,7 @@ class Game:
         clear()
         inp = 0
         while(inp != 'sair'):
-            n_items = DataBase.get_view_store(self.connection, Loja.idloja)
+            n_items = DataBase.get_view_store(self.connection, Loja)
 
             dinheiro = DataBase.get_money(self.connection, self.player.idJogador)
             print(f'\nDinheiro do Jogador: {dinheiro}')
@@ -250,7 +280,7 @@ class Game:
                 elif inp.isnumeric() == False:
                     print('\nOpção Inválida!')
 
-                elif DataBase.ver_item_store(self.connection, inp, Loja.idloja) == False:
+                elif DataBase.ver_item_store(self.connection, inp, Loja) == False:
                     print('\nOpção Inválida!')
 
                 else:

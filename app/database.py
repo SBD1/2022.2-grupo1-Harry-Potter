@@ -190,19 +190,25 @@ class DataBase():
             id_area)
         cursor.execute(querry)
 
-        rtn = cursor.fetchone()
+        rtn = cursor.fetchall()
+        table = pd.DataFrame(rtn, columns=['Id', 'idArea', 'Descrição'])
+        table = table.drop('idArea', axis=1)
+
 
         if rtn == None:
             cursor.close()
             return Loja(-1, -1,  ''), False
         else:
-            idloja, idarea, descricao = rtn
-            return Loja(idloja, idarea, descricao), True
+            return rtn, True
             
-    def get_view_store(connection, idLoja):
+    def get_view_store(connection, nomeLoja):
         cursor = connection.cursor()
 
-        querry = """SELECT * FROM produtos_loja WHERE (idLoja = %s) """ % (
+        querry = """SELECT idloja FROM LOJA WHERE (LOJA.descricao = '%s')""" % (nomeLoja)
+        cursor.execute(querry)
+        idLoja = cursor.fetchone()
+
+        querry = """SELECT * FROM produtos_loja WHERE (idloja = %s) """ % (
             idLoja)
         cursor.execute(querry)            
     
@@ -223,8 +229,12 @@ class DataBase():
 
         return n_items
 
-    def ver_item_store(connection, idItem, idLoja):
+    def ver_item_store(connection, idItem, nomeLoja):
         cursor = connection.cursor()
+
+        querry = """SELECT idLoja FROM LOJA WHERE (LOJA.descricao = '%s')""" % (nomeLoja)
+        cursor.execute(querry)
+        idLoja = cursor.fetchone()
 
         querry = """SELECT * FROM ITEM WHERE (ITEM.idLoja = %s) AND (ITEM.idItem = %s) """ % (
             idLoja, idItem)

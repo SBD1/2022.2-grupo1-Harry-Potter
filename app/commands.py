@@ -6,7 +6,7 @@ class Commands:
             print('''Comandos disponíveis:
             help -> informa os comandos disponíveis.
             mover + N/S/L/O -> Movimenta o jogador pelo mapa nas direções Norte, Sul, Leste e Oeste, respectivamente, quando for possível se deslocar.
-            loja -> Abre a loja da área.
+            loja <nome> -> Abre a loja selecionada da área (digitar o nome sem os sinais < e >).
             inventario -> Abre o inventario.
             (não implementado)grimorio -> Informa as magias disponíveis para o jogador.
             combate -> Inicia o combate com o inimigo da área.
@@ -32,21 +32,6 @@ class Commands:
                     return 'sair'
                 else:
                     print('\nOpção Inválida!')
-
-        elif inp in ['mover n', 'Mover n', 'mover N', 'Mover N', 'mover s', 'Mover s', 'mover S', 'Mover S', 'mover l', 'Mover l', 'mover L', 'Mover L', 'mover o', 'Mover o', 'mover O', 'Mover O']:
-            return 'mover'
-
-        elif inp == 'combate' or inp == 'Combate':
-            return 'combate'
-
-        elif inp == "atacar" or inp == "Atacar":
-            return 'atacar'
-
-        elif inp == "loja" or inp == "Loja":
-            return 'loja'
-
-        elif inp == "inventario" or inp == "Inventario":
-            return 'inventario'
 
         else:
             return False
