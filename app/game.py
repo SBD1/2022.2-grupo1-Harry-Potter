@@ -108,10 +108,12 @@ class Game:
 
     def load_character(self):
         clear()
-        nome = input("Digite o nome do personagem: ")
+        nome = input("Digite o nome do personagem ou sair: ")
         self.player = DataBase.get_character(self.connection, nome)
         while(self.player.idJogador == -1):
-            nome = input("Jogador não encontrado! digite outro: ")
+            if nome == 'sair':
+                return
+            nome = input("Jogador não encontrado! digite outro ou sair: ")
             self.player = DataBase.get_character(self.connection, nome)
         self.gameplay()
 
@@ -230,7 +232,7 @@ class Game:
                     self.store('Floreios e Borroes')
                     break
 
-                elif inp == 'loja farmácia' and valid_loja == True:
+                elif inp == 'loja farmacia' and valid_loja == True:
                     self.store('Farmacia')
                     break
                 
@@ -239,6 +241,9 @@ class Game:
                     break
 
                 elif inp == False or (inp == 'combate' and valid_inim == False)or (inp == 'loja' and valid_loja == False):
+                    print('\nOpção Inválida!')
+
+                else: 
                     print('\nOpção Inválida!')
 
     def inventario(self):
@@ -280,8 +285,8 @@ class Game:
                 elif inp.isnumeric() == False:
                     print('\nOpção Inválida!')
 
-                elif DataBase.ver_item_store(self.connection, inp, Loja) == False:
-                    print('\nOpção Inválida!')
+                elif DataBase.ver_item_store(self.connection, inp, Loja) == False: #verifica se o item esta na loja
+                    print('\nNão há este item nesta loja, procure em outra!')
 
                 else:
                     val_item = DataBase.get_item_value(self.connection, inp)

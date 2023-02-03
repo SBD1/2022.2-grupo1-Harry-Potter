@@ -234,7 +234,8 @@ class DataBase():
 
         querry = """SELECT idLoja FROM LOJA WHERE (LOJA.descricao = '%s')""" % (nomeLoja)
         cursor.execute(querry)
-        idLoja = cursor.fetchone()
+        idLoja = cursor.fetchone()[0]
+
 
         querry = """SELECT * FROM ITEM WHERE (ITEM.idLoja = %s) AND (ITEM.idItem = %s) """ % (
             idLoja, idItem)
@@ -242,7 +243,7 @@ class DataBase():
 
         rtn = cursor.fetchall()
 
-        if rtn == None:
+        if bool(rtn) == False:
             return False
         else:
             return True
