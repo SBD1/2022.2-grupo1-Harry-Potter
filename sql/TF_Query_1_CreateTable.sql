@@ -122,8 +122,8 @@ commit;
 begin;
    CREATE SEQUENCE npc_id_seq START 1;
    CREATE TABLE IF NOT EXISTS NPC(
-      idNPC      int NOT NULL DEFAULT nextval('npc_id_seq') PRIMARY KEY,
-      item       INT  NOT NULL,
+      idNPC      INT NOT NULL DEFAULT nextval('npc_id_seq') PRIMARY KEY,
+      item       INT NOT NULL,
       nome       VARCHAR(20) NOT NULL,
       FOREIGN KEY (item) REFERENCES ITEM (idItem)
    );
@@ -185,6 +185,7 @@ begin;
       idArea       INT  NOT NULL,
       pontosVida   INT  NOT NULL,
       idCasa       INT  NOT NULL,
+      estado       INT  NOT NULL DEFAULT 1,
       FOREIGN KEY (idGrimorio) REFERENCES GRIMORIO (idGrimorio),
       FOREIGN KEY (idArea) REFERENCES AREA (idArea),
       FOREIGN KEY (idCasa) REFERENCES CASA (idCasa),
@@ -310,6 +311,17 @@ begin;
    savepoint create_tb_LIVRO;
 commit;
 
+-- Tabela Falas
+begin;
+   CREATE TABLE IF NOT EXISTS FALAS(
+      idNPC           INT NOT NULL,
+      idArea          INT NOT NULL,
+      texto           VARCHAR(300),
+      momento         INT NOT NULL,
+      FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
+      FOREIGN KEY (idArea) REFERENCES AREA (idArea)
+   );
+commit;
 
 -- Tabela Instancia_NPC_Tipo
 begin;
@@ -322,4 +334,3 @@ begin;
    );
    savepoint create_tb_INSTANCIA_NPC_TIPO;
 commit;
-

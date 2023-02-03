@@ -53,13 +53,22 @@ INSERT INTO AREA(idArea, idRegiao, nome, areaOeste, areaLeste, areaNorte,  areaS
 (14, 1, 'Refeitorio', 1, 13, 1, 1),
 (15, 1, 'Biblioteca', 13, 1, 1, 1),
 (16, 1, 'Primeiro andar', 17, 18, 19, 13),
-(17, 1, 'Sala de aula: Defesa Contra as Artes das Trevas', 1, 16, 1, 1),
-(18, 1, 'Sala de aula: Poções', 16, 1, 1, 1),
-(19, 1, 'Sala de aula: Feitiços', 1, 1, 1, 16),
+(17, 1, 'Sala de aula 1', 1, 16, 1, 1),
+(18, 1, 'Sala de aula 2', 16, 1, 1, 1),
+(19, 1, 'Sala de aula 3', 1, 1, 1, 16),
 (20, 1, 'Dormitório: Grifinória', 1, 1, 1, 12),
 (21, 1, 'Dormitório: Cornival', 1, 1, 12, 1),
 (22, 1, 'Dormitório: Sonserina', 1, 1, 1, 11), 
 (23, 1, 'Dormitório: Lufa-lufa', 1, 1, 11, 1);
+
+-- Popula Falas
+INSERT INTO FALAS(idNPC, idArea, momento, texto) VALUES
+(1,2,1,'Bem vindo à Hogwards'),
+(17,5,2,'Calouro? posso te ensinar alguns truques...'),
+(8,6,2,'Nessa floresta há sempre monstros a espreita cuidado!'),
+(5,15,2,'Se quiser aprender um feitiço novo tente pedir um livro ao seu professor!'),
+(6,13,2,'Saia do meu caminho!');
+()
 
 -- Popula Feitico
 INSERT INTO FEITICO (nome, efeito, ponto, quantidadeUso) VALUES
@@ -70,6 +79,7 @@ INSERT INTO FEITICO (nome, efeito, ponto, quantidadeUso) VALUES
 ('Petrificus Totalus', 'etrifica por completo o oponente temporariamente', 5, 99),
 ('Expecto Patronum', 'Conjura uma espécie de espírito protetor, um guardião de magia capaz de proteger o bruxo de criaturas das trevas ', 10, 50),
 ('Lapifors', 'Transforma um alvo em um coelho', 1, 99),
+('Avada Kedavra', 'Tira a vida de quem é atingido por', 400, 1),
 ('Up', 'Faz a vassoura subir', 1, 99);
 
 -- Popula Grimorio
@@ -92,12 +102,12 @@ INSERT INTO JOGADOR (idGrimorio, nome, idArea, pontosVida, idCasa) VALUES
 
 -- Popula LOJA
 INSERT INTO LOJA(idArea, descricao) VALUES
-(1, ' Sorveteria Florean Fortescue'),
-(1, 'Olivaras Varinhas'),
-(1, 'Genialidades Weasley'),
+(3, ' Sorveteria Florean Fortescue'),
+(3, 'Olivaras Varinhas'),
+(3, 'Genialidades Weasley'),
 (3, ' Caldeirão Furado'),
-(1, ' Borgin e Burkes'),
-(1, 'Profeta Diário');
+(3, ' Borgin e Burkes'),
+(3, 'Profeta Diário');
 
 -- Popula Item
 INSERT INTO ITEM(IdLoja, nome, acao, valor, tipo, descricaoItem) VALUES
@@ -110,31 +120,27 @@ INSERT INTO ITEM(IdLoja, nome, acao, valor, tipo, descricaoItem) VALUES
 (4, 'Livros de Criaturas Mágicas', 'Explica sobre as criaturas mágicas', 50, 'ATAQUE', 'Existem vários tipos'),
 (4, 'Vassoura', 'Usada para moder voar', 50, 'DEFESA', 'Transporte entre locais'),
 (4, 'Vira-tempo', 'Utilizado para viajar no tempo', 50, 'DEFESA', 'Retorna horas ao passado'),
-(4, 'Osso', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Um osso em perfeito estado');
+(4, 'Osso', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Um osso em perfeito estado'),
+
+INSERT INTO ITEM(nome, acao, valor, tipo, descricaoItem) VALUES
+('Casca de banana', 'Pode fazer pessoas cairem', 0, 'LIXO', 'Casca de banana pegajosa e nojenta, eca!');
 
 -- Popula NPC
 INSERT INTO NPC(item, nome) VALUES
 (5, 'Albus Dumbledore'), 
-(2, 'Remo Lupin'), 
-(3, 'Tiago Potter'), 
-(4, 'Ron Weasley'), 
-(5, 'Minerva McGonagall'), 
 (6, 'Severus Snape'),
-(1, 'Rolanda Hooch'), 
 (7, 'Rúbeo Hagrid'), 
-(5, 'Séptima Vector'), 
-(5, 'Herpo, o Sujo'),
-(5, 'Morgana le Fay'),
-(5, 'Gerardo Grindelwald'),
-(1, 'Tom Riddle'),
-(1, 'Emerico, o Mal'),
-(1, 'Florean Fortescue'),
-(1, 'Garrick Olivaras'),
-(1, 'Fred Weasley'),
-(1, 'Daisy Dodderidge'),
-(1, 'Sr. Borgin'),
-(1, ' Barnabas Cuffe'),
-(1, 'Lobo');
+(5, 'Fílio Flitwick'),
+(5, 'Pomona Sprout'),
+(5, 'Horácio Slughorn'),
+(5, 'Minerva McGonagall'), 
+(1, 'Hermione Granger'),
+(1, 'Ron Weasley'),
+(4, 'Luna Lovegood'),
+(5, 'Draco Malfoy'),
+(1, 'Lobo'),
+(3, 'Lord Voldemort'),
+(8, 'Dementador');
 
 -- Popula DISCIPLINA
 INSERT INTO DISCIPLINA (NPC, nomeDisciplina, feitico) VALUES
@@ -259,9 +265,5 @@ INSERT INTO INSTANCIA_NPC_TIPO(idNPC, idArea, tipo) VALUES
 (12, 2, 'Inimigo'),
 (13, 3, 'Inimigo'),
 (14, 4, 'Inimigo'),
-(15, 2, 'Inimigo'),
-(16, 3, 'Vendedor'),
-(17, 3, 'Vendedor'),
-(18, 3, 'Vendedor'),
-(19, 3, 'Vendedor'),
-(20, 3, 'Vendedor');
+(15, 2, 'Inimigo');
+

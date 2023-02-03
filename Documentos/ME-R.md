@@ -8,7 +8,7 @@
 * AREA;
 * CASA;
 * DISCIPLINA;
-* FALAS;
+* FALA;
 * FEITICO;
 * GRIMORIO; 
 * HABILIDADE;
@@ -33,7 +33,7 @@
 * Area(<ins>idArea</ins>, areaLeste, areaOeste, areaSul, areaNorte); 
 * Casa(<ins>idCasa</ins>, nomeCasa, petCasa, professorResponsavel);
 * Disciplina(<ins>idDisciplina</ins>, NPC, nomeDisciplina, feitico);
-* Falas(<ins>idNPC</ins>, momento, fala);
+* Fala(<ins>idNPC</ins>, momento, texto);
 * Feitico(<ins>idFeitico</ins>, efeito, ponto, quantidadeUso);
 * Grimorio(<ins>idGrimorio</ins>, nome, numSlots, feitico);
 * Habilidade(<ins>idHabilidade</ins>, nome, dano, descricao);
@@ -106,5 +106,7 @@
 * **Livro** - *ensina* - **Feitico**:
     * Um **Livro** *ensina* um **Feitico**(s) e um **Feitico** *é ensinado* por um **Livro**;
     * Cardinalidade: 1 : 1 - 1 : 1.
-
+* **Fala** - *pertence* - **InstanciaNPCTipo**:
+    * Uma **Fala** *pertence* a uma **InstanciaNPCTipo** e uma **InstanciaNPCTipo** tem zero ou mais **Fala**(s);
+    * Cardinalidade: 1 : 1 - 0 : n.
 

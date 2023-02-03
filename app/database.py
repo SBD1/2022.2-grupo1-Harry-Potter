@@ -48,16 +48,16 @@ class DataBase():
         rtn = cursor.fetchone()
         if(rtn == None):
             cursor.close()
-            return Player(-1, -1, -1, -1, -1, -1)
+            return Player(-1, -1, -1, -1, -1, -1, -1)
         else:
             querry = """SELECT * FROM JOGADOR
                     WHERE( JOGADOR.nome = '%s') 
                     """ % (name)
             cursor.execute(querry)
-            id_player, id_grimorio, nome, id_area, pontos_vida, id_casa = cursor.fetchone()
+            id_player, id_grimorio, nome, id_area, pontos_vida, id_casa, estado = cursor.fetchone()
 
             cursor.close()
-            return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa)
+            return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa, estado)
 
     def get_casa(connection, id_casa):
         cursor = connection.cursor()
@@ -102,10 +102,10 @@ class DataBase():
                     """ % (id)
 
         cursor.execute(querry)
-        id_player, id_grimorio, nome, id_area, pontos_vida, id_casa = cursor.fetchone()
+        id_player, id_grimorio, nome, id_area, pontos_vida, id_casa, estado = cursor.fetchone()
 
         cursor.close()
-        return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa)
+        return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa, estado)
 
     def update_player_money(connection, id_jogador, dinheiro):
         cursor = connection.cursor()
@@ -310,7 +310,39 @@ class DataBase():
                     """ % (idJogador)
 
         cursor.execute(querry)
-        id_player, id_grimorio, nome, id_area, pontos_vida, id_casa = cursor.fetchone()
+        id_player, id_grimorio, nome, id_area, pontos_vida, id_casa, estado = cursor.fetchone()
 
         cursor.close()
-        return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa)
+        return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa, estado)
+
+    def getSpeech(connection, area, momento):
+        cursor = connection.cursor()
+
+        querry = """SELECT texto FROM falas WHERE (idArea = '%s' AND momento = '%s')""" % (area ,momento)
+        cursor.execute(querry)
+        vazio = cursor.fetchone()
+        if vazio == None :
+            return None
+        else:
+            texto = vazio[0]
+
+        querry = """SELECT idNPC FROM falas WHERE (idArea = '%s' AND momento = '%s')""" % (area ,momento)
+        cursor.execute(querry)
+        idnpc = cursor.fetchone()
+
+        querry = """SELECT nome FROM NPC WHERE (idNPC = '%s')""" % (idnpc)
+        cursor.execute(querry)
+        nome = cursor.fetchone()[0]
+
+        cursor.close()
+
+        return nome + ': ' + texto
+
+    def updateState(connection, idJogador, estado):
+        cursor = connection.cursor()
+
+        querry = """UPDATE JOGADOR SET estado = '%s' WHERE( JOGADOR.idJogador = '%s') """ % (estado, idJogador)
+        cursor.execute(querry)
+        connection.commit()
+
+        cursor.close()

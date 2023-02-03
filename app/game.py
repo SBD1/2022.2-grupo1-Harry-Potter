@@ -13,7 +13,7 @@ class Game:
 
     def __init__(self):
         self.connection = DataBase.create_connection()
-        self.player = Player(-1, -1, ' ', -1, -1, -1)
+        self.player = Player(-1, -1, ' ', -1, -1, -1, -1)
         self.valid_cmd = 0
         pass
 
@@ -103,6 +103,7 @@ class Game:
         print(
             f'\nSeja bem vinde ao jogo {new_name}! Você está chegando no portão da escola!\nAproveite a estadia.\n')
         input('pressione _enter_ para continuar...')
+       
         self.gameplay()
 
     def load_character(self):
@@ -144,15 +145,20 @@ class Game:
 
             # Procura se ha algum inimigo na area
             Inimigo, valid_inim = DataBase.search_enemy(self.connection, current_area.idArea)
+            
+            print('\n#----------------------------------------------------#')
+            texto = DataBase.getSpeech(self.connection, current_area.idArea, self.player.estado)
+            if texto != None:
+                print(DataBase.getSpeech(self.connection, current_area.idArea, self.player.estado)) 
+                DataBase.updateState(self.connection, self.player.idJogador, self.player.estado+1)
+            print('#----------------------------------------------------#\n')
 
             if valid_inim == True:
                 print("\nInimigo na area: ")
                 print(f"{Inimigo.nome}\n")
 
-
-
-
             print(f"\nArea atual: {current_area.nome}\n")
+
 
             print(f'                            N. {area_norte}\n')
             print(f'          O. {area_oeste}' + f'         L. {area_leste}\n')
@@ -165,7 +171,7 @@ class Game:
             while(self.valid_cmd == False or self.valid_cmd == 'help' or valid_inim == True or  valid_loja == True):
                 inp = input('> ')
                 self.valid_cmd = Commands.cmd(inp)
-
+                
                 if (inp == 'mover N' or inp == 'mover n' or inp == 'Mover N' or inp == 'Mover n') and self.valid_cmd == 'mover':
                     if current_area.areaNorte != 1:
                         self.player = DataBase.update_player_area(
