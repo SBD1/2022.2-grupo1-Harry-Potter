@@ -135,7 +135,7 @@ class Game:
             area_sul = DataBase.get_area(
                 self.connection, current_area.areaSul).nome
 
-            # Procura se ha algum inimigo na area
+            # Procura se ha alguma loja na area
             Loja, valid_loja = DataBase.search_store(self.connection, current_area.idArea)
 
             if valid_loja == True:
@@ -304,6 +304,7 @@ class Game:
             dinheiro = DataBase.get_money(self.connection, self.player.idJogador)
             dinheiro += Inimigo.moedas
             DataBase.update_player_money(self.connection, self.player.idJogador, dinheiro)
+            # Exluir o inimigo por um tempo
             input('\npressione _enter_ para continuar...')
 
         elif self.player.pontosVida <= 0:
