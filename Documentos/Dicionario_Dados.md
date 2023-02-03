@@ -18,6 +18,7 @@
 | area       | Obrigatório     | int     | 4       | Identificação do mapa do jogador.     | 1            |
 | nome       | Obrigatório     | char    | 20      | Nickname do jogador.                  | Harry Potter |
 | pontosVida | Obrigatório     | int     | 4       | Quantidade de vida que o jogador tem. | 100          |
+| estado     | Obrigatório     | inr     | 4       | Estado do jogo que o jogador está     | 2            |      
 
 ## Entidade: Casa
 #### Descrição: 4 Equipes que se identificam por um nome, animal e tem um professor responsável e um local específico nos dormitórios.
@@ -118,6 +119,7 @@
 | Atributo  | Obrigatoriedade | Tipo    | Tamanho | Descrição              | Exemplo |
 | --------- | --------------- | ------- | ------- | ---------------------- | ------- |
 | idArea    | Obrigatório     | int     | 4       | Identificação da Área. | 1       |
+| noem      | Obrigatório     | varchar | 50      | nome da Área.          | Rio     |
 | areaLeste | Obrigatório     | int     | 4       | Posição na Leste.      | 2       |
 | areaOeste | Obrigatório     | int     | 4       | Posição na Oeste.      | 5       |
 | areaSul   | Obrigatório     | int     | 4       | Posição no Sul.        | 9       |
@@ -130,7 +132,9 @@
 | --------------- | --------------- | ------- | ------- | ------------------------------- | ------- |
 | idInstanciaItem | Obrigatório     | int     | 4       | Identificação da InstanciaItem. | 1       |
 | idItem          | Obrigatório     | int     | 4       | Identificação do Item.          | 1       |
-| utilizado       | Obrigatório     | boolean | 1       | Se o item foi utilizado ou não. | False   |
+| idLoja          | Não obrigatório | int     | 4       | Identificação da Loja.          | 1       |
+| idJogador       | Não obrigatório | int     | 4       | Identificação do jogador        | 1       |
+
 ## Entidade: Item
 #### Descrição: Itens que um jogador pode ter.
 
@@ -170,7 +174,6 @@
 | Atributo      | Obrigatoriedade | Tipo    | Tamanho | Descrição                                     | Exemplo                                                                                                                     |
 | ------------- | --------------- | ------- | ------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | idLoja        | Obrigatório     | int     | 4       | Identificação da Loja.                        | 1                                                                                                                           |
-| instanciaItem | Obrigatório     | int     | 4       | Identificação da Instancia do Item.           | 1                                                                                                                           |
 | descricaoLoja | Obrigatório     | varchar | 60      | Detalhamento das características da Loja.     | Floreios e Borrões é uma livraria no Lado Norte, Beco Diagonal. É onde os alunos de Hogwarts adquire seus livros escolares. |
 | area          | Obrigatório     | int     | 4       | Identificação da localização da loja no mapa. | 63                                                                                                                          |
 
@@ -198,4 +201,4 @@
 | ---------- | --------------- | ------- | ------- | ----------------------------------------------- | ---------------------- |
 | idNPC      | Obrigatório     | int     | 4       | Identificador do NPC                            | 42                     |
 | momento    | Obrigatório     | int     | 4       | Identificador de qual fala deve ser mostrada    | 5                      |
-| fala       | Obrigatório     | varchar | 300     | Texto de fala do NPC                            | É Leviosa, não Leviosá |
+| texto      | Obrigatório     | varchar | 300     | Texto de fala do NPC                            | É Leviosa, não Leviosá |

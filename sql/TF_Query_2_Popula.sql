@@ -36,13 +36,30 @@ INSERT INTO REGIAO (idMapa, descricao, nome) VALUES
 (6, 'É uma loja bem popular entre os alunos de Hogwarts pelos variados doces que nela se encontra, vai dos mais simples até os bem exóticos', 'Dedos de Mel');
 
 -- Popula Area
-INSERT INTO AREA(idArea, idRegiao, nome, areaLeste, areaOeste, areaSul, areaNorte) VALUES
+INSERT INTO AREA(idArea, idRegiao, nome, areaOeste, areaLeste, areaNorte,  areaSul) VALUES
 (1, 1, 'Nada', 1, 1, 1, 1),
-(2, 1,'Portao de Hogwarts', 1, 1, 6, 3),
-(3, 1,'Salao Principal', 5, 1, 2, 4),
-(4, 1,'Refeitorio', 1, 1, 3, 1),
-(5, 1,'Biblioteca', 1, 3, 1, 1),
-(6, 1,'Floresta', 1, 1, 1, 4);
+(2, 1, 'Portao de Hogwarts', 3, 4, 5, 6),
+(3, 1, 'Beco Diagonal', 1, 2, 1, 1),
+(4, 1, 'Patio exterior', 2, 1, 1, 1),
+(5, 1, 'Salao Principal', 12, 11, 13, 2),
+(6, 1, 'Floresta', 9, 10, 2, 7),
+(7, 1, 'Montanha', 1, 1, 6, 8),
+(8, 1, 'Floresta oculta', 1, 1, 7, 1),
+(9, 1, 'Clareira', 1, 6, 1, 1),
+(10, 1, 'Rio', 6, 1, 1, 1),
+(11, 1, 'Torre leste', 5, 1, 22, 23),
+(12, 1, 'Torre oeste', 1, 5, 20, 21),
+(13, 1, 'Corredor', 14, 15, 16, 5),
+(14, 1, 'Refeitorio', 1, 13, 1, 1),
+(15, 1, 'Biblioteca', 13, 1, 1, 1),
+(16, 1, 'Primeiro andar', 17, 18, 19, 13),
+(17, 1, 'Sala de aula: Defesa Contra as Artes das Trevas', 1, 16, 1, 1),
+(18, 1, 'Sala de aula: Poções', 16, 1, 1, 1),
+(19, 1, 'Sala de aula: Feitiços', 1, 1, 1, 16),
+(20, 1, 'Dormitório: Grifinória', 1, 1, 1, 12),
+(21, 1, 'Dormitório: Cornival', 1, 1, 12, 1),
+(22, 1, 'Dormitório: Sonserina', 1, 1, 1, 11), 
+(23, 1, 'Dormitório: Lufa-lufa', 1, 1, 11, 1);
 
 -- Popula Feitico
 INSERT INTO FEITICO (nome, efeito, ponto, quantidadeUso) VALUES

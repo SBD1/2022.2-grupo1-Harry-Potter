@@ -78,6 +78,7 @@ create OR REPLACE view inventario_jogador as
 
 select * from inventario_jogador;
 
+-- View itens de uma loja
 create OR REPLACE view produtos_loja as
 	select i.idItem as "iditem",  i.nome as "Item",  i.descricaoitem as "Descricao", i.valor as "Valor", i.idloja as "idloja"
 	from loja l

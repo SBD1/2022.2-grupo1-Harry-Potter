@@ -47,7 +47,7 @@ begin;
    CREATE TABLE IF NOT EXISTS AREA(
       idArea        int NOT NULL DEFAULT nextval('area_id_seq') PRIMARY KEY,
       idRegiao      INT NOT NULL,
-      nome          VARCHAR(25) NOT NULL,
+      nome          VARCHAR(50) NOT NULL,
       areaLeste     INT  REFERENCES AREA(idArea),
       areaOeste     INT  REFERENCES AREA(idArea),
       areaSul       INT  REFERENCES AREA(idArea),
