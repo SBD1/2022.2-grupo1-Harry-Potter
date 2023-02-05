@@ -318,7 +318,7 @@ class Game:
                 inp = input('> ')
                 self.valid_cmd = Commands.cmd(inp)
 
-                if(self.valid_cmd == 'atacar'):
+                if(inp == 'atacar'):
                     dano_player = random.randint(0, Feitico.ponto)
                     Inimigo.pontosVida = Inimigo.pontosVida - dano_player
                     print(f"\n{self.player.nome} usou {Feitico.nome} causando {dano_player} de dano!\n")
@@ -345,6 +345,7 @@ class Game:
             dinheiro = DataBase.get_money(self.connection, self.player.idJogador)
             dinheiro += Inimigo.moedas
             DataBase.update_player_money(self.connection, self.player.idJogador, dinheiro)
+            
             # Exluir o inimigo por um tempo
             input('\npressione _enter_ para continuar...')
 

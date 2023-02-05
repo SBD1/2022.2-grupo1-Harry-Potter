@@ -149,7 +149,7 @@ class DataBase():
     def search_enemy(connection, id_area):
         cursor = connection.cursor()
 
-        querry = """SELECT * FROM INSTANCIA_INIMIGO WHERE (INSTANCIA_INIMIGO.idArea = %s) """ % (
+        querry = """SELECT * FROM INSTANCIA_INIMIGO WHERE (INSTANCIA_INIMIGO.idArea = %s) AND (INSTANCIA_INIMIGO.pontosvida <> 0) """ % (
             id_area)
         cursor.execute(querry)
 

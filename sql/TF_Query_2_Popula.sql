@@ -61,15 +61,6 @@ INSERT INTO AREA(idArea, idRegiao, nome, areaOeste, areaLeste, areaNorte,  areaS
 (22, 1, 'Dormitório: Sonserina', 1, 1, 1, 11), 
 (23, 1, 'Dormitório: Lufa-lufa', 1, 1, 11, 1);
 
--- Popula Falas
-INSERT INTO FALAS(idNPC, idArea, momento, texto) VALUES
-(1,2,1,'Bem vindo à Hogwards'),
-(17,5,2,'Calouro? posso te ensinar alguns truques...'),
-(8,6,2,'Nessa floresta há sempre monstros a espreita cuidado!'),
-(5,15,2,'Se quiser aprender um feitiço novo tente pedir um livro ao seu professor!'),
-(6,13,2,'Saia do meu caminho!');
-()
-
 -- Popula Feitico
 INSERT INTO FEITICO (nome, efeito, ponto, quantidadeUso) VALUES
 ('Expelliarmus', 'Derrubar a arma do inimigo', 6, 99),
@@ -120,7 +111,7 @@ INSERT INTO ITEM(IdLoja, nome, acao, valor, tipo, descricaoItem) VALUES
 (4, 'Livros de Criaturas Mágicas', 'Explica sobre as criaturas mágicas', 50, 'ATAQUE', 'Existem vários tipos'),
 (4, 'Vassoura', 'Usada para moder voar', 50, 'DEFESA', 'Transporte entre locais'),
 (4, 'Vira-tempo', 'Utilizado para viajar no tempo', 50, 'DEFESA', 'Retorna horas ao passado'),
-(4, 'Osso', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Um osso em perfeito estado'),
+(4, 'Osso', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Um osso em perfeito estado');
 
 INSERT INTO ITEM(nome, acao, valor, tipo, descricaoItem) VALUES
 ('Casca de banana', 'Pode fazer pessoas cairem', 0, 'LIXO', 'Casca de banana pegajosa e nojenta, eca!');
@@ -141,6 +132,15 @@ INSERT INTO NPC(item, nome) VALUES
 (1, 'Lobo'),
 (3, 'Lord Voldemort'),
 (8, 'Dementador');
+
+-- Popula Falas
+INSERT INTO FALAS(idNPC, idArea, momento, texto) VALUES
+(1,2,1,'Bem vindo à Hogwards'),
+(7,5,2,'Calouro? posso te ensinar alguns truques...'),
+(8,6,2,'Nessa floresta há sempre monstros a espreita cuidado!'),
+(5,15,2,'Se quiser aprender um feitiço novo tente pedir um livro ao seu professor!'),
+(6,13,2,'Saia do meu caminho!');
+
 
 -- Popula DISCIPLINA
 INSERT INTO DISCIPLINA (NPC, nomeDisciplina, feitico) VALUES
@@ -208,17 +208,17 @@ INSERT INTO INIMIGO(idNPC, idHabilidade, moedas) VALUES
 (12, 6, 1000),
 (13, 6, 1000),
 (14, 6, 1000),
-(21, 8, 4);
+(10, 8, 4);
 
 -- Popula INSTANCIA_INIMIGO
-INSERT INTO INSTANCIA_INIMIGO(idNPC, idArea, idItem, pontosVida, multiplicador) VALUES
-(9, 1, 1, 400, 1),
-(10, 1, 2, 400, 2),
-(11, 1, 3, 400, 3),
-(12, 1, 4, 400, 1),
-(13, 1, 5, 400, 2),
-(14, 1, 6, 400, 3),
-(21, 6, 10, 10, 1);
+INSERT INTO INSTANCIA_INIMIGO(idNPC, idArea, idItem, pontosVidaMax, pontosVida,  multiplicador) VALUES
+(9, 1, 1, 400, 400, 1),
+(10, 1, 2, 400, 400, 2),
+(11, 1, 3, 400, 400, 3),
+(12, 1, 4, 400, 400, 1),
+(13, 1, 5, 400, 400, 2),
+(14, 1, 6, 400, 400, 3),
+(10, 6, 10, 10, 10, 1);
 
 -- Popula FERRAMENTA
 INSERT INTO FERRAMENTA(idItem, forca) VALUES
@@ -264,6 +264,5 @@ INSERT INTO INSTANCIA_NPC_TIPO(idNPC, idArea, tipo) VALUES
 (11, 1, 'Inimigo'),
 (12, 2, 'Inimigo'),
 (13, 3, 'Inimigo'),
-(14, 4, 'Inimigo'),
-(15, 2, 'Inimigo');
+(14, 4, 'Inimigo');
 
