@@ -13,7 +13,7 @@ class Game:
 
     def __init__(self):
         self.connection = DataBase.create_connection()
-        self.player = Player(-1, -1, ' ', -1, -1, -1, -1)
+        self.player = Player(-1, ' ', -1, -1, -1, -1)
         self.valid_cmd = 0
         pass
 
@@ -310,10 +310,11 @@ class Game:
 
     def combat(self, Inimigo):
         clear()
-        grimorio = DataBase.get_spells(self.connection, self.player.idGrimorio)
+        grimorio = DataBase.get_spells(self.connection, self.player.idJogador)
         if not grimorio:
             print("Você não tem feitiços para lançar!! tá maluco?")
-            return
+            input('pressione _enter_ para voltar...')
+            self.gameplay()
 
         while(self.player.pontosVida > 0 and Inimigo.pontosVida > 0):
             Habilidade = DataBase.get_habi(self.connection, Inimigo.idNPC)
@@ -329,16 +330,17 @@ class Game:
 
                 if self.valid_cmd == False:
                     print('\nOpção Inválida!')
-                
-                # verifica se o jogador tem aquele feitico
-                feitico = DataBase.get_one_spell(self.connection, self.player.idGrimorio, int(inp))
-                if feitico == False and feitico != 'help':
-                    print('\nVocê não possui este feitiço!\n')
-                elif(feitico != 'help'):
-                    dano_player = random.randint(0, feitico.ponto)
-                    Inimigo.pontosVida = Inimigo.pontosVida - dano_player
-                    print(f"\n{self.player.nome} usou {feitico.nome} causando {dano_player} de dano!\n")
+                else: 
+                    # verifica se o jogador tem aquele feitico
+                    feitico = DataBase.get_one_spell(self.connection, self.player.idJogador, int(inp))
+                    if feitico == False and feitico != 'help':
+                        print('\nVocê não possui este feitiço!\n')
+                    elif(feitico != 'help'):
+                        dano_player = random.randint(0, feitico.ponto)
+                        Inimigo.pontosVida = Inimigo.pontosVida - dano_player
+                        print(f"\n{self.player.nome} usou {feitico.nome} causando {dano_player} de dano!\n")
 
+                    # mesmo se nao tiver o feitico ele ainda recebe dano
                     if Inimigo.pontosVida <= 0 or self.player.pontosVida <= 0:
                         break
 

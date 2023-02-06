@@ -17,7 +17,7 @@ class DataBase():
     def create_new_character(connection, nome, casa):
         cursor = connection.cursor()
 
-        querry = "INSERT INTO JOGADOR (idGrimorio, nome, idArea, pontosVida, idCasa) VALUES ( 1 , '%s', 2, 20, %s)" % (
+        querry = "INSERT INTO JOGADOR (nome, idArea, pontosVida, idCasa) VALUES ('%s', 2, 20, %s)" % (
             nome, casa)
 
         cursor.execute(querry)
@@ -49,16 +49,16 @@ class DataBase():
         rtn = cursor.fetchone()
         if(rtn == None):
             cursor.close()
-            return Player(-1, -1, -1, -1, -1, -1, -1)
+            return Player(-1, -1, -1, -1, -1, -1)
         else:
             querry = """SELECT * FROM JOGADOR
                     WHERE( JOGADOR.nome = '%s') 
                     """ % (name)
             cursor.execute(querry)
-            id_player, id_grimorio, nome, id_area, pontos_vida, id_casa, estado = cursor.fetchone()
+            id_player, nome, id_area, pontos_vida, id_casa, estado = cursor.fetchone()
 
             cursor.close()
-            return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa, estado)
+            return Player(id_player, nome, id_area, pontos_vida, id_casa, estado)
 
     def get_casa(connection, id_casa):
         cursor = connection.cursor()
@@ -103,10 +103,10 @@ class DataBase():
                     """ % (id)
 
         cursor.execute(querry)
-        id_player, id_grimorio, nome, id_area, pontos_vida, id_casa, estado = cursor.fetchone()
+        id_player, nome, id_area, pontos_vida, id_casa, estado = cursor.fetchone()
 
         cursor.close()
-        return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa, estado)
+        return Player(id_player, nome, id_area, pontos_vida, id_casa, estado)
 
     def update_player_money(connection, id_jogador, dinheiro):
         cursor = connection.cursor()
@@ -289,11 +289,13 @@ class DataBase():
 
         cursor.close()
 
-        print("\n#----- Grimório ---------------------------------------------------------------#")
-        print(table)
-        print("#------------------------------------------------------------------------------#\n\n")
-
-        return True
+        if table.empty:
+            return False
+        else:
+            print("\n#----- Grimório ---------------------------------------------------------------#")
+            print(table)
+            print("#------------------------------------------------------------------------------#\n\n")
+            return True
 
     def get_one_spell(connection, id_Grimorio, inp):
         cursor = connection.cursor()

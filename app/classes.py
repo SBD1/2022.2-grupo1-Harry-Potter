@@ -1,8 +1,7 @@
 
 class Player:
-    def __init__(self, idJogador, idGrimorio, nome, idArea, pontosvida, idCasa, estado):
+    def __init__(self, idJogador, nome, idArea, pontosvida, idCasa, estado):
         self.idJogador = idJogador
-        self.idGrimorio = idGrimorio
         self.nome = nome
         self. idArea = idArea
         self.pontosVida = pontosvida

@@ -73,18 +73,6 @@ begin;
 commit;
 
 
--- Tabela GRIMORIO
-begin;
-   CREATE SEQUENCE grimorio_id_seq START 1;
-   CREATE TABLE IF NOT EXISTS GRIMORIO(
-      idGrimorio  int NOT NULL DEFAULT nextval('grimorio_id_seq') PRIMARY KEY,
-      feitico     INT  NOT NULL,
-      FOREIGN KEY (feitico) REFERENCES FEITICO (idFeitico)
-   );
-   ALTER SEQUENCE grimorio_id_seq OWNED BY GRIMORIO.idGrimorio;
-   savepoint create_tb_GRIMORIO;
-commit;
-
 -- Tabela LOJA
 begin;
    CREATE SEQUENCE loja_id_seq START 1;
@@ -178,13 +166,11 @@ begin;
    CREATE SEQUENCE jogador_id_seq START 1;
    CREATE TABLE IF NOT EXISTS JOGADOR(
       idJogador    INT NOT NULL DEFAULT nextval('jogador_id_seq') PRIMARY KEY,
-      idGrimorio   INT  NOT NULL,
       nome         VARCHAR(20) NOT NULL,
       idArea       INT  NOT NULL,
       pontosVida   INT  NOT NULL,
       idCasa       INT  NOT NULL,
       estado       INT  NOT NULL DEFAULT 1,
-      FOREIGN KEY (idGrimorio) REFERENCES GRIMORIO (idGrimorio),
       FOREIGN KEY (idArea) REFERENCES AREA (idArea),
       FOREIGN KEY (idCasa) REFERENCES CASA (idCasa),
       UNIQUE (nome)
@@ -193,6 +179,18 @@ begin;
    savepoint create_tb_JOGADOR;
 commit;
 
+-- Tabela GRIMORIO
+begin;
+   CREATE SEQUENCE grimorio_id_seq START 1;
+   CREATE TABLE IF NOT EXISTS GRIMORIO(
+      idGrimorio  int NOT NULL PRIMARY KEY,
+      feitico     INT NULL,
+      FOREIGN KEY (idGrimorio) REFERENCES JOGADOR (idJogador),
+      FOREIGN KEY (feitico) REFERENCES FEITICO (idFeitico)
+   );
+   ALTER SEQUENCE grimorio_id_seq OWNED BY GRIMORIO.idGrimorio;
+   savepoint create_tb_GRIMORIO;
+commit;
 
 -- Tabela INSTANCIA_ITEM
 begin;

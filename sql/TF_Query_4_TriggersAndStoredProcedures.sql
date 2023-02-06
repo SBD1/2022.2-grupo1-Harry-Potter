@@ -230,6 +230,7 @@ CREATE TRIGGER st_alteracoes_casa_aviso
 AFTER DELETE ON JOGADOR
 EXECUTE PROCEDURE st_alteracoes_casa();
 
+-- RESURGIMENTO DE INIMIGOS NO MAPA;
 
 CREATE OR REPLACE FUNCTION st_respawn_enemy() RETURNS TRIGGER AS $st_respawn_enemy$
 BEGIN

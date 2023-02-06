@@ -68,6 +68,14 @@ INSERT INTO FEITICO (nome, efeito, ponto) VALUES
 ('Expecto Patronum', 'Conjura uma espécie de espírito protetor capaz de proteger o bruxo', 10),
 ('Avada Kedavra', 'Tira a vida de quem é atingido por', 400);
 
+-- Popula Jogador
+INSERT INTO JOGADOR (nome, idArea, pontosVida, idCasa) VALUES
+('Harry Potter', 4, 20, 1),
+('Lily Williamson', 1, 20, 1),
+('Ben Kent', 2, 20, 2),
+('Morgan Kerr', 3, 20, 3),
+('Edward Simpson', 4, 20, 4);
+
 -- Popula Grimorio
 INSERT INTO GRIMORIO (idGrimorio, feitico) VALUES
 (1, 3),
@@ -75,14 +83,6 @@ INSERT INTO GRIMORIO (idGrimorio, feitico) VALUES
 (3, 2),
 (4, 2),
 (5, 1);
-
--- Popula Jogador
-INSERT INTO JOGADOR (idGrimorio, nome, idArea, pontosVida, idCasa) VALUES
-(1, 'Harry Potter', 4, 20, 1),
-(2, 'Lily Williamson', 1, 20, 1),
-(3, 'Ben Kent', 2, 20, 2),
-(4, 'Morgan Kerr', 3, 20, 3),
-(5, 'Edward Simpson', 4, 20, 4);
 
 -- Popula LOJA
 INSERT INTO LOJA(idArea, descricao) VALUES
