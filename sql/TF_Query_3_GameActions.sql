@@ -85,3 +85,15 @@ create OR REPLACE view produtos_loja as
 	inner join item i on(i.idLoja = l.idloja);
 
 select * from produtos_loja;
+
+-- CREATE OR REPLACE FUNCTION st_respawn_enemy() RETURNS TRIGGER AS $st_respawn_enemy$
+-- BEGIN
+-- 	PERFORM pg_sleep(30);
+-- 	UPDATE INSTANCIA_INIMIGO SET pontosvida = old.pontosvidamax WHERE idinstancia_inimigo = old.idinstancia_inimigo;
+-- END;
+-- 
+-- $st_respawn_enemy$ LANGUAGE plpgsql;
+-- 
+-- CREATE TRIGGER respawn_enemy
+-- AFTER UPDATE ON INSTANCIA_INIMIGO
+-- EXECUTE PROCEDURE st_respawn_enemy();
