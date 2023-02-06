@@ -172,7 +172,7 @@ INSERT INTO FALAS(idNPC, idArea, momento, texto) VALUES
 (1,2,1,'Bem vindo à Hogwards'),
 (9,5,2,'Calouro? posso te ensinar alguns truques...'),
 (3,6,2,'Nessa floresta há sempre monstros a espreita cuidado!'),
-(7,15,2,'Se quiser aprender um feitiço novo tente pedir um livro ao seu professor!'),
+(7,15,2,'Para aumentar o seu ataque é necessário comprar uma varinha melhor na loja!'),
 (11,13,2,'Saia do meu caminho!');
 
 -- Popula Falas

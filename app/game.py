@@ -60,6 +60,9 @@ class Game:
     def create_new_character(self):
         clear()
         new_name = input('Digite o nome do seu personagem: ')
+        if new_name == '':
+            print("Não é possível registrar um nome vazio!")
+            return
         self.player = DataBase.get_character(self.connection, new_name)
         while(self.player.idJogador != -1):
             new_name = input('Nome já registrado, escolha outro:')
@@ -149,12 +152,19 @@ class Game:
             # Procura se ha algum inimigo na area
             Inimigo, valid_inim = DataBase.search_enemy(self.connection, current_area.idArea)
             
-            print('\n#----------------------------------------------------#')
+            # Procura se ha alguma fala na area
             texto = DataBase.getSpeech(self.connection, current_area.idArea, self.player.estado)
             if texto != None:
+                print('\n#----------------------------------------------------#')
                 print(DataBase.getSpeech(self.connection, current_area.idArea, self.player.estado)) 
-                DataBase.updateState(self.connection, self.player.idJogador, self.player.estado+1)
-            print('#----------------------------------------------------#\n')
+                print('#----------------------------------------------------#\n')
+
+                if self.player.estado == 1: # tira fala de boas vindas
+                    DataBase.updateState(self.connection, self.player.idJogador, self.player.estado+1)
+                else:
+                    DataBase.updateState(self.connection, self.player.idJogador, self.player.estado)
+
+
 
             if valid_inim == True:
                 print("\nInimigo na area: ")
