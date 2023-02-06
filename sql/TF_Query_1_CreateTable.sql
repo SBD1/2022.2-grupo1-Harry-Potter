@@ -66,7 +66,7 @@ begin;
       idFeitico       int NOT NULL DEFAULT nextval('feitico_id_seq') PRIMARY KEY,
       nome            VARCHAR(20) NOT NULL,
       efeito          VARCHAR NOT NULL,
-      ponto           NUMERIC(4,2) NOT NULL,
+      ponto           NUMERIC(4,1) NOT NULL,
       quantidadeUso   NUMERIC(4,2) NOT NULL
    );
    ALTER SEQUENCE feitico_id_seq OWNED BY FEITICO.idFeitico;
@@ -269,6 +269,7 @@ begin;
       idNPC             INT NOT NULL,
       idArea            INT NOT NULL,
       idItem            INT NULL,
+      pontosVidaMax     INT NOT NULL,
       pontosVida        INT NOT NULL,
       multiplicador     INT NOT NULL,
       FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),

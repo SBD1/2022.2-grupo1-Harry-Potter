@@ -307,23 +307,23 @@ class Game:
             Feitico = DataBase.get_spells(self.connection, self.player.idGrimorio)
             Habilidade = DataBase.get_habi(self.connection, Inimigo.idNPC)
 
-            self.show_player_info()
 
-            print(f"\nInimigo: {Inimigo.nome}")
-            print(f"PV Inimigo: {Inimigo.pontosVida}\n")
 
             inp = 0
             self.valid_cmd = 0
-            while(self.valid_cmd == False or self.valid_cmd == 'help'):
+            while(self.valid_cmd == False or self.valid_cmd == 'help'):            
+                self.show_player_info()
+                print(f"\nInimigo: {Inimigo.nome}")
+                print(f"PV Inimigo: {Inimigo.pontosVida}\n")
                 inp = input('> ')
                 self.valid_cmd = Commands.cmd(inp)
 
-                if(self.valid_cmd == 'atacar'):
+                if(inp == 'atacar'):
                     dano_player = random.randint(0, Feitico.ponto)
                     Inimigo.pontosVida = Inimigo.pontosVida - dano_player
                     print(f"\n{self.player.nome} usou {Feitico.nome} causando {dano_player} de dano!\n")
 
-                    if Inimigo.pontosVida <= 0:
+                    if Inimigo.pontosVida <= 0 or self.player.pontosVida <= 0:
                         break
 
                     dano_inimigo = random.randint(0, Habilidade.dano)
@@ -345,16 +345,18 @@ class Game:
             dinheiro = DataBase.get_money(self.connection, self.player.idJogador)
             dinheiro += Inimigo.moedas
             DataBase.update_player_money(self.connection, self.player.idJogador, dinheiro)
+            DataBase.reset_enemy_pv(self.connection, Inimigo.idInstInim, Inimigo.pontosVidamax, Inimigo.idArea)            
             # Exluir o inimigo por um tempo
             input('\npressione _enter_ para continuar...')
 
-        elif self.player.pontosVida <= 0:
+        if self.player.pontosVida <= 0:
             print("Você morreu!")
 
             input('Pressione  enter_ para renascer no Portão de Hogwarts')
 
             self.player = DataBase.set_player_pv(self.connection, self.player.idJogador, 20)
             self.player = DataBase.update_player_area(self.connection, self.player.idJogador, 2)
+            DataBase.set_enemy_pv(self.connection, Inimigo.idInstInim, Inimigo.pontosVida)  
 
 
     def show_player_info(self):
