@@ -1,6 +1,7 @@
 import psycopg2
 import pandas as pd
 from classes import *
+import random
 
 
 class DataBase():
@@ -149,7 +150,7 @@ class DataBase():
     def search_enemy(connection, id_area):
         cursor = connection.cursor()
 
-        querry = """SELECT * FROM INSTANCIA_INIMIGO WHERE (INSTANCIA_INIMIGO.idArea = %s) """ % (
+        querry = """SELECT * FROM INSTANCIA_INIMIGO WHERE (INSTANCIA_INIMIGO.idArea = %s) AND (INSTANCIA_INIMIGO.pontosvida > 0) """ % (
             id_area)
         cursor.execute(querry)
 
@@ -157,10 +158,10 @@ class DataBase():
 
         if rtn == None:
             cursor.close()
-            return Inimigo(-1, -1, '', -1, -1, -1, -1, -1, -1), False
+            return Inimigo(-1, -1, '', -1, -1, -1, -1, -1, -1,-1), False
 
         else:
-            idInstInim, idNPC, idArea, idItem, pontosVida, multiplicador = rtn
+            idInstInim, idNPC, idArea, idItem, pontosVidamax, pontosVida, multiplicador = rtn
 
             querry = """SELECT nome FROM NPC WHERE(NPC.idNPC = %s) """ % (
                 idNPC)
@@ -181,7 +182,7 @@ class DataBase():
             nomeItem = cursor.fetchone()[0]
             cursor.close()
 
-            return Inimigo(idInstInim, idNPC, nome, idArea, idItem, nomeItem, moedas, pontosVida, multiplicador), True
+            return Inimigo(idInstInim, idNPC, nome, idArea, idItem, nomeItem, moedas, pontosVidamax, pontosVida, multiplicador), True
 
     def search_store(connection, id_area):
         cursor = connection.cursor()
@@ -325,6 +326,60 @@ class DataBase():
 
         cursor.close()
         return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa, estado)
+
+    def set_enemy_pv(connection, idInimigo, PV):
+        cursor = connection.cursor()
+
+        querry = """UPDATE INSTANCIA_INIMIGO
+                    SET pontosVida = '%s'
+                    WHERE( INSTANCIA_INIMIGO.idinstancia_inimigo = '%s') 
+                    """ % (PV, idInimigo)
+
+        cursor.execute(querry)
+        connection.commit()
+
+        querry = """SELECT * FROM INSTANCIA_INIMIGO
+                    WHERE( INSTANCIA_INIMIGO.idinstancia_inimigo = '%s') 
+                    """ % (idInimigo)
+
+        cursor.execute(querry)
+        idinstancia_inimigo, idnpc, idarea, iditem, pontosvidamax, pontosVida, multiplicador = cursor.fetchone()
+
+        cursor.close()
+        return Inimigo(idinstancia_inimigo, idnpc,"nome", idarea, iditem, "nomeitem", "moedas", pontosvidamax, pontosVida, multiplicador)
+    
+    def reset_enemy_pv(connection, idInimigo, PV, idarea):
+        cursor = connection.cursor()
+
+        querry = """UPDATE INSTANCIA_INIMIGO
+                    SET pontosVida = '%s'
+                    WHERE( INSTANCIA_INIMIGO.idinstancia_inimigo = '%s') 
+                    """ % (PV, idInimigo)
+
+        cursor.execute(querry)
+        connection.commit()
+        rand = random.randint(6,10)
+        while(rand == idarea):
+            rand = random.randint(6,10)
+
+        querry = """UPDATE INSTANCIA_INIMIGO
+                    SET idarea = '%s'
+                    WHERE( INSTANCIA_INIMIGO.idinstancia_inimigo = '%s') 
+                    """ % (rand, idInimigo)
+
+        cursor.execute(querry)
+        connection.commit()
+
+        querry = """SELECT * FROM INSTANCIA_INIMIGO
+                    WHERE( INSTANCIA_INIMIGO.idinstancia_inimigo = '%s') 
+                    """ % (idInimigo)
+
+        cursor.execute(querry)
+        idinstancia_inimigo, idnpc, idarea, iditem, pontosvidamax, pontosVida, multiplicador = cursor.fetchone()
+
+        cursor.close()
+        return Inimigo(idinstancia_inimigo, idnpc,"nome", idarea, iditem, "nomeitem", "moedas", pontosvidamax, pontosVida, multiplicador)
+
 
     def getSpeech(connection, area, momento):
         cursor = connection.cursor()

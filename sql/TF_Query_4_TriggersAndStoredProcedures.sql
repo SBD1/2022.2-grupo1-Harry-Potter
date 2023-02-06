@@ -229,3 +229,24 @@ $st_alteracoes_casa$ LANGUAGE plpgsql;
 CREATE TRIGGER st_alteracoes_casa_aviso
 AFTER DELETE ON JOGADOR
 EXECUTE PROCEDURE st_alteracoes_casa();
+
+
+CREATE OR REPLACE FUNCTION st_respawn_enemy() RETURNS TRIGGER AS $st_respawn_enemy$
+BEGIN
+	PERFORM pg_sleep(10);
+	UPDATE INSTANCIA_INIMIGO SET pontosvida = old.pontosvidamax WHERE idinstancia_inimigo = old.idinstancia_inimigo;
+END;
+
+
+$st_respawn_enemy$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER respawn_enemy
+AFTER UPDATE ON INSTANCIA_INIMIGO
+EXECUTE PROCEDURE st_respawn_enemy();
+
+
+SELECT  event_object_table AS table_name ,trigger_name         
+FROM information_schema.triggers  
+GROUP BY table_name , trigger_name 
+ORDER BY table_name ,trigger_name 

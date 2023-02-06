@@ -269,6 +269,7 @@ begin;
       idNPC             INT NOT NULL,
       idArea            INT NOT NULL,
       idItem            INT NULL,
+      pontosVidaMax     INT NOT NULL,
       pontosVida        INT NOT NULL,
       multiplicador     INT NOT NULL,
       FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
