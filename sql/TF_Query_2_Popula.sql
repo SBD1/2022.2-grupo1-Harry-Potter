@@ -205,10 +205,10 @@ INSERT INTO INIMIGO(idNPC, idHabilidade, moedas) VALUES
 (9, 6, 1000),
 (10, 6, 1000),
 (11, 6, 1000),
-(12, 6, 1000),
+(3, 6, 1000),
 (13, 6, 1000),
 (14, 6, 1000),
-(10, 8, 4);
+(12, 8, 4);
 
 -- Popula INSTANCIA_INIMIGO
 INSERT INTO INSTANCIA_INIMIGO(idNPC, idArea, idItem, pontosVidaMax, pontosVida,  multiplicador) VALUES
@@ -218,7 +218,7 @@ INSERT INTO INSTANCIA_INIMIGO(idNPC, idArea, idItem, pontosVidaMax, pontosVida, 
 (12, 1, 4, 400, 400, 1),
 (13, 1, 5, 400, 400, 2),
 (14, 1, 6, 400, 400, 3),
-(10, 6, 10, 10, 10, 1);
+(12, 6, 10, 10, 10, 1);
 
 -- Popula FERRAMENTA
 INSERT INTO FERRAMENTA(idItem, forca) VALUES
