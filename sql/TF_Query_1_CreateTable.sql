@@ -66,7 +66,7 @@ begin;
       idFeitico       int NOT NULL DEFAULT nextval('feitico_id_seq') PRIMARY KEY,
       nome            VARCHAR(20) NOT NULL,
       efeito          VARCHAR NOT NULL,
-      ponto           NUMERIC(4,2) NOT NULL,
+      ponto           INT NOT NULL,
       quantidadeUso   NUMERIC(4,2) NOT NULL
    );
    ALTER SEQUENCE feitico_id_seq OWNED BY FEITICO.idFeitico;
@@ -327,10 +327,8 @@ commit;
 begin;
    CREATE TABLE IF NOT EXISTS INSTANCIA_NPC_TIPO(
       idNPC           INT NOT NULL,
-      idArea          INT NOT NULL,
       tipo            CHAR(30) NOT NULL,
-      FOREIGN KEY (idNPC) REFERENCES NPC (idNPC),
-      FOREIGN KEY (idArea) REFERENCES AREA (idArea)
+      FOREIGN KEY (idNPC) REFERENCES NPC (idNPC)
    );
    savepoint create_tb_INSTANCIA_NPC_TIPO;
 commit;

@@ -61,15 +61,6 @@ INSERT INTO AREA(idArea, idRegiao, nome, areaOeste, areaLeste, areaNorte,  areaS
 (22, 1, 'Dormitório: Sonserina', 1, 1, 1, 11), 
 (23, 1, 'Dormitório: Lufa-lufa', 1, 1, 11, 1);
 
--- Popula Falas
-INSERT INTO FALAS(idNPC, idArea, momento, texto) VALUES
-(1,2,1,'Bem vindo à Hogwards'),
-(17,5,2,'Calouro? posso te ensinar alguns truques...'),
-(8,6,2,'Nessa floresta há sempre monstros a espreita cuidado!'),
-(5,15,2,'Se quiser aprender um feitiço novo tente pedir um livro ao seu professor!'),
-(6,13,2,'Saia do meu caminho!');
-()
-
 -- Popula Feitico
 INSERT INTO FEITICO (nome, efeito, ponto, quantidadeUso) VALUES
 ('Expelliarmus', 'Derrubar a arma do inimigo', 6, 99),
@@ -77,7 +68,7 @@ INSERT INTO FEITICO (nome, efeito, ponto, quantidadeUso) VALUES
 ('Aqua Eructo', 'conjura um intenso jato de água', 2, 99),
 ('Bombarda', 'Usado para destruir obstáculos', 3, 99),
 ('Petrificus Totalus', 'etrifica por completo o oponente temporariamente', 5, 99),
-('Expecto Patronum', 'Conjura uma espécie de espírito protetor, um guardião de magia capaz de proteger o bruxo de criaturas das trevas ', 10, 50),
+('Expecto Patronum', 'Conjura uma espécie de espírito protetor, um guardião de magia capaz de proteger o bruxo de criaturas das trevas', 10, 50),
 ('Lapifors', 'Transforma um alvo em um coelho', 1, 99),
 ('Avada Kedavra', 'Tira a vida de quem é atingido por', 400, 1),
 ('Up', 'Faz a vassoura subir', 1, 99);
@@ -102,28 +93,37 @@ INSERT INTO JOGADOR (idGrimorio, nome, idArea, pontosVida, idCasa) VALUES
 
 -- Popula LOJA
 INSERT INTO LOJA(idArea, descricao) VALUES
-(3, ' Sorveteria Florean Fortescue'),
+(3, 'Sorveteria Florean Fortescue'),
 (3, 'Olivaras Varinhas'),
-(3, 'Genialidades Weasley'),
-(3, ' Caldeirão Furado'),
-(3, ' Borgin e Burkes'),
-(3, 'Profeta Diário');
+(3, 'Gemialidades Weasley'),
+(3, 'Caldeirão Furado'),
+(3, 'Profeta Diario'),
+(3, 'Vassourax'),
+(3, 'Floreios e Borroes'),
+(3, 'Farmacia');
 
 -- Popula Item
 INSERT INTO ITEM(IdLoja, nome, acao, valor, tipo, descricaoItem) VALUES
-(4, 'Varinha', 'Realiza Feiticos', 90, 'ATAQUE', 'Onde um bruxo canaliza seus poderes mágicos'),
-(4, 'Mapa do Maroto', 'Mostra a localização exata de cada pessoa dentro dos limites de Hogwarts', 40, 'LOCOMOCAO', 'Indica pontos de interesse pelo castelo'),
-(4, 'Capa da Invisibilidade', 'Torna o usuário invisível', 60, 'DEFESA', 'Única capa de invisibilidade conhecida'),
-(4, 'Desiluminador', 'Remove e devolve fontes de luz à suas devidas fontes', 10, 'DEFESA', 'Aparenta ser um isqueiro de prata padrão'),
-(4, 'Livros de Feitiços', 'Explica ao leitor como realizar feitiços', 50, 'ATAQUE', 'Existem vários tipos'),
-(4, 'Livros de Poções', 'Explica ao leitor como realizar poções', 70, 'DEFESA', 'Existem vários tipos'),
-(4, 'Livros de Criaturas Mágicas', 'Explica sobre as criaturas mágicas', 50, 'ATAQUE', 'Existem vários tipos'),
-(4, 'Vassoura', 'Usada para moder voar', 50, 'DEFESA', 'Transporte entre locais'),
-(4, 'Vira-tempo', 'Utilizado para viajar no tempo', 50, 'DEFESA', 'Retorna horas ao passado'),
-(4, 'Osso', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Um osso em perfeito estado'),
-
-INSERT INTO ITEM(nome, acao, valor, tipo, descricaoItem) VALUES
-('Casca de banana', 'Pode fazer pessoas cairem', 0, 'LIXO', 'Casca de banana pegajosa e nojenta, eca!');
+(2, 'Varinha de teixo', 'Realiza Feiticos', 90, 'ATAQUE', 'Onde um bruxo canaliza seus poderes mágicos'),
+(2, 'Varinha de azevinho', 'Realiza Feiticos', 80, 'ATAQUE', 'Onde um bruxo canaliza seus poderes mágicos'),
+(2, 'Varinha de videira', 'Realiza Feiticos', 60, 'ATAQUE', 'Onde um bruxo canaliza seus poderes mágicos'),
+(3, 'Pena Auto-Revisora', 'Decoracao', 3, 'DEIVERSOS', 'Corrige qualquer palavra escrita errada.'),
+(3, 'Marcas Negras Comestíveis', 'Deixa alguém doente',10, 'DIVERSOS', 'Vêm em um tubinho e deixam qualquer um doente.'),
+(3, 'Poção do Amor', 'Poção', 20, 'DIVERSOS', 'Cria uma paixão obsessiva'),
+(4, 'Cerveja amanteigada', 'Bedida', 5, 'CURA', 'Cerveja fermentada amanteigada'),
+(5, 'Jornal do dia', 'Jornal para leitura', 2, 'DIVERSOS', 'Monstros entranhos vem cercando Hogwards'),
+(7, 'Livros de Feitiços', 'Explica ao leitor como realizar feitiços', 50, 'ATAQUE', 'Existem vários tipos'),
+(7, 'Livros de Poções', 'Explica ao leitor como realizar poções', 70, 'DEFESA', 'Existem vários tipos'),
+(7, 'Livros de Criaturas Mágicas', 'Explica sobre as criaturas mágicas', 50, 'ATAQUE', 'Existem vários tipos'),
+(6, 'Vassoura', 'Usada para moder voar', 50, 'DEFESA', 'Transporte entre locais'),
+(8, 'Osso', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Um osso em perfeito estado'),
+(8, 'Sanguinária', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Planta com propriedades mágicas'),
+(8, 'Diafanina', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Planta mágica que parece ter tentáculos longos e oscilantes.'),
+(8, 'Bezoar', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Massa pétrea retirada do estômago de um bode'),
+(8, 'Ovo de Cinzal', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Ovos do Cinzal, uma serpente mágica'),
+(8, 'Chifre de Unicórnio', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Chifres de unicórnio têm propriedades de purificação'),
+(1, 'Sorvete de morango', 'Traz felicidade', 5, 'CURA', 'Sorvete sabor morango'),
+(1, 'Sorvete de chocolate', 'Traz felicidade', 5, 'CURA', 'Sorvete sabor chocolate');
 
 -- Popula NPC
 INSERT INTO NPC(item, nome) VALUES
@@ -139,8 +139,40 @@ INSERT INTO NPC(item, nome) VALUES
 (4, 'Luna Lovegood'),
 (5, 'Draco Malfoy'),
 (1, 'Lobo'),
-(3, 'Lord Voldemort'),
-(8, 'Dementador');
+(8, 'Dementador'),
+(3, 'Lord Voldemort');
+
+-- Popula Instancia_NPC_Tipo
+INSERT INTO INSTANCIA_NPC_TIPO(idNPC, tipo) VALUES
+(1, 'Professor'),
+(2, 'Professor'),
+(3, 'Amigo'),
+(4, 'Professor'),
+(5, 'Professor'),
+(6, 'Professor'),
+(7, 'Professor'),
+(8, 'Amigo'),
+(9, 'Amigo'),
+(10, 'Amigo'),
+(11, 'Amigo'),
+(12, 'Inimigo'),
+(13, 'Inimigo'),
+(14, 'Inimigo');
+
+-- Popula Falas
+INSERT INTO FALAS(idNPC, idArea, momento, texto) VALUES
+(1,2,1,'Bem vindo à Hogwards'),
+(9,5,2,'Calouro? posso te ensinar alguns truques...'),
+(3,6,2,'Nessa floresta há sempre monstros a espreita cuidado!'),
+(7,15,2,'Se quiser aprender um feitiço novo tente pedir um livro ao seu professor!'),
+(11,13,2,'Saia do meu caminho!');
+
+INSERT INTO ITEM(nome, acao, valor, tipo, descricaoItem) VALUES
+('Casca de banana', 'Pode fazer pessoas cairem', 0, 'LIXO', 'Casca de banana pegajosa e nojenta, eca!'),
+('Vira-tempo', 'Utilizado para viajar no tempo', 50, 'DEFESA', 'Retorna horas ao passado'),
+('Mapa do Maroto', 'Mostra a localização exata de cada pessoa dentro dos limites de Hogwarts', 40, 'LOCOMOCAO', 'Indica pontos de interesse pelo castelo'),
+('Capa da Invisibilidade', 'Torna o usuário invisível', 60, 'DEFESA', 'Única capa de invisibilidade conhecida'),
+('Desiluminador', 'Remove e devolve fontes de luz à suas devidas fontes', 10, 'DEFESA', 'Aparenta ser um isqueiro de prata padrão');
 
 -- Popula DISCIPLINA
 INSERT INTO DISCIPLINA (NPC, nomeDisciplina, feitico) VALUES
@@ -198,27 +230,24 @@ INSERT INTO HABILIDADE(nomeHabilidade, dano, descricao) VALUES
 ('Oclumência', 0, 'Capacidade de proteger suas mentes dos Legilimens'),
 ('Ofidioglossia', 5, 'Capacidade natural de falar língua de cobra'),
 ('Realizar Feitiços', 5, 'Realizar feitiços com a varinha'),
-('Mordida', 4, 'O lobo morde o jogador');
+('Mordida', 4, 'O lobo morde o jogador'),
+('Sugar a alegria', 5, 'Cria um ambiente de frio, escuridão, tristeza e desespero ');
 
 -- Popula INIMIGO
 INSERT INTO INIMIGO(idNPC, idHabilidade, moedas) VALUES
-(9, 6, 1000),
-(10, 6, 1000),
-(11, 6, 1000),
-(12, 6, 1000),
-(13, 6, 1000),
-(14, 6, 1000),
-(21, 8, 4);
+(12, 8, 10),
+(13, 9, 80),
+(14, 4, 120);
 
 -- Popula INSTANCIA_INIMIGO
 INSERT INTO INSTANCIA_INIMIGO(idNPC, idArea, idItem, pontosVida, multiplicador) VALUES
-(9, 1, 1, 400, 1),
-(10, 1, 2, 400, 2),
-(11, 1, 3, 400, 3),
-(12, 1, 4, 400, 1),
-(13, 1, 5, 400, 2),
-(14, 1, 6, 400, 3),
-(21, 6, 10, 10, 1);
+(12, 6, 1, 10, 1),
+(13, 7, 2, 40, 1),
+(14, 8, 3, 400, 3),
+(12, 6, 4, 10, 2),
+(13, 7, 5, 40, 2),
+(14, 8, 6, 400, 3),
+(12, 6, 10, 10, 3);
 
 -- Popula FERRAMENTA
 INSERT INTO FERRAMENTA(idItem, forca) VALUES
@@ -248,22 +277,4 @@ INSERT INTO LIVRO(idItem, feitico) VALUES
 (5, 4),
 (5, 5),
 (5, 6);
-
--- Popula Instancia_NPC_Tipo
-INSERT INTO INSTANCIA_NPC_TIPO(idNPC, idArea, tipo) VALUES
-(1, 1, 'Professor'),
-(2, 1, 'Professor'),
-(3, 1, 'Amigo'),
-(4, 1, 'Amigo'),
-(5, 1, 'Professor'),
-(6, 1, 'Professor'),
-(7, 1, 'Professor'),
-(8, 1, 'Professor'),
-(9, 1, 'Professor'),
-(10, 1, 'Inimigo'),
-(11, 1, 'Inimigo'),
-(12, 2, 'Inimigo'),
-(13, 3, 'Inimigo'),
-(14, 4, 'Inimigo'),
-(15, 2, 'Inimigo');
 

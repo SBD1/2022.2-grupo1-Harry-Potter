@@ -155,7 +155,7 @@
 | idFeitico     | Obrigatório     | int     | 4       | Identificação do Feitiço.                                       | 1                                                                                                                 |
 | nome          | Obrigatório     | char    | 30      | Nome do Feitiço.                                                | Expecto Patronum                                                                                                  |
 | efeito        | Obrigatório     | varchar | 40      | Define qual o efeito produzido pelo feitiço.                    | Conjura uma espécie de espírito protetor, um guardião de magia capaz de proteger o bruxo de criaturas das trevas. |
-| ponto         | Obrigatório     | numeric | 2,1     | Define quantos pontos de dano ou cura é produzido pelo feitiço. | 0                                                                                                                 |
+| ponto         | Obrigatório     | int     | 4       | Define quantos pontos de dano ou cura é produzido pelo feitiço. | 0                                                                                                                 |
 | quantidadeUso | Obrigatório     | numeric | 2,1     | Define qual a quantidade de uso do feitiço.                     | 0                                                                                                                 |
 
 ## Entidade: Habilidade
