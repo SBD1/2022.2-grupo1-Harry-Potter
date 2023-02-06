@@ -273,20 +273,55 @@ class DataBase():
     def get_spells(connection, id_Grimorio):
         cursor = connection.cursor()
 
-        querry = """SELECT feitico FROM GRIMORIO WHERE (GRIMORIO.idGrimorio = %s) """ % (
+        # pega todos os feiticos do grimorio do jogador
+        querry = """SELECT * FROM feitico_jogador WHERE (idgrimorio = %s) """ % (
             id_Grimorio)
         cursor.execute(querry)
+        rtn = cursor.fetchall()
 
-        idfeitico = cursor.fetchone()
+        if rtn == None:
+            cursor.close()
+            return False
 
-        querry = """SELECT * FROM FEITICO WHERE (FEITICO.idFeitico = %s) """ % (
-            idfeitico)
-        cursor.execute(querry)
+        table = pd.DataFrame(rtn, columns=['idGrimorio', 'Id', 'nome', 'descricao', 'dano'])
+        table = table.set_index('Id')
+        table = table.drop('idGrimorio', axis=1)
 
-        idfeitico, nome, efeito, ponto, quantidadeUso = cursor.fetchone()
         cursor.close()
 
-        return Feitico(idfeitico, nome, efeito, int(ponto), quantidadeUso)
+        print("\n#----- Grimório ---------------------------------------------------------------#")
+        print(table)
+        print("#------------------------------------------------------------------------------#\n\n")
+
+        return True
+
+    def get_one_spell(connection, id_Grimorio, inp):
+        cursor = connection.cursor()
+
+        # pega todos os feiticos do grimorio do jogador
+        querry = """SELECT * FROM feitico_jogador WHERE (idGrimorio = %s) """ % (
+            id_Grimorio)
+        cursor.execute(querry)
+        rtn = cursor.fetchall()
+
+        # verifica se o input(id do feitico) esta dentro do grimorio
+        achou = False
+        for i in rtn:
+            if i[1] == inp:
+                achou = True
+                break
+        if not achou:
+            return False
+
+        # retorna o feitico
+        querry = """SELECT * FROM FEITICO WHERE (FEITICO.idFeitico = %s) """ % (
+            inp)
+        cursor.execute(querry)
+
+        idfeitico, nome, efeito, ponto = cursor.fetchone()
+        cursor.close()
+
+        return Feitico(idfeitico, nome, efeito, int(ponto))           
 
     def get_habi(connection, idNPC):
         cursor = connection.cursor()

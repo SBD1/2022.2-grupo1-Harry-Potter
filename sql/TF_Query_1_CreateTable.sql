@@ -66,8 +66,7 @@ begin;
       idFeitico       int NOT NULL DEFAULT nextval('feitico_id_seq') PRIMARY KEY,
       nome            VARCHAR(20) NOT NULL,
       efeito          VARCHAR NOT NULL,
-      ponto           INT NOT NULL,
-      quantidadeUso   NUMERIC(4,2) NOT NULL
+      ponto           INT NOT NULL
    );
    ALTER SEQUENCE feitico_id_seq OWNED BY FEITICO.idFeitico;
    savepoint create_tb_FEITICO;
@@ -79,7 +78,6 @@ begin;
    CREATE SEQUENCE grimorio_id_seq START 1;
    CREATE TABLE IF NOT EXISTS GRIMORIO(
       idGrimorio  int NOT NULL DEFAULT nextval('grimorio_id_seq') PRIMARY KEY,
-      numSlots    INT  NOT NULL,
       feitico     INT  NOT NULL,
       FOREIGN KEY (feitico) REFERENCES FEITICO (idFeitico)
    );

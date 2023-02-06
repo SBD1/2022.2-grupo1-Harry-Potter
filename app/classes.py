@@ -41,12 +41,11 @@ class Loja:
         self.descricao = descricao
         
 class Feitico:
-    def __init__(self, idfeitico, nome, efeito, ponto, quantidadeUso):
+    def __init__(self, idfeitico, nome, efeito, ponto):
         self.idfeitico = idfeitico
         self.nome = nome
         self.efeito = efeito
         self.ponto = ponto
-        self.quantidadeUso = quantidadeUso
         
 class Habilidade:
     def __init__(self, idHabilidade, nomeHabilidade, dano, descricao):

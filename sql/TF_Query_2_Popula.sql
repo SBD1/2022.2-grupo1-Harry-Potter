@@ -62,25 +62,19 @@ INSERT INTO AREA(idArea, idRegiao, nome, areaOeste, areaLeste, areaNorte,  areaS
 (23, 1, 'Dormitório: Lufa-lufa', 1, 1, 11, 1);
 
 -- Popula Feitico
-INSERT INTO FEITICO (nome, efeito, ponto, quantidadeUso) VALUES
-('Expelliarmus', 'Derrubar a arma do inimigo', 6, 99),
-('Accio', 'Este feitiço é usado para convocar objetos', 0, 99),
-('Aqua Eructo', 'conjura um intenso jato de água', 2, 99),
-('Bombarda', 'Usado para destruir obstáculos', 3, 99),
-('Petrificus Totalus', 'etrifica por completo o oponente temporariamente', 5, 99),
-('Expecto Patronum', 'Conjura uma espécie de espírito protetor, um guardião de magia capaz de proteger o bruxo de criaturas das trevas', 10, 50),
-('Lapifors', 'Transforma um alvo em um coelho', 1, 99),
-('Avada Kedavra', 'Tira a vida de quem é atingido por', 400, 1),
-('Up', 'Faz a vassoura subir', 1, 99);
+INSERT INTO FEITICO (nome, efeito, ponto) VALUES
+('Expelliarmus', 'Derrubar a arma do inimigo', 6),
+('Petrificus Totalus', 'etrifica por completo o oponente temporariamente', 5),
+('Expecto Patronum', 'Conjura uma espécie de espírito protetor capaz de proteger o bruxo', 10),
+('Avada Kedavra', 'Tira a vida de quem é atingido por', 400);
 
 -- Popula Grimorio
-INSERT INTO GRIMORIO (numSlots, feitico) VALUES
-(99, 1),
-(99, 2),
-(99, 3),
-(99, 4),
-(99, 5),
-(99, 6);
+INSERT INTO GRIMORIO (idGrimorio, feitico) VALUES
+(1, 3),
+(2, 4),
+(3, 2),
+(4, 2),
+(5, 1);
 
 -- Popula Jogador
 INSERT INTO JOGADOR (idGrimorio, nome, idArea, pontosVida, idCasa) VALUES
@@ -88,8 +82,7 @@ INSERT INTO JOGADOR (idGrimorio, nome, idArea, pontosVida, idCasa) VALUES
 (2, 'Lily Williamson', 1, 20, 1),
 (3, 'Ben Kent', 2, 20, 2),
 (4, 'Morgan Kerr', 3, 20, 3),
-(5, 'Edward Simpson', 4, 20, 4),
-(6, 'Emma Parkes', 5, 20, 1);
+(5, 'Edward Simpson', 4, 20, 4);
 
 -- Popula LOJA
 INSERT INTO LOJA(idArea, descricao) VALUES
@@ -186,12 +179,12 @@ INSERT INTO FALAS(idNPC, idArea, momento, texto) VALUES
 
 -- Popula DISCIPLINA
 INSERT INTO DISCIPLINA (NPC, nomeDisciplina, feitico) VALUES
-(1, 'DEFESA ARTE TREVAS', 5),
-(2, 'TRANSFORMAÇÕES', 7),
-(7, 'VÔO COM VASSOURAS', 7),
+(1, 'DEFESA ARTE TREVAS', 1),
+(2, 'TRANSFORMAÇÕES', 1),
+(7, 'VÔO COM VASSOURAS', 2),
 (8, 'TRATO CRIATURAS', 2),
-(6, 'POÇÕES', 2),
-(9, 'ARITMANCIA', 2);
+(6, 'POÇÕES', 3),
+(9, 'ARITMANCIA', 4);
 
 -- Popula PROFESSOR
 INSERT INTO PROFESSOR(idNPC, casa, disciplina) VALUES
@@ -210,7 +203,6 @@ INSERT INTO INSTANCIA_ITEM(idItem, idJogador) VALUES
 (3, NULL),
 (4, NULL),
 (5, NULL),
-(6, NULL),
 (3, 1);
 
 -- Popula INVENTARIO
@@ -219,8 +211,7 @@ INSERT INTO INVENTARIO(idJogador, dinheiro) VALUES
 (2, 2000),
 (3, 2000),
 (4, 2000),
-(5, 200),
-(6, 2000);
+(5, 200);
 
 -- Popula INSTANCIA_JOGADOR_DISCIPLINA
 INSERT INTO INSTANCIA_JOGADOR_DISCIPLINA(idJogador, idDisciplina) VALUES
@@ -228,8 +219,7 @@ INSERT INTO INSTANCIA_JOGADOR_DISCIPLINA(idJogador, idDisciplina) VALUES
 (2, 3),
 (3, 4),
 (4, 5),
-(5, 6),
-(6, 1);
+(5, 6);
 
 -- Popula HABILIDADE
 INSERT INTO HABILIDADE(nomeHabilidade, dano, descricao) VALUES
@@ -284,7 +274,5 @@ INSERT INTO LIVRO(idItem, feitico) VALUES
 (9, 1),
 (9, 2),
 (9, 3),
-(9, 4),
-(9, 5),
-(9, 6);
+(9, 4);
 

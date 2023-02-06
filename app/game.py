@@ -164,7 +164,8 @@ class Game:
                 else:
                     DataBase.updateState(self.connection, self.player.idJogador, self.player.estado)
 
-
+            # Se ele entrar nas salas de aula aprende feitico
+        
 
             if valid_inim == True:
                 print("\nInimigo na area: ")
@@ -234,8 +235,8 @@ class Game:
                     self.store('Profeta Diário')
                     break
 
-                elif inp == 'loja borgin e burkes' and valid_loja == True:
-                    self.store('Borgin e Burkes')
+                elif inp == 'loja vassourax' and valid_loja == True:
+                    self.store('Vassourax')
                     break
 
                 elif inp == 'loja farmacia' and valid_loja == True:
@@ -309,25 +310,34 @@ class Game:
 
     def combat(self, Inimigo):
         clear()
+        grimorio = DataBase.get_spells(self.connection, self.player.idGrimorio)
+        if not grimorio:
+            print("Você não tem feitiços para lançar!! tá maluco?")
+            return
+
         while(self.player.pontosVida > 0 and Inimigo.pontosVida > 0):
-            Feitico = DataBase.get_spells(self.connection, self.player.idGrimorio)
             Habilidade = DataBase.get_habi(self.connection, Inimigo.idNPC)
-
-
-
+            
             inp = 0
-            self.valid_cmd = 0
-            while(self.valid_cmd == False or self.valid_cmd == 'help'):            
+            self.valid_cmd = True
+            while(self.valid_cmd == True or self.valid_cmd == 'help'):            
                 self.show_player_info()
                 print(f"\nInimigo: {Inimigo.nome}")
                 print(f"PV Inimigo: {Inimigo.pontosVida}\n")
-                inp = input('> ')
+                inp = input('Digite o id do feitico\n>')
                 self.valid_cmd = Commands.cmd(inp)
 
-                if(inp == 'atacar'):
-                    dano_player = random.randint(0, Feitico.ponto)
+                if self.valid_cmd == False:
+                    print('\nOpção Inválida!')
+                
+                # verifica se o jogador tem aquele feitico
+                feitico = DataBase.get_one_spell(self.connection, self.player.idGrimorio, int(inp))
+                if feitico == False and feitico != 'help':
+                    print('\nVocê não possui este feitiço!\n')
+                elif(feitico != 'help'):
+                    dano_player = random.randint(0, feitico.ponto)
                     Inimigo.pontosVida = Inimigo.pontosVida - dano_player
-                    print(f"\n{self.player.nome} usou {Feitico.nome} causando {dano_player} de dano!\n")
+                    print(f"\n{self.player.nome} usou {feitico.nome} causando {dano_player} de dano!\n")
 
                     if Inimigo.pontosVida <= 0 or self.player.pontosVida <= 0:
                         break
@@ -335,8 +345,6 @@ class Game:
                     dano_inimigo = random.randint(0, Habilidade.dano)
                     self.player.pontosVida = self.player.pontosVida - dano_inimigo
                     print(f"{Inimigo.nome} usou {Habilidade.nomeHabilidade} causando {dano_inimigo} de dano!\n")
-                elif self.valid_cmd == False:
-                    print('\nOpção Inválida!')
 
 
 

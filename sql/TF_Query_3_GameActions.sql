@@ -42,13 +42,13 @@ create or REPLACE VIEW dados_inimigos AS
   
 select * from dados_inimigos;
 
--- View Grimório do Jogador:
+/* -- View Grimório do Jogador:
 create view grimorio_jogador as
-	select J.nome as "Jogador", G.numSlots as "Número de Slots", G.feitico as "Feitiços"
+	select J.nome as "Jogador", G.feitico as "Feitiços"
 	from jogador J
 	inner join grimorio G on (J.idgrimorio = G.idgrimorio);
   
-select * from grimorio_jogador;
+select * from grimorio_jogador; */
 
 -- View Feitiços de um Livro:
 create view feiticos_livro as
@@ -85,6 +85,14 @@ create OR REPLACE view produtos_loja as
 	inner join item i on(i.idLoja = l.idloja);
 
 select * from produtos_loja;
+
+-- View feiticos dos jogadores
+create OR REPLACE view feitico_jogador as
+	select l.idgrimorio as "idgrimorio", i.idFeitico as "idFeitico", i.nome as "nome", i.efeito as "descricao", i.ponto as "dano" 
+	from grimorio l
+	inner join feitico i on(i.idFeitico = l.feitico);
+
+select * from feitico_jogador;
 
 -- CREATE OR REPLACE FUNCTION st_respawn_enemy() RETURNS TRIGGER AS $st_respawn_enemy$
 -- BEGIN

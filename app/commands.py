@@ -8,9 +8,9 @@ class Commands:
             mover + N/S/L/O -> Movimenta o jogador pelo mapa nas direções Norte, Sul, Leste e Oeste, respectivamente, quando for possível se deslocar.
             loja <nome> -> Abre a loja selecionada da área (digitar o nome sem os sinais < e >).
             inventario -> Abre o inventario.
-            (não implementado)grimorio -> Informa as magias disponíveis para o jogador.
+            grimorio -> Informa as magias disponíveis para o jogador.
             combate -> Inicia o combate com o inimigo da área.
-            atacar -> Ataca o unimigo com a magia equipada.
+            <nome feitico> -> Pode ser usado em um combate para causar dano ao inimigo, para consultar seus feiticos digite grimorio.
             sair -> Sai do Jogo.
             ''')
 
@@ -32,6 +32,10 @@ class Commands:
                     return 'sair'
                 else:
                     print('\nOpção Inválida!')
+
+        # inputs validos no combate: id dos feiticos e acionar o grimorio
+        elif inp == '1' or inp == '2' or inp == '3' or inp == '4' or inp == 'grimorio':
+            return True
 
         else:
             return False
