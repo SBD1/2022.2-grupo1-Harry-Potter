@@ -93,11 +93,11 @@ INSERT INTO JOGADOR (idGrimorio, nome, idArea, pontosVida, idCasa) VALUES
 
 -- Popula LOJA
 INSERT INTO LOJA(idArea, descricao) VALUES
-(3, ' Sorveteria Florean Fortescue'),
+(3, 'Sorveteria Florean Fortescue'),
 (3, 'Olivaras Varinhas'),
 (3, 'Genialidades Weasley'),
-(3, ' Caldeirão Furado'),
-(3, ' Borgin e Burkes'),
+(3, 'Caldeirão Furado'),
+(3, 'Borgin e Burkes'),
 (3, 'Profeta Diário');
 
 -- Popula Item

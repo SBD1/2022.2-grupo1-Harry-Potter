@@ -212,28 +212,20 @@ class Game:
                     self.store('Olivaras Varinhas')
                     break
 
-                elif inp == 'loja gemialidades weasley' and valid_loja == True:
-                    self.store('Gemialidades Weasley')
+                elif inp == 'loja genialidades weasley' and valid_loja == True:
+                    self.store('Genialidades Weasley')
                     break
 
-                elif inp == 'loja caldeirão furado' and valid_loja == True:
+                elif inp == 'loja caldeirao furado' and valid_loja == True:
                     self.store('Caldeirão Furado')
                     break
 
                 elif inp == 'loja profeta diario' and valid_loja == True:
-                    self.store('Profeta Diario')
+                    self.store('Profeta Diário')
                     break
 
-                elif inp == 'loja vassourax' and valid_loja == True:
-                    self.store('Vassourax')
-                    break
-
-                elif inp == 'loja floreios e borroes' and valid_loja == True:
-                    self.store('Floreios e Borroes')
-                    break
-
-                elif inp == 'loja farmacia' and valid_loja == True:
-                    self.store('Farmacia')
+                elif inp == 'loja borgin e burkes' and valid_loja == True:
+                    self.store('Borgin e Burkes')
                     break
                 
                 elif inp == 'inventario':
