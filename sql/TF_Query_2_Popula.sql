@@ -88,7 +88,7 @@ INSERT INTO GRIMORIO (idGrimorio, feitico) VALUES
 INSERT INTO LOJA(idArea, descricao) VALUES
 (3, 'Sorveteria Florean Fortescue'),
 (3, 'Olivaras Varinhas'),
-(3, 'Gemialidades Weasley'),
+(3, 'Genialidades Weasley'),
 (3, 'Caldeirão Furado'),
 (3, 'Profeta Diario'),
 (3, 'Vassourax'),
@@ -116,7 +116,7 @@ INSERT INTO ITEM(IdLoja, nome, acao, valor, tipo, descricaoItem) VALUES
 (8, 'Ovo de Cinzal', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Ovos do Cinzal, uma serpente mágica'),
 (8, 'Chifre de Unicórnio', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Chifres de unicórnio têm propriedades de purificação'),
 (1, 'Sorvete de morango', 'Traz felicidade', 5, 'CURA', 'Sorvete sabor morango'),
-(1, 'Sorvete de morango', 'Traz felicidade', 100, 'CURA', 'Sorvete sabor vida'),
+(1, 'Sorvete de morango', 'Traz felicidade', 99, 'CURA', 'Sorvete sabor vida'),
 (1, 'Sorvete de chocolate', 'Traz felicidade', 10, 'CURA', 'Sorvete sabor chocolate');
 
 -- Popula ITEM que nao estao em lojas
