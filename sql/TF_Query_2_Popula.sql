@@ -142,7 +142,7 @@ INSERT INTO NPC(item, nome) VALUES
 (21, 'Draco Malfoy'),
 (8, 'Lobo'),
 (2, 'Dementador'),
-(3, 'Lord Voldemort'),
+(25, 'Lord Voldemort'),
 (1, 'Neville Longbottom');
 
 -- Popula Instancia_NPC_Tipo
@@ -176,8 +176,8 @@ INSERT INTO FALAS(idNPC, idArea, momento, texto) VALUES
 (5,19,2,'Você não tem experiência para essa aula ainda.'),
 (5,19,3,'Hoje vou ensinar o feitiço Expecto Patronum.'),
 (10,4,2,'Seria tão legal poder ter uma vassoura voadora né? talvez você ache algo interessante para comprar no Beco Diagonal.'),
-(9,5,4,'Na floresta oculta há o maior dos nossos medos, procure a Hermione para conseguir derrota-lo!'),
-(8,12,4,'Vejo que você precisa aprender algo a mais, mas cuidado é um feitiço muito perigoso!'),
+(9,5,4,'Na floresta oculta há o maior dos nossos medos, procure a Hermione para conseguir derrota-lo ela normalmente fica na biblioteca!'),
+(8,15,4,'Vejo que você precisa aprender algo a mais, mas cuidado é um feitiço muito perigoso!'),
 (8,3,2,'Tome um sorvete ou cerveja e se cure o quanto você estiver disposto a pagar.'),
 (9,3,3,'Tome um sorvete ou cerveja e se cure o quanto você estiver disposto a pagar.'),
 (10,3,4,'Tome um sorvete ou cerveja e se cure o quanto você estiver disposto a pagar.'),

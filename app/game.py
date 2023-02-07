@@ -191,6 +191,10 @@ class Game:
             elif current_area.idArea == 19 and self.player.estado == 3:
                 DataBase.addFeitico(self.connection, self.player.idJogador, 4, 3)
                 print("\n Você aprendeu o feitiço Expecto Patronum, cheque o seu grimório!\n")
+
+            elif current_area.idArea == 15 and self.player.estado == 4:
+                DataBase.addFeitico(self.connection, self.player.idJogador, 5, 4)
+                print("\n Você aprendeu o feitiço Avada Kedavra, cheque o seu grimório!\n")
             
 
             inp = 0
@@ -228,8 +232,8 @@ class Game:
                     self.combat(Inimigo)
                     break
 
-                elif inp == 'loja sorveteria florean fortescue' and valid_loja == True:
-                    self.store('Sorveteria Florean Fortescue')
+                elif inp == 'loja sorveteria' and valid_loja == True:
+                    self.store('Sorveteria')
                     break
 
                 elif inp == 'loja olivaras varinhas' and valid_loja == True:
