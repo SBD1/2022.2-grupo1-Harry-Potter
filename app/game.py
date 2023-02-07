@@ -62,7 +62,7 @@ class Game:
         new_name = input('Digite o nome do seu personagem: ')
         if new_name == '':
             print("Não é possível registrar um nome vazio!")
-            return
+            self.start()
         self.player = DataBase.get_character(self.connection, new_name)
         while(self.player.idJogador != -1):
             new_name = input('Nome já registrado, escolha outro:')
@@ -115,7 +115,7 @@ class Game:
         self.player = DataBase.get_character(self.connection, nome)
         while(self.player.idJogador == -1):
             if nome == 'sair':
-                return
+                self.start()
             nome = input("Jogador não encontrado! digite outro ou sair: ")
             self.player = DataBase.get_character(self.connection, nome)
         self.gameplay()
@@ -164,8 +164,6 @@ class Game:
                 else:
                     DataBase.updateState(self.connection, self.player.idJogador, self.player.estado)
 
-            # Se ele entrar nas salas de aula aprende feitico
-        
 
             if valid_inim == True:
                 print("\nInimigo na area: ")
@@ -180,6 +178,21 @@ class Game:
             print('######################################################\n')
 
             print('(Digite "help" para ver todos os comandos disponíveis)')
+
+            # Se ele entrar nas salas de aula aprende feitico
+            if current_area.idArea == 17 and self.player.estado == 2:
+                DataBase.addFeitico(self.connection, self.player.idJogador, 3, 1)
+                print("\n Você aprendeu o feitiço Expelliarmus, cheque o seu grimório!\n")
+
+            elif current_area.idArea == 18 and self.player.estado == 3:
+                DataBase.addFeitico(self.connection, self.player.idJogador, 3, 2)
+                print("\n Você aprendeu o feitiço Petrificus Totalus, cheque o seu grimório!\n")
+
+            elif current_area.idArea == 19 and self.player.estado == 3:
+                DataBase.addFeitico(self.connection, self.player.idJogador, 4, 3)
+                print("\n Você aprendeu o feitiço Expecto Patronum, cheque o seu grimório!\n")
+            
+
             inp = 0
             self.valid_cmd = 0
             while(self.valid_cmd == False or self.valid_cmd == 'help' or valid_inim == True or  valid_loja == True):
@@ -246,6 +259,11 @@ class Game:
                 elif inp == 'inventario':
                     self.inventario()
                     break
+
+                elif inp == 'grimorio':
+                    grimorio = DataBase.get_spells(self.connection, self.player.idJogador)
+                    if not grimorio:
+                        print("\n GRIMÓRIO EM BRANCO ;P \n")
 
                 elif inp == False or (inp == 'combate' and valid_inim == False)or (inp == 'loja' and valid_loja == False):
                     print('\nOpção Inválida!')

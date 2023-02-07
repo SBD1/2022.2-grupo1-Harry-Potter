@@ -359,10 +359,10 @@ class DataBase():
                     """ % (idJogador)
 
         cursor.execute(querry)
-        id_player, id_grimorio, nome, id_area, pontos_vida, id_casa, estado = cursor.fetchone()
+        id_player, nome, id_area, pontos_vida, id_casa, estado = cursor.fetchone()
 
         cursor.close()
-        return Player(id_player, id_grimorio, nome, id_area, pontos_vida, id_casa, estado)
+        return Player(id_player, nome, id_area, pontos_vida, id_casa, estado)
 
     def set_enemy_pv(connection, idInimigo, PV):
         cursor = connection.cursor()
@@ -447,5 +447,25 @@ class DataBase():
         querry = """UPDATE JOGADOR SET estado = '%s' WHERE( JOGADOR.idJogador = '%s') """ % (estado, idJogador)
         cursor.execute(querry)
         connection.commit()
+
+        cursor.close()
+
+    def addFeitico(connection, idJogador, estado, feitico):
+        cursor = connection.cursor()
+
+        # adiciona um feitico ao grimorio do jogador
+        querry = "INSERT INTO GRIMORIO (idGrimorio, feitico) VALUES (%s, %s)" % (
+            idJogador, feitico)
+
+        cursor.execute(querry)
+        connection.commit()
+
+        # atualiza o estado
+        querry = """UPDATE JOGADOR
+                    SET estado = '%s'
+                    WHERE( JOGADOR.idJogador = '%s') 
+                    """ % (estado, idJogador)
+
+        cursor.execute(querry)
 
         cursor.close()

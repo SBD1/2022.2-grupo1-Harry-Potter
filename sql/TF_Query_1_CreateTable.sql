@@ -183,10 +183,11 @@ commit;
 begin;
    CREATE SEQUENCE grimorio_id_seq START 1;
    CREATE TABLE IF NOT EXISTS GRIMORIO(
-      idGrimorio  int NOT NULL PRIMARY KEY,
-      feitico     INT NULL,
+      idGrimorio  INT NOT NULL,
+      feitico     INT NOT NULL,
       FOREIGN KEY (idGrimorio) REFERENCES JOGADOR (idJogador),
-      FOREIGN KEY (feitico) REFERENCES FEITICO (idFeitico)
+      FOREIGN KEY (feitico) REFERENCES FEITICO (idFeitico),
+      PRIMARY KEY (idGrimorio,feitico)
    );
    ALTER SEQUENCE grimorio_id_seq OWNED BY GRIMORIO.idGrimorio;
    savepoint create_tb_GRIMORIO;

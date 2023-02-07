@@ -65,7 +65,7 @@ INSERT INTO AREA(idArea, idRegiao, nome, areaOeste, areaLeste, areaNorte,  areaS
 INSERT INTO FEITICO (nome, efeito, ponto) VALUES
 ('Expelliarmus', 'Derrubar a arma do inimigo', 6),
 ('Petrificus Totalus', 'etrifica por completo o oponente temporariamente', 5),
-('Expecto Patronum', 'Conjura uma espécie de espírito protetor capaz de proteger o bruxo', 10),
+('Expecto Patronum', 'Conjura uma espécie de espírito protetor capaz de proteger o bruxo', 12),
 ('Avada Kedavra', 'Tira a vida de quem é atingido por', 400);
 
 -- Popula Jogador
@@ -80,7 +80,7 @@ INSERT INTO JOGADOR (nome, idArea, pontosVida, idCasa) VALUES
 INSERT INTO GRIMORIO (idGrimorio, feitico) VALUES
 (1, 3),
 (2, 4),
-(3, 2),
+(2, 2),
 (4, 2),
 (5, 1);
 
@@ -103,7 +103,7 @@ INSERT INTO ITEM(IdLoja, nome, acao, valor, tipo, descricaoItem) VALUES
 (3, 'Pena Auto-Revisora', 'Decoracao', 3, 'DEIVERSOS', 'Corrige qualquer palavra escrita errada.'),
 (3, 'Marcas Negras Comestíveis', 'Deixa alguém doente',10, 'DIVERSOS', 'Vêm em um tubinho e deixam qualquer um doente.'),
 (3, 'Poção do Amor', 'Poção', 20, 'DIVERSOS', 'Cria uma paixão obsessiva'),
-(4, 'Cerveja amanteigada', 'Bedida', 5, 'CURA', 'Cerveja fermentada amanteigada'),
+(4, 'Cerveja amanteigada', 'Bedida', 20, 'CURA', 'Cerveja fermentada amanteigada'),
 (5, 'Jornal do dia', 'Jornal para leitura', 2, 'DIVERSOS', 'Monstros entranhos vem cercando Hogwards'),
 (7, 'Livros de Feitiços', 'Explica ao leitor como realizar feitiços', 50, 'ATAQUE', 'Existem vários tipos'),
 (7, 'Livros de Poções', 'Explica ao leitor como realizar poções', 70, 'DEFESA', 'Existem vários tipos'),
@@ -116,7 +116,8 @@ INSERT INTO ITEM(IdLoja, nome, acao, valor, tipo, descricaoItem) VALUES
 (8, 'Ovo de Cinzal', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Ovos do Cinzal, uma serpente mágica'),
 (8, 'Chifre de Unicórnio', 'Pode ser vendido ou usado como ingrediente de pocoes', 3, 'DIVERSOS', 'Chifres de unicórnio têm propriedades de purificação'),
 (1, 'Sorvete de morango', 'Traz felicidade', 5, 'CURA', 'Sorvete sabor morango'),
-(1, 'Sorvete de chocolate', 'Traz felicidade', 5, 'CURA', 'Sorvete sabor chocolate');
+(1, 'Sorvete de morango', 'Traz felicidade', 100, 'CURA', 'Sorvete sabor vida'),
+(1, 'Sorvete de chocolate', 'Traz felicidade', 10, 'CURA', 'Sorvete sabor chocolate');
 
 -- Popula ITEM que nao estao em lojas
 INSERT INTO ITEM(nome, acao, valor, tipo, descricaoItem) VALUES
@@ -141,7 +142,8 @@ INSERT INTO NPC(item, nome) VALUES
 (21, 'Draco Malfoy'),
 (8, 'Lobo'),
 (2, 'Dementador'),
-(3, 'Lord Voldemort');
+(3, 'Lord Voldemort'),
+(1, 'Neville Longbottom');
 
 -- Popula Instancia_NPC_Tipo
 INSERT INTO INSTANCIA_NPC_TIPO(idNPC, tipo) VALUES
@@ -165,8 +167,21 @@ INSERT INTO FALAS(idNPC, idArea, momento, texto) VALUES
 (1,2,1,'Bem vindo à Hogwards'),
 (9,5,2,'Calouro? posso te ensinar alguns truques...'),
 (3,6,2,'Nessa floresta há sempre monstros a espreita cuidado!'),
-(7,15,2,'Para aumentar o seu ataque é necessário comprar uma varinha melhor na loja!'),
-(11,13,2,'Saia do meu caminho!');
+(7,15,2,'Para aprender um feitiço é preciso assistir as aulas!'),
+(11,13,2,'Saia do meu caminho!'),
+(2,17,2,'Hoje vou ensinar o feitiço Expelliarmus.'),
+(2,17,3,'Você não tem mais nada para aprender aqui.'),
+(4,18,2,'Você não tem experiência para essa aula ainda.'),
+(4,18,3,'Hoje vou ensinar o feitiço Petrificus Totalus.'),
+(5,19,2,'Você não tem experiência para essa aula ainda.'),
+(5,19,3,'Hoje vou ensinar o feitiço Expecto Patronum.'),
+(10,4,2,'Seria tão legal poder ter uma vassoura voadora né? talvez você ache algo interessante para comprar no Beco Diagonal.'),
+(9,5,4,'Na floresta oculta há o maior dos nossos medos, procure a Hermione para conseguir derrota-lo!'),
+(8,12,4,'Vejo que você precisa aprender algo a mais, mas cuidado é um feitiço muito perigoso!'),
+(8,3,2,'Tome um sorvete ou cerveja e se cure o quanto você estiver disposto a pagar.'),
+(9,3,3,'Tome um sorvete ou cerveja e se cure o quanto você estiver disposto a pagar.'),
+(10,3,4,'Tome um sorvete ou cerveja e se cure o quanto você estiver disposto a pagar.'),
+(13,16,2,'Eu soube que o professor Fílio Flitwick não ensina o Petrificus Totalus se você já souber o Expecto Patronum, maluquice né?!\n Se eu fosse você eu ia na sala 2 primeiro...');
 
 -- Popula Falas
 INSERT INTO FALAS(idNPC, idArea, momento, texto) VALUES
