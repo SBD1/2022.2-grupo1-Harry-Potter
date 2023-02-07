@@ -181,7 +181,7 @@ INSERT INTO FALAS(idNPC, idArea, momento, texto) VALUES
 (8,3,2,'Tome um sorvete ou cerveja e se cure o quanto você estiver disposto a pagar.'),
 (9,3,3,'Tome um sorvete ou cerveja e se cure o quanto você estiver disposto a pagar.'),
 (10,3,4,'Tome um sorvete ou cerveja e se cure o quanto você estiver disposto a pagar.'),
-(13,16,2,'Eu soube que o professor Fílio Flitwick não ensina o Petrificus Totalus se você já souber o Expecto Patronum, maluquice né?!\n Se eu fosse você eu ia na sala 2 primeiro...');
+(13,16,2,'Eu soube que o professor Fílio Flitwick não ensina o Petrificus Totalus se você já souber o Expecto Patronum, maluquice né?! Se eu fosse você eu ia na sala 2 primeiro...');
 
 -- Popula Falas
 INSERT INTO FALAS(idNPC, idArea, momento, texto) VALUES
