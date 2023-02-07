@@ -245,13 +245,17 @@ class Game:
                     break
 
                 elif inp == 'loja profeta diario' and valid_loja == True:
-                    self.store('Profeta Diário')
+                    self.store('Profeta Diario')
                     break
 
                 elif inp == 'loja vassourax' and valid_loja == True:
                     self.store('Vassourax')
                     break
 
+                elif inp == 'loja floreios e borroes' and valid_loja == True:
+                    self.store('Floreios e Borroes')
+                    break
+                
                 elif inp == 'loja farmacia' and valid_loja == True:
                     self.store('Farmacia')
                     break
