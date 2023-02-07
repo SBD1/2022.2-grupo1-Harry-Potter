@@ -273,6 +273,7 @@ class Game:
 
     def inventario(self):
         clear()
+        comidas = ['cerveja amanteigada', 'sorvete de morango', 'sorvete de chocolate', 'sorvete de vida']
         inp = 0
         while(inp != 'sair'):
             DataBase.get_view_inventory(self.connection, self.player.idJogador)
@@ -285,9 +286,32 @@ class Game:
             while(inp != 'sair' and inp != 'Sair'):
                 inp = input('> ')
 
-                if inp != 'sair' and inp != 'Sair':
+                if inp == 'sair' and inp == 'Sair':
+                    self.gameplay()
+
+                elif inp == 'tomar':
+                    inp = input("\n> Digite oq deseja tomar: ")
+                    self.curar(inp)
+
+                else:
                     print('\nOpção Inválida!')
 
+
+    def curar(self, inp):
+        idInstancia = DataBase.check_item_inventario(self.connection, self.player.idJogador, inp)
+        if not idInstancia:
+            input('pressione _enter_ para tentar novamente...')
+            return
+        else:
+            if not DataBase.healing(self.connection, self.player.idJogador, idInstancia):
+                print("\n VIDA NO MÁXIMO \n")
+            else:
+                DataBase.deleteItem(self.connection, idInstancia)
+                print("\nQue delícia! sua vida aumentou, mas diga adeus a sua comidinha ;P")
+                input('pressione _enter_ para tentar novamente...')
+                return
+        
+        self.inventario()
 
 
     def store(self, Loja):

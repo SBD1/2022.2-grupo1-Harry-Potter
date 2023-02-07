@@ -94,7 +94,7 @@ begin;
       idLoja           INT NULL, 
       nome             VARCHAR(30) NOT NULL,
       acao             VARCHAR(200) NOT NULL,
-      valor            NUMERIC(4,2) NOT NULL,
+      valor            NUMERIC(10,2) NOT NULL,
       tipo             CHAR(20) NOT NULL,
       descricaoItem    VARCHAR(60) NOT NULL, 
       FOREIGN KEY (idLoja) REFERENCES LOJA (idLoja)

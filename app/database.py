@@ -469,3 +469,74 @@ class DataBase():
         cursor.execute(querry)
 
         cursor.close()
+
+    def healing(connection, idJogador, idItem):
+        cursor = connection.cursor()
+
+        querry = """SELECT pontosvida FROM JOGADOR 
+                    WHERE( JOGADOR.idJogador = %s) 
+                    """ % (idJogador)
+        cursor.execute(querry)
+        pontosVida = cursor.fetchone()[0]
+
+        # com o id do item pega o valor da cura
+        querry = """SELECT valor FROM ITEM 
+                    WHERE (ITEM.idItem = '%s')
+                    """ % (idItem)
+        cursor.execute(querry)
+        cura = cursor.fetchone()[0]
+
+        # vida máxima de 30 pontos
+        if cura + pontosVida > 30:
+            pontosVida = 30
+        elif pontosVida >= 30:
+            return False
+        else:
+            pontosVida += cura
+
+        querry = """UPDATE JOGADOR
+                    SET pontosvida = %s
+                    WHERE( JOGADOR.idJogador = %s) 
+                    """ % (pontosVida, idJogador)
+
+        cursor.execute(querry)
+
+        cursor.close()
+        return True
+
+    def check_item_inventario(connection, idInventario, item):
+        cursor = connection.cursor()
+
+        querry = """SELECT idItem FROM ITEM 
+                    WHERE( ITEM.nome = '%s') 
+                    """ % (item)
+        cursor.execute(querry)
+        idItem = cursor.fetchone()
+
+        if idItem == None:
+            print("\nEste item não existe, verifique a grafia.\n")
+            return False
+
+        querry = """SELECT idinstanciaitem FROM instancia_item
+                    WHERE( idJogador = %s AND idItem = %s)
+                    """ % (idInventario, idItem[0])
+        cursor.execute(querry)
+        idInstancia = cursor.fetchone()[0]            
+
+        if idInstancia:
+            return idInstancia
+        else:
+            print("\nVocê não possui esse item no seu inventario.\n")
+            return False
+
+    def deleteItem(connection, idInstancia):
+        cursor = connection.cursor()
+
+        querry = """DELETE FROM instancia_item
+                    WHERE( idinstanciaitem = %s)
+                    """ % (idInstancia)
+        cursor.execute(querry)
+        connection.commit()
+
+        cursor.close()
+
