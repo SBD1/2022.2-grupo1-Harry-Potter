@@ -28,7 +28,6 @@
 | idCasa               | Obrigatório     | int     | 4       | Identificação da casa.              | 1          |
 | nomeCasa             | Obrigatório     | char    | 10      | nome da casa.                       | Grifinória |
 | petCasa              | Obrigatório     | varchar | 8       | animal de cada casa.                | Leão       |
-| professorResponsavel | Obrigatório     | int     | 4       | Identificação do professor da casa. | 1          |
 
 ## Entidade: Disciplina
 #### Descrição: Conjunto de períodos os quais os jogadores estarão aprendendo algo com o professor.
@@ -74,7 +73,6 @@
 | Atributo      | Obrigatoriedade | Tipo     | Tamanho | Descrição                                      | Exemplo |
 | ------------- | --------------- | -------- | ------- | ---------------------------------------------- | ------- |
 | idJogador     | Obrigatório     | int      |41       | Identificador do jogador.                      | 1       |
-| instanciaItem | Não obrigatório | int      |41       | Identificador do item.                         | 1       |
 | dinheiro      | Não obrigatório | smallint | 2       | Quantidade de dinheiro que o jogador pode ter. | 2000    |
 
 ## Entidade: Ferramenta
@@ -119,7 +117,7 @@
 | Atributo  | Obrigatoriedade | Tipo    | Tamanho | Descrição              | Exemplo |
 | --------- | --------------- | ------- | ------- | ---------------------- | ------- |
 | idArea    | Obrigatório     | int     | 4       | Identificação da Área. | 1       |
-| noem      | Obrigatório     | varchar | 50      | nome da Área.          | Rio     |
+| nome      | Obrigatório     | varchar | 50      | nome da Área.          | Rio     |
 | areaLeste | Obrigatório     | int     | 4       | Posição na Leste.      | 2       |
 | areaOeste | Obrigatório     | int     | 4       | Posição na Oeste.      | 5       |
 | areaSul   | Obrigatório     | int     | 4       | Posição no Sul.        | 9       |
@@ -156,7 +154,6 @@
 | nome          | Obrigatório     | char    | 30      | Nome do Feitiço.                                                | Expecto Patronum                                                                                                  |
 | efeito        | Obrigatório     | varchar | 40      | Define qual o efeito produzido pelo feitiço.                    | Conjura uma espécie de espírito protetor, um guardião de magia capaz de proteger o bruxo de criaturas das trevas. |
 | ponto         | Obrigatório     | int     | 4       | Define quantos pontos de dano ou cura é produzido pelo feitiço. | 0                                                                                                                 |
-| quantidadeUso | Obrigatório     | numeric | 2,1     | Define qual a quantidade de uso do feitiço.                     | 0                                                                                                                 |
 
 ## Entidade: Habilidade
 #### Descrição: As habilidades que um NPC - Inimigo pode ter .
@@ -184,7 +181,6 @@
 | ---------- | --------------- | ------- | ------- | ----------------------------------------------- | ------- |
 | idGrimorio | Obrigatório     | int     | 4       | Identificação do Grimório.                      | 1       |
 | feitico    | Obrigatório     | int     | 4       | Identificação do Feitiço.                       | 1       |
-| numSlots   | Obrigatório     | int     | 4       | Quantidade de Feitiços que um jogador pode ter. | 20      |
 
 # Entidade: Livro
 #### Descrição: Item que armazena um feitiço
