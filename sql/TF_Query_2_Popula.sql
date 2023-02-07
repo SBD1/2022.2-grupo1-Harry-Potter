@@ -88,7 +88,7 @@ INSERT INTO GRIMORIO (idGrimorio, feitico) VALUES
 INSERT INTO LOJA(idArea, descricao) VALUES
 (3, 'Sorveteria'),
 (3, 'Olivaras Varinhas'),
-(3, 'Gemialidades Weasley'),
+(3, 'Genialidades Weasley'),
 (3, 'Caldeirão Furado'),
 (3, 'Profeta Diario'),
 (3, 'Vassourax'),

@@ -245,13 +245,17 @@ class Game:
                     break
 
                 elif inp == 'loja profeta diario' and valid_loja == True:
-                    self.store('Profeta Diário')
+                    self.store('Profeta Diario')
                     break
 
                 elif inp == 'loja vassourax' and valid_loja == True:
                     self.store('Vassourax')
                     break
 
+                elif inp == 'loja floreios e borroes' and valid_loja == True:
+                    self.store('Floreios e Borroes')
+                    break
+                
                 elif inp == 'loja farmacia' and valid_loja == True:
                     self.store('Farmacia')
                     break
@@ -261,14 +265,29 @@ class Game:
                     break
 
                 elif inp == 'grimorio':
-                    grimorio = DataBase.get_spells(self.connection, self.player.idJogador)
-                    if not grimorio:
-                        print("\n GRIMÓRIO EM BRANCO ;P \n")
+                    self.grimorio()
+                    break
 
                 elif inp == False or (inp == 'combate' and valid_inim == False)or (inp == 'loja' and valid_loja == False):
                     print('\nOpção Inválida!')
 
                 else: 
+                    print('\nOpção Inválida!')
+
+    def grimorio(self):
+        clear()
+        inp = 0
+        while(inp != 'sair'):
+            grimorio = DataBase.get_spells(self.connection, self.player.idJogador)
+            if not grimorio:
+                print("\n GRIMÓRIO EM BRANCO ;P \n")
+
+            print(f'\n(Digite "sair" para voltar)')
+
+            while(inp != 'sair' and inp != 'Sair'):
+                inp = input('> ')
+
+                if inp != 'sair' and inp != 'Sair':
                     print('\nOpção Inválida!')
 
     def inventario(self):
